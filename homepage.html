@@ -399,6 +399,49 @@ header h1{
   top: 0;
   z-index: 9999;
 }
+@media (max-width:768px){
+
+  header{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+  }
+
+  .header-center{
+    position:static;
+    transform:none;
+    margin-top:5px;
+  }
+
+  .right-nav{
+    justify-content:center;
+    width:100%;
+    gap:20px;
+  }
+
+  /* FIX NAVBAR FOR MOBILE */
+  .navbar nav{
+    flex-wrap: wrap; /* allows items to move to next line */
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .search-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+  }
+
+  .search-container input{
+    width:90%; /* prevents overflow */
+    max-width:300px;
+  }
+
+  .dropdown{
+    font-size:14px;
+  }
+}
 
   </style>
 </head>
