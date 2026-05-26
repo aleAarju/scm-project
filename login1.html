@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <style>
+   body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* FORM BOX */
+.login-box {
+  background: white;
+  padding: 30px;
+  width: 320px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(255, 77, 136, 0.3);
+  border-top: 5px solid #ff4d88;
+}
+
+/* TITLE */
+h2 {
+  text-align: center;
+  color: #ff4d88;
+}
+
+/* LABELS */
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* INPUT FIELDS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ffd1dc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #ff4d88;
+  box-shadow: 0 0 5px rgba(255, 77, 136, 0.3);
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background: #ff4d88;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #e6005c;
+  transform: scale(1.03);
+}
+
+/* TEXT BELOW FORM */
+p {
+  text-align: center;
+  margin-top: 15px;
+  color: #444;
+}
+
+/* LINK */
+a {
+  text-decoration: none;
+  color: #ff4d88;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="login-box">
+    <h2>Login Form</h2>
+
+    <form>
+      <label>Email</label>
+      <input type="email" placeholder="Enter Email" required>
+
+      <label>Password</label>
+      <input type="password" placeholder="Enter Password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? 
+      <a href="sigin.html">Sign Up</a>
+    </p>
+  </div>
+  <script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault(); // stops page reload
+    window.location.href = "homepage.html"; // your website page
+  });
+</script>
+
+</body>
+</html>
