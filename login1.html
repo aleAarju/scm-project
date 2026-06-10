@@ -115,10 +115,12 @@ a:hover {
     </p>
   </div>
   <script>
-  document.querySelector("form").addEventListener("submit", function(e) {
-    e.preventDefault(); // stops page reload
-    window.location.href = "homepage.html"; // your website page
-  });
+document.querySelector("form").addEventListener("submit", function(e) {
+  e.preventDefault(); // stops reload
+
+  localStorage.setItem("loggedIn", "true"); // mark user logged in
+  window.location.href = "homepage.html"; // go to homepage
+});
 </script>
 
 </body>

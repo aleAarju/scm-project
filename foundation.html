@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlowCart Shopping Website</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+ 
   <style>
 /* ================= RESET ================= */
 *{
@@ -14,11 +15,11 @@
   box-sizing:border-box;
   font-family: Arial, sans-serif;
 }
-
+ 
 body{
   background:#fff5f7;
 }
-
+ 
 /* ================= HEADER ================= */
 header{
   background:#ff4d88;
@@ -30,7 +31,7 @@ header{
   position:relative;
   flex-wrap:wrap;
 }
-
+ 
 header h1{
   font-size:32px;
   z-index:2;
@@ -40,11 +41,11 @@ header h1{
   text-decoration: none;
   color: white;
 }
-
+ 
 .topbar a:visited{
   color: white;
 }
-
+ 
 /* CENTER TEXT */
 .header-center{
   position:absolute;
@@ -56,14 +57,14 @@ header h1{
   letter-spacing:1px;
   white-space:nowrap;
 }
-
+ 
 /* RIGHT NAV */
 .right-nav{
   display:flex;
   align-items:center;
   gap:30px;
 }
-
+ 
 /* ================= HERO ================= */
 .hero{
   height:300px;
@@ -75,12 +76,12 @@ header h1{
   color:white;
   text-align:center;
 }
-
+ 
 .hero h2{
   font-size:40px;
   margin-bottom:10px;
 }
-
+ 
 .hero button{
   padding:10px 20px;
   border:none;
@@ -90,15 +91,15 @@ header h1{
   border-radius:5px;
   cursor:pointer;
 }
-
+ 
 /* ================= PRODUCTS ================= */
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:20px;
   padding:40px;
 }
-
+ 
 .card{
   background:white;
   border-radius:10px;
@@ -107,28 +108,32 @@ header h1{
   text-align:center;
   transition:0.3s;
 }
-
+ 
 .card:hover{
   transform:scale(1.05);
 }
-
+ 
 .card img{
   width:100%;
-  height:200px;
-  object-fit:cover;
+  height:220px;
+  object-fit:contain;
+  background:white;
   border-radius:10px;
 }
-
-.card h3{
-  margin:15px 0 10px;
+.card h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;    /* shows only 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
+ 
 .price{
   color:#ff4d88;
   font-size:20px;
   margin-bottom:10px;
 }
-
+ 
 .card button{
   background:#ff4d88;
   color:white;
@@ -137,7 +142,7 @@ header h1{
   border-radius:5px;
   cursor:pointer;
 }
-
+ 
 /* ================= NAVBAR ================= */
 .navbar{
   background:white;
@@ -148,30 +153,30 @@ header h1{
   background:white;
   padding:12px 20px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
-
+ 
   position: sticky;
   top: 75px; 
   z-index: 9998;
 }
-
+ 
 .navbar nav{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:25px;
 }
-
+ 
 .navbar nav a{
   text-decoration:none;
   color:#ff4d88;
   font-weight:normal;
 }
-
+ 
 /* ================= DROPDOWN ================= */
 .dropdown{
   position:relative;
 }
-
+ 
 .dropdown-content{
   display:none;
   position:absolute;
@@ -183,21 +188,21 @@ header h1{
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
   z-index:4000;
 }
-
+ 
 .dropdown-content a{
   display:block;
   padding:12px;
   color:#ff4d88;
 }
-
+ 
 .dropdown-content a:hover{
   background:#ffe6ee;
 }
-
+ 
 .dropdown:hover .dropdown-content{
   display:block;
 }
-
+ 
 /* ================= SEARCH ================= */
 .search-container input{
   width:220px;
@@ -205,7 +210,7 @@ header h1{
   border-radius:20px;
   border:1px solid #ccc;
 }
-
+ 
 /* ================= SLIDER (UNCHANGED) ================= */
 .slider{
   width:100%;
@@ -213,13 +218,13 @@ header h1{
   overflow:hidden;
   background:#fff5f7;
 }
-
+ 
 .slides{
   display:flex;
   width:400%;
   animation:swipe 12s infinite ease-in-out;
 }
-
+ 
 .slides img{
   width:100vw;
   height:500px;
@@ -227,7 +232,7 @@ header h1{
   flex-shrink:0;
   background:#fff5f7;
 }
-
+ 
 @keyframes swipe{
   0%{transform:translateX(0);}
   20%{transform:translateX(0);}
@@ -239,7 +244,7 @@ header h1{
   95%{transform:translateX(-300vw);}
   100%{transform:translateX(0);}
 }
-
+ 
 /* ================= ACCOUNT ================= */
 .my-account{
   position:relative;
@@ -248,22 +253,22 @@ header h1{
   gap:10px;
   color:white;
 }
-
+ 
 .my-account .fa-user{
   font-size:28px;
 }
-
+ 
 .account-text{
   display:flex;
   flex-direction:column;
   margin-left:10px;
 }
-
+ 
 .account-text span{
   font-size:12px;
   color:white;
 }
-
+ 
 .account-text a{
   color:white;
   text-decoration:none !important;
@@ -276,7 +281,7 @@ header h1{
 .my-account a{
   text-decoration:none;
 }
-
+ 
 /* dropdown */
 .account-dropdown{
   display:none;
@@ -290,7 +295,7 @@ header h1{
   z-index:5000;
   flex-direction:column;
 }
-
+ 
 .account-dropdown a{
   display:block;
   padding:10px 12px;
@@ -298,25 +303,25 @@ header h1{
   text-decoration:none;
   background:white;
 }
-
+ 
 .account-dropdown a:hover{
   background:#ffe6ee;
 }
-
+ 
 .my-account:hover .account-dropdown{
   display:flex;
 }
-
+ 
 /* ================= CART ================= */
 .cart-icon{
   margin-right:23px;
 }
-
+ 
 .cart-icon i{
   font-size:24px;
   color:white;
 }
-
+ 
 /* ================= FOOTER ================= */
 .footer{
   background:#ff4d88;
@@ -327,23 +332,23 @@ header h1{
   transform:translateY(50px);
   transition:all 0.6s ease;
 }
-
+ 
 .footer.show{
   opacity:1;
   transform:translateY(0);
 }
-
+ 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
-
+ 
 .footer-box h3,
 .footer-box h4{
   margin-bottom:10px;
 }
-
+ 
 .footer-box a{
   display:block;
   color:white;
@@ -351,7 +356,7 @@ header h1{
   margin:5px 0;
   font-size:14px;
 }
-
+ 
 .footer-bottom{
   text-align:center;
   margin-top:20px;
@@ -359,7 +364,7 @@ header h1{
   border-top:1px solid rgba(255,255,255,0.3);
   font-size:13px;
 }
-
+ 
 /* ================= RESPONSIVE ================= */
 @media (max-width:768px){
   header{
@@ -367,13 +372,13 @@ header h1{
     text-align:center;
     gap:10px;
   }
-
+ 
   .header-center{
     position:static;
     transform:none;
     margin-top:5px;
   }
-
+ 
   .right-nav{
     justify-content:center;
     width:100%;
@@ -385,12 +390,12 @@ header h1{
   align-items:center;
   gap:6px;
 }
-
+ 
 .dropdown-icon{
   font-size:12px;
   transition:transform 0.3s ease;
 }
-
+ 
 .dropdown:hover .dropdown-icon{
   transform:rotate(180deg);
 }
@@ -400,79 +405,210 @@ header h1{
   z-index: 9999;
 }
 @media (max-width:768px){
-
+ 
   header{
     flex-direction:column;
     text-align:center;
     gap:10px;
   }
-
+ 
   .header-center{
     position:static;
     transform:none;
     margin-top:5px;
   }
-
+ 
   .right-nav{
     justify-content:center;
     width:100%;
     gap:20px;
   }
-
+ 
   /* FIX NAVBAR FOR MOBILE */
   .navbar nav{
     flex-wrap: wrap; /* allows items to move to next line */
     gap: 12px;
     justify-content: center;
   }
-
+ 
   .search-container{
     width:100%;
     display:flex;
     justify-content:center;
     margin-top:10px;
   }
-
+ 
   .search-container input{
     width:90%; /* prevents overflow */
     max-width:300px;
   }
-
+ 
   .dropdown{
     font-size:14px;
   }
 }
+.shop-layout{
+  display:flex;
+  gap:20px;
+  padding:40px;
+  align-items:stretch; /* IMPORTANT */
+}
+ 
+/* SIDEBAR */
+ 
+.sidebar{
+  width:250px;
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+ 
+  position:sticky;
+  top:120px;
+ 
+  max-height: calc(100vh - 140px);
+  overflow-y:auto;
+}
+ 
+/* make sidebar feel longer */
+.sidebar-inner{
+  position:sticky;
+  top:120px;
+}
+ 
+.sidebar h3{
+  color:#ff4d88;
+  margin-bottom:15px;
+}
+ 
+.filter-box{
+  margin-bottom:20px;
+}
+ 
+.filter-box h4{
+  margin-bottom:8px;
+  font-size:14px;
+  color:#333;
+}
+ 
+.filter-box label{
+  font-size:13px;
+  color:#555;
+  cursor:pointer;
+}
+@media (max-width:768px){
+  .shop-layout{
+    flex-direction:column;
+  }
+ 
+  .sidebar{
+    width:100%;
+  }
+}
+.filter-btn{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#ff4d88;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.3s;
+}
+ 
+.filter-btn:hover{
+  background:#e63e77;
+}
+.product-link{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+ 
+/* ===== ONLY NEW CSS ADDED: hidden class for filter ===== */
+.product-link.hidden{
+  display:none;
+}
+ 
+@media (max-width:768px){
+ 
+  .shop-layout{
+    padding:15px;
+    gap:15px;
+  }
+ 
+  .products{
+    padding:0;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+ 
+  .card{
+    padding:12px;
+  }
+ 
+  .card img{
+    height:140px;
+  }
+ 
+  .card h3{
+    font-size:14px;
+  }
+ 
+  .price{
+    font-size:16px;
+  }
+ 
+  .card button{
+    width:100%;
+    font-size:13px;
+    padding:8px;
+  }
+ 
+  .sidebar{
+    position:static;
+    max-height:none;
+    overflow:visible;
+  }
+ 
+  h2{
+    text-align:center;
+  }
+}
 
   </style>
+  
 </head>
-
+ 
 <body>
-
+ 
 <header class="topbar">
  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
-
+ 
   <div class="header-center">
     Glow More, Shop More 
   </div>
-
+ 
   <nav class="right-nav">
     <div class="my-account">
       <i class="fa-regular fa-user"></i>
-
+ 
       <div class="account-text">
         <span>Hello User</span>
         <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
       </div>
-
+ 
       <div class="account-dropdown">
         <a href="#">Contact us</a>
         <a href="doctor.html">Doctors appointment</a>
-        <a href="#">About us</a>
+        <a href="aboutus1.html">About us</a>
         <a href="login1.html" id="loginBtn">Login</a>
         <a href="#" id="logoutBtn" style="display:none;">Logout</a>
       </div>
     </div>
-
+ 
     <div class="cart-icon">
       <a href="#">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -481,7 +617,7 @@ header h1{
     </div>
   </nav>
 </header>
-
+ 
 <!-- NAVBAR -->
 <div class="navbar">
   <nav>
@@ -491,37 +627,37 @@ header h1{
     Skincare
     <i class="fa-solid fa-chevron-down dropdown-icon"></i>
   </a>
-
+ 
   <div class="dropdown-content">
     <a href="cleanser.html">Cleanser</a>
     <a href="moisturizer.html">Moisturizer</a>
     <a href="suncream.html">Sunscreen</a>
   </div>
 </div>
-
+ 
 <!-- Makeup -->
 <div class="dropdown">
   <a href="#">
     Makeup
     <i class="fa-solid fa-chevron-down dropdown-icon"></i>
   </a>
-
+ 
   <div class="dropdown-content">
-    <a href="foundation.html">Foundation</a>
+   <a href="foundation.html">Foundation</a>
     <a href="Lipstick.html">Lipstick</a>
     <a href="blush.html">Blush</a>
   </div>
 </div>
-
+ 
 <!-- Fragrance -->
 <div class="dropdown">
   <a href="#">
     Fragrance
     <i class="fa-solid fa-chevron-down dropdown-icon"></i>
   </a>
-
+ 
   <div class="dropdown-content">
-    <a href="perfume.html">Perfume</a>
+     <a href="perfume.html">Perfume</a>
   </div>
 </div>
     <div class="search-container">
@@ -529,19 +665,77 @@ header h1{
     </div>
   </nav>
 </div>
-
-<!-- SLIDER (UNCHANGED) -->
-<div class="slider">
-  <div class="slides">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
+<div class="shop-layout">
+ 
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Filter Products</h3>
+ 
+    <div class="filter-box">
+      <h4>Sort by Price</h4>
+      <label><input type="radio" name="price" value="low"> Low to High</label><br>
+      <label><input type="radio" name="price" value="high"> High to Low</label>
+    </div>
+ 
+    <div class="filter-box">
+      <h4>Price Range</h4>
+      <label><input type="radio" name="range" value="under1000"> Under Rs. 1000</label>
+      <label><input type="radio" name="range" value="1000to1500"> Rs. 1000 - Rs. 1500</label>
+      <label><input type="radio" name="range" value="above1500"> Above Rs. 1500</label>
+    </div>
+ 
+    <div class="filter-box">
+      <h4>Skin Type</h4>
+    <label><input type="radio" name="skin" value="oily"> Oily</label>
+      <label><input type="radio" name="skin" value="dry"> Dry</label>
+      <label><input type="radio" name="skin" value="combination"> Combination</label>
+      
+ 
+   <button class="filter-btn" id="applyFilter"> Filters</button>
+   <button class="filter-btn" id="resetFilter" style="background:#aaa;margin-top:6px;">Reset Filters</button>
+ </div>
+  </aside>
+ 
+  <!-- PRODUCTS -->
+  <div style="flex:1;">
+    <h2 style="color:#ff4d88; margin-bottom:20px;">Foundation</h2>
+ 
+<div class="products" id="productsContainer">
+ 
+  <!-- ✅ FIX: moved data-price and data-skin to the <a> tag -->
+  <a href="product.html?id=11" class="product-link" data-price="1200" data-skin="dry">
+    <div class="card">
+      <img src="foundation1.jpg">
+      <h3>L.A. Colors Radiant Foundation (Fair) 28.5ml</h3>
+      <p class="price">Rs. 1200</p>
+      <button>Add to Cart</button>
+    </div>
+  </a>
+ 
+  <!-- ✅ FIX: moved data-price and data-skin to the <a> tag -->
+  <a href="product.html?id=22" class="product-link" data-price="3000" data-skin="oily">
+    <div class="card">
+      <img src="foundation2.jpg">
+      <h3>Sheglam Complexion Pro Long Lasting Breathable Matte Foundation, 30Ml</h3>
+      <p class="price">Rs. 3000</p>
+      <button>Add to Cart</button>
+    </div>
+  </a>
+ 
+  <!-- ✅ FIX: moved data-price and data-skin to the <a> tag -->
+  <a href="product.html?id=33" class="product-link" data-price="900" data-skin="combination">
+    <div class="card">
+      <img src="foundation3.jpg">
+      <h3>Mars | High Coverage Foundation in a Tube | SPF 50PA++++ UVA/UVB</h3>
+      <p class="price">Rs. 900</p>
+      <button>Add to Cart</button>
+    </div>
+    </a>
+</div>
   </div>
 </div>
 
+ 
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
@@ -549,7 +743,7 @@ header h1{
       <h3>GlowCart</h3>
       <p>Glow More, Shop More ✨</p>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Quick Links</h4>
       <a href="#">Home</a>
@@ -557,14 +751,14 @@ header h1{
       <a href="#">Makeup</a>
       <a href="#">Fragrance</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Support</h4>
       <a href="#">Contact Us</a>
       <a href="#">Help</a>
       <a href="#">Privacy Policy</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Follow Us</h4>
       <a href="#">Instagram</a>
@@ -572,30 +766,36 @@ header h1{
       <a href="#">TikTok</a>
     </div>
   </div>
-
+ 
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
+      </div> <!-- products -->
+ 
+  </div> <!-- flex:1 -->
+ 
+</div> <!-- shop-layout -->
 </footer>
-
+ 
+ 
 <script>
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");
   const scrollPosition = window.innerHeight + window.scrollY;
   const pageHeight = document.body.offsetHeight;
-
+ 
   if (scrollPosition >= pageHeight - 50) {
     footer.classList.add("show");
   }
 });
-
+ 
 // check login status
 function updateAuthUI() {
   const isLoggedIn = localStorage.getItem("loggedIn");
-
+ 
   const loginBtn = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
-
+ 
   if (isLoggedIn === "true") {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "block";
@@ -604,24 +804,77 @@ function updateAuthUI() {
     logoutBtn.style.display = "none";
   }
 }
-
+ 
 // simulate login (call this after login page success)
 function loginUser() {
   localStorage.setItem("loggedIn", "true");
   updateAuthUI();
 }
-
+ 
 // logout function
 document.getElementById("logoutBtn").addEventListener("click", function (e) {
   e.preventDefault();
   localStorage.removeItem("loggedIn");
   updateAuthUI();
 });
-
+ 
 // run on page load
 updateAuthUI();
-
+ 
+// ===== FILTER (fixed) =====
+document.getElementById("applyFilter").addEventListener("click", () => {
+ 
+  const selectedSort  = document.querySelector('input[name="price"]:checked')?.value;
+  const selectedRange = document.querySelector('input[name="range"]:checked')?.value;
+  const selectedSkin  = document.querySelector('input[name="skin"]:checked')?.value;
+ 
+  const container = document.getElementById("productsContainer");
+  const products  = Array.from(document.querySelectorAll(".product-link"));
+ 
+  // STEP 1: show/hide by range and skin
+  products.forEach(product => {
+    const price = Number(product.dataset.price);   // now reads from <a> tag ✅
+    const skin  = product.dataset.skin;            // now reads from <a> tag ✅
+ 
+    let rangeMatch = true;
+    if (selectedRange === "under1000")  rangeMatch = price < 1000;
+    if (selectedRange === "1000to1500") rangeMatch = price >= 1000 && price <= 1500;
+    if (selectedRange === "above1500")  rangeMatch = price > 1500;
+ 
+    let skinMatch = true;
+    if (selectedSkin) skinMatch = skin === selectedSkin;
+ 
+    if (rangeMatch && skinMatch) {
+      product.classList.remove("hidden");
+    } else {
+      product.classList.add("hidden");
+    }
+  });
+ 
+  // STEP 2: sort visible products by price
+  if (selectedSort) {
+    const visibleProducts = products.filter(p => !p.classList.contains("hidden"));
+ 
+    visibleProducts.sort((a, b) => {
+      const priceA = Number(a.dataset.price);
+      const priceB = Number(b.dataset.price);
+      return selectedSort === "low" ? priceA - priceB : priceB - priceA;
+    });
+ 
+    visibleProducts.forEach(p => container.appendChild(p));
+  }
+ 
+});
+ 
+// ===== RESET FILTER =====
+document.getElementById("resetFilter").addEventListener("click", () => {
+  document.querySelectorAll('input[name="price"], input[name="range"], input[name="skin"]')
+    .forEach(input => input.checked = false);
+  document.querySelectorAll(".product-link")
+    .forEach(p => p.classList.remove("hidden"));
+});
 </script>
-
+ 
 </body>
 </html>
+ 

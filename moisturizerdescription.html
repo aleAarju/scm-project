@@ -442,6 +442,22 @@ header h1{
     font-size:14px;
   }
 }
+.product-detail{
+  display:flex;
+  gap:40px;
+  padding:40px;
+  align-items:flex-start;
+}
+
+.image-side img{
+  width:400px;
+  height:auto;
+  border-radius:10px;
+}
+
+.desc-side{
+  flex:1;
+}
 
   </style>
 </head>
@@ -495,7 +511,8 @@ header h1{
   <div class="dropdown-content">
     <a href="cleanser.html">Cleanser</a>
     <a href="moisturizer.html">Moisturizer</a>
-    <a href="suncream.html">Sunscreen</a>
+    <a href="sunscreen.html">Sunscreen</a>
+    <a href="serum.html">Serum</a>
   </div>
 </div>
 
@@ -507,9 +524,10 @@ header h1{
   </a>
 
   <div class="dropdown-content">
-    <a href="foundation.html">Foundation</a>
-    <a href="Lipstick.html">Lipstick</a>
-    <a href="blush.html">Blush</a>
+    <a href="#">Foundation</a>
+    <a href="#">Lipstick</a>
+    <a href="#">Blush</a>
+    <a href="#">Primer</a>
   </div>
 </div>
 
@@ -521,7 +539,9 @@ header h1{
   </a>
 
   <div class="dropdown-content">
-    <a href="perfume.html">Perfume</a>
+    <a href="#">Perfume</a>
+    <a href="#">Body Mist</a>
+    <a href="#">Deodorant</a>
   </div>
 </div>
     <div class="search-container">
@@ -530,18 +550,21 @@ header h1{
   </nav>
 </div>
 
-<!-- SLIDER (UNCHANGED) -->
-<div class="slider">
-  <div class="slides">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
-  </div>
-</div>
 
+<div class="product-detail">
+
+  <div class="image-side">
+    <img id="productImg">
+  </div>
+
+  <div class="desc-side">
+    <h1 id="productName"></h1>
+    <p id="productPrice"></p>
+
+    <p id="productDesc"></p>
+  </div>
+
+</div>
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
@@ -621,6 +644,149 @@ document.getElementById("logoutBtn").addEventListener("click", function (e) {
 // run on page load
 updateAuthUI();
 
+
+const products = {
+
+  1: {
+
+    name: "Foaming Cleanser",
+
+    price: "Rs. 1200",
+
+    img: "cleanser1.avif",
+
+ desc: {
+  intro: "Buff away dry skin and reveal smooth glowing skin.",
+  features: [
+    "Gently exfoliates dead skin cells",
+    "Hydrating formula that locks moisture",
+    "Leaves skin soft and refreshed"
+  ],
+  scents: [
+    "Watermelon - Melon Times Better",
+    "Strawberry - Berry Into You",
+    "Mango - Mango With It",
+    "Apple - Apple-solutely For You",
+    "Peach - Life's A Peach",
+    "Cherry - Sweet As Cherry"
+  ],
+  extras: [
+    "Vegan",
+    "Cruelty-free",
+    "Paraben-free"
+  ]
+}
+
+  },
+
+  2: {
+
+    name: "Gentle Face Wash",
+
+    price: "Rs. 900",
+
+    img: "cleanser2.jpg",
+
+    desc: "Soft formula suitable for daily use."
+
+  },
+
+  3: {
+
+    name: "Oil Control Cleanser",
+
+    price: "Rs. 1100",
+
+    img: "cleanser3.jpg",
+
+    desc: "Controls excess oil and prevents acne."
+
+  },
+
+  4: {
+
+    name: "Hydrating Gel Cleanser",
+
+    price: "Rs. 1300",
+
+    img: "cleanser4.jpg",
+
+    desc: "Hydrates skin while cleansing deeply."
+
+  },
+
+  5: {
+
+  name: "Deep Cleansing Foam",
+
+  price: "Rs. 1500",
+
+  img: "cleanser5.jpg",
+
+  desc: "Removes deep impurities and blackheads."
+
+},
+
+6: {
+
+  name: "Aloe Vera Cleanser",
+
+  price: "Rs. 1000",
+
+  img: "cleanser6.jpg",
+
+  desc: "Soothes skin and reduces irritation."
+
+}
+
+
+
+};
+
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
+
+const product = products[id];
+
+const descEl = document.getElementById("productDesc");
+
+if (!product) {
+  document.querySelector(".product-detail").innerHTML = "<h2>Product not found</h2>";
+} else {
+
+  document.getElementById("productImg").src = product.img;
+  document.getElementById("productName").innerText = product.name;
+  document.getElementById("productPrice").innerText = product.price;
+
+  // SAFE description handling
+  if (typeof product.desc === "object") {
+
+    descEl.innerHTML = `
+      <p><b>${product.desc.intro || ""}</b></p>
+
+      <h3>Key Features</h3>
+      <ul>
+        ${(product.desc.features || []).map(f => `<li>${f}</li>`).join("")}
+      </ul>
+
+      <h3>Scents</h3>
+      <ul>
+        ${(product.desc.scents || []).map(s => `<li>${s}</li>`).join("")}
+      </ul>
+
+      <h3>Why You'll Love It</h3>
+      <ul>
+        ${(product.desc.extras || []).map(e => `<li>${e}</li>`).join("")}
+      </ul>
+    `;
+
+  } else {
+    // fallback for normal products
+    descEl.innerHTML = `<p>${product.desc}</p>`;
+  }
+}
 </script>
 
 </body>

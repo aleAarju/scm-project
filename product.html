@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GlowCart Product</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#fff5f7;
+}
+
+/* ================= HEADER ================= */
+header{
+  background:#ff4d88;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  flex-wrap:wrap;
+}
+
+header h1{
+  font-size:32px;
+  z-index:2;
+}
+/* GlowCart logo link */
+.topbar a{
+  text-decoration: none;
+  color: white;
+}
+
+.topbar a:visited{
+  color: white;
+}
+
+/* CENTER TEXT */
+.header-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+/* RIGHT NAV */
+.right-nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+/* ================= HERO ================= */
+.hero{
+  height:300px;
+  background:linear-gradient(to right,#ff9a9e,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  text-align:center;
+}
+
+.hero h2{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.hero button{
+  padding:10px 20px;
+  border:none;
+  background:white;
+  color:#ff4d88;
+  font-size:18px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* ================= PRODUCTS ================= */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:40px;
+}
+
+.card{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:20px;
+  text-align:center;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.card h3{
+  margin:15px 0 10px;
+}
+
+.price{
+  color:#ff4d88;
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.card button{
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:white;
+  padding:12px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+.navbar{
+  background:white;
+  padding:12px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+  position: sticky;
+  top: 75px; 
+  z-index: 9998;
+}
+
+.navbar nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:25px;
+}
+
+.navbar nav a{
+  text-decoration:none;
+  color:#ff4d88;
+  font-weight:normal;
+}
+
+/* ================= DROPDOWN ================= */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:180px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:4000;
+}
+
+.dropdown-content a{
+  display:block;
+  padding:12px;
+  color:#ff4d88;
+}
+
+.dropdown-content a:hover{
+  background:#ffe6ee;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+
+/* ================= SEARCH ================= */
+.search-container input{
+  width:220px;
+  padding:8px 15px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+
+/* ================= ACCOUNT ================= */
+.my-account{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+}
+
+.my-account .fa-user{
+  font-size:28px;
+}
+
+.account-text{
+  display:flex;
+  flex-direction:column;
+  margin-left:10px;
+}
+
+.account-text span{
+  font-size:12px;
+  color:white;
+}
+
+.account-text a{
+  color:white;
+  text-decoration:none !important;
+  font-weight:normal;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.my-account a{
+  text-decoration:none;
+}
+
+/* dropdown */
+.account-dropdown{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:160px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:5000;
+  flex-direction:column;
+}
+
+.account-dropdown a{
+  display:block;
+  padding:10px 12px;
+  color:#ff4d88 !important;
+  text-decoration:none;
+  background:white;
+}
+
+.account-dropdown a:hover{
+  background:#ffe6ee;
+}
+
+.my-account:hover .account-dropdown{
+  display:flex;
+}
+
+/* ================= CART ================= */
+.cart-icon{
+  margin-right:23px;
+}
+
+.cart-icon i{
+  font-size:24px;
+  color:white;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  background:#ff4d88;
+  color:white;
+  margin-top:40px;
+  padding:40px 20px 10px;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 0.6s ease;
+}
+
+.footer.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.footer-box h3,
+.footer-box h4{
+  margin-bottom:10px;
+}
+
+.footer-box a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  margin:5px 0;
+  font-size:14px;
+}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.3);
+  font-size:13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:768px){
+  header{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+  }
+
+  .header-center{
+    position:static;
+    transform:none;
+    margin-top:5px;
+  }
+
+  .right-nav{
+    justify-content:center;
+    width:100%;
+    gap:20px;
+  }
+}
+.dropdown a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.dropdown-icon{
+  font-size:12px;
+  transition:transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-icon{
+  transform:rotate(180deg);
+}
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+@media (max-width:768px){
+
+  header{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+  }
+
+  .header-center{
+    position:static;
+    transform:none;
+    margin-top:5px;
+  }
+
+  .right-nav{
+    justify-content:center;
+    width:100%;
+    gap:20px;
+  }
+
+  /* FIX NAVBAR FOR MOBILE */
+  .navbar nav{
+    flex-wrap: wrap; /* allows items to move to next line */
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .search-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+  }
+
+  .search-container input{
+    width:90%; /* prevents overflow */
+    max-width:300px;
+  }
+
+  .dropdown{
+    font-size:14px;
+  }
+}
+
+    .container{
+      display:flex;
+      gap:40px;
+      padding:40px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .product-img{
+      flex:1;
+      min-width:300px;
+      max-width:400px;
+    }
+
+    .product-img img{
+      width:100%;
+      border-radius:12px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .details{
+      flex:1;
+      min-width:300px;
+    }
+
+    .details h1{
+      color:#ff4d88;
+      margin-bottom:10px;
+    }
+
+    .price{
+      font-size:22px;
+      color:#333;
+      margin:10px 0;
+    }
+
+    .desc{
+      color:#555;
+      line-height:1.6;
+    }
+
+    .btn{
+      margin-top:20px;
+      padding:12px 18px;
+      background:#ff4d88;
+      color:white;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .btn:hover{
+      background:#e63e77;
+    }
+    .rating{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0;
+}
+
+#stars{
+  color:#ffc107;
+  font-size:18px;
+}
+
+#ratingText{
+  color:#555;
+  font-size:14px;
+}
+  </style>
+</head>
+
+<body>
+    <header class="topbar">
+ <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+
+  <div class="header-center">
+    Glow More, Shop More 
+  </div>
+
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
+
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="aboutus1.html">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
+
+    <div class="cart-icon">
+      <a href="#">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <nav>
+    <!-- Skincare -->
+<div class="dropdown">
+  <a href="#">
+    Skincare
+    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+  </a>
+
+  <div class="dropdown-content">
+    <a href="cleanser.html">Cleanser</a>
+    <a href="moisturizer.html">Moisturizer</a>
+    <a href="sunscream.html">Sunscreen</a>
+  </div>
+</div>
+
+<!-- Makeup -->
+<div class="dropdown">
+  <a href="#">
+    Makeup
+    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+  </a>
+
+  <div class="dropdown-content">
+  <a href="foundation.html">Foundation</a>
+    <a href="Lipstick.html">Lipstick</a>
+    <a href="blush.html">Blush</a>
+  </div>
+</div>
+
+<!-- Fragrance -->
+<div class="dropdown">
+  <a href="#">
+    Fragrance
+    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+  </a>
+
+  <div class="dropdown-content">
+    <a href="perfume.html">Perfume</a>
+  </div>
+</div>
+    <div class="search-container">
+      <input type="text" placeholder="Search the product">
+    </div>
+  </nav>
+</div>
+
+
+<div class="container">
+  
+  <div class="product-img">
+    <img id="productImage" src="" alt="Product">
+  </div>
+
+  <div class="details">
+    <h1 id="productName"></h1>
+    <p class="price" id="productPrice"></p>
+    <span id="stars"></span>
+    <span id="ratingText"></span>
+    <p class="desc" id="productDesc"></p>
+   <div id="ingredientsBox" style="display:none; margin-top:15px;">
+  <h4 style="color:#ff4d88; margin-bottom:6px;">Ingredients</h4>
+  <p class="desc" id="productIngredients" style="font-size:13px; color:#777;"></p>
+</div>
+<!-- SHADES BOX -->
+<div id="shadesBox" style="display:none; margin-top:15px;">
+  <h4 style="color:#ff4d88; margin-bottom:8px;">Select Shade</h4>
+  <div id="shadeOptions" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+  <p style="font-size:13px; color:#777; margin-top:6px;">Selected: <span id="selectedShade">None</span></p>
+</div>
+   <!-- Quantity Selector -->
+<div style="display:inline-flex; align-items:center; border:2px solid #ff4d88; border-radius:8px; overflow:hidden; margin-top:20px;">
+  
+  <button onclick="changeQty(-1)" style="
+    width:40px; height:40px;
+    border:none; background:white;
+    color:#ff4d88; font-size:22px; cursor:pointer;">−</button>
+
+  <span id="qtyDisplay" style="
+    width:45px; height:40px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; font-weight:bold;
+    border-left:2px solid #ff4d88;
+    border-right:2px solid #ff4d88;">1</span>
+
+  <button onclick="changeQty(1)" style="
+    width:40px; height:40px;
+    border:none; background:white;
+    color:#ff4d88; font-size:22px; cursor:pointer;">+</button>
+
+</div>
+
+<br>
+<button class="btn" style="margin-top:15px;">Add to Cart</button>
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // product database (same IDs as your cleanser page)
+  const products = {
+1: {
+  name: "CeraVe Hydrating Cream to Foam Cleanser 87ml | Makeup Remover Face Wash with Hyaluronic Acid & Ceramides | For Normal to Dry Skin",
+  price: "Rs. 1200",
+  image: "cleanser1.avif",
+  rating: 4.5,
+  reviews: 128,
+  desc: "A gentle foaming cleanser that removes dirt and oil without drying your skin.",
+  ingredients: "Aqua/Water, Cocamidopropyl Hydroxysultaine, Sodium Lauroyl Sarcosinate, Propanediol, PEG-150 Pentaerythrityl Tetrastearate, PEG-6 Caprylic/Capric Glycerides, Glycerin, Ceramide NP, Ceramide AP, Ceramide EOP, Carbomer, Niacinamide, Sodium Methyl Cocoyl Taurate, Sodium Benzoate, Sodium Chloride, Sodium Lauroyl Lactylate, Sodium Hyaluronate, Cholesterol, Phenoxyethanol, Disodium EDTA, Citric Acid, Phytosphingosine, Xanthan Gum, Ethylhexylglycerin"
+},
+    2: {
+      name: "DOT & KEY Watermelon Super Glow Gel Face Wash With Vitamin C & Cucumber 100ml",
+      price: "Rs. 900",
+      image: "cleanser2.jpeg",
+       rating: 3.2,
+  reviews: 128,
+      desc: "Soft and mild face wash suitable for daily use and sensitive skin.",
+    ingredients:"Aqua, Cocamidopropyl Betaine, Decyl Glucoside, Disodium Cocoyl Glutamate, 1,3 Butylene glycol, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Salicylic Acid, Xanthan Gum, PEG-40 Hydrogenated Castor Oil, Sodium Hydroxide, Zinc Pca, Disodium EDTA, Benzophenone-4, Camphor, Melaleuca Alternifolia (Tea Tree) Leaf Oil, Mentha Piperita (Peppermint) Oil, Panthenol, Glycine Soja (Soybean) Seed Extract, Houttuynia Cordata Extract, Scutellaria Baicalensis Root Extract, Melia Azadirachta Leaf Extract, Rehmannia Chinensis Root Extract, Salix Alba (Willow) Bark Extract, Phellodendron Amurense Bark Extract, Lactobacillus/​Pear Juice Ferment Filtrate, Camellia Sinensis (Green Tea) Leaf Extract, Aloe Barbadensis (Aloe Vera) Leaf Juice, Centella Asiatica (Cica) Leaf Extract, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ci 19140, Ci 42090"
+  },
+    3: {
+      name: "Kleida Foaming Face Wash, For Acne Prone Skin, 100G",
+      price: "Rs. 1100",
+      image: "cleanser3.webp",
+       rating: 4.0,
+       reviews: 22,
+      desc: "Helps control excess oil and keeps your skin fresh all day.",
+    ingredients:"Aqua, Sodium Lauryl Ether Sulphate, Cocamidopropyl Betaine, Glycerin, Sorbitol, Propylene Glycol, Niacinamide, Glycolic Acid, Triethanolamine, Carbomer, Xanthan Gum, D-Panthenol, Benzophenone-4, Disodium EDTA, Cellulose Beads, Allantoin, Methylchloroisothiazolinone, Methylisothiazolinone, Fragrance"
+  },
+    4: {
+      name: "Minimalist 6% Oat Extract Gentle Face Wash for Sensitive, Dry & Dehydrated Skin | Hyaluronic Acid Provides Hydration | For Women & Men | 4 Fl Oz / 120 ml",
+      price: "Rs. 500",
+      image: "cleanser4.webp",
+       rating: 3.0,
+       reviews: 12,
+      desc: "Deep cleans pores and removes impurities effectively.",
+    ingredients:"Aloe Barbadensis (Aloe Vera) Leaf Juice*, Cocoglucoside, Sodium Cocoyl Glutamate, Glycerin*, Vaccinium Myrtillus (Bilberry) Fruit/​Leaf Extract, Saccharum Officinarum (Sugar Cane) Extract, Acer Saccharum (Sugar Maple) Extract, Citrus Aurantium Dulcis (Orange) Fruit Extract, Citrus Limon (Lemon) Fruit Extract, Ribes Nigrum (Blackcurrant) Leaf Extract, Rubus Idaeus (Raspberry) Leaf Extract, Hamamelis Virginiana (Witch Hazel) Pulp Water*, Alcohol*, Propanediol, Rhamnose, Glucose, Glucuronic Acid, Betaine, Salix Nigra (Willow Bark) Extract, Sodium Lauroyl Lactylate, Caprylyl/​Capryl Wheat Bran/​Straw Glycosides, Fusel Wheat Bran/​Straw Glycosides, Polyglyceryl-5 Oleate, Glyceryl Caprylate, Epilobium Fleischeri (Alpine Plant) Extract, Vanillosmopsis Erythropappa (Bisabolol) Wood Oil, Cymbopogon Martinii V Motia (Palmarosa) Leaf Oil, Citrus Paradisi (Pink Grapefruit), Lemon/​Citrus Limon Peel (Lemon) Oil, Cananga Odorata (Ylang Ylang) Flower Oil, Pogostemon Cablin (Patchouli) Leaf Oil, Santalum Spicatum (Sandalwood) Wood Oil, PCA Glyceryl Oleate, Sclerotium Gum, Gluconolactone, Sodium Benzoate, Citric Acid"
+  },
+      101: {
+    name: "Dot & Key Barrier Repair Moisturizer with Ceramide + Hyaluronic 100g",
+    category: "moisturizer",
+    price: "Rs. 568",
+    image: "moisturizer1.jpg",
+    rating: 4.0,
+       reviews: 12,
+    desc: "Deep hydration moisturizer that keeps skin soft all day.",
+    ingredients:"Aqua, Caprylyl Methicone, PEG-12 Dimethicone/​PPG-20 Crosspolymer, Cyclopentasiloxane, Dimethicone Crosspolymer, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Glycerine, Silanetriol, Hyaluronic Acid, Propanediol, Citrullus Lanatus (Watermelon) Fruit Extract, Prunus Persica (Peach) Fruit Extract, Urtica Dioica (Nettle) Leaf Extract, Saccharum Officinarum (Sugarcane) Extract, Cucumis Sativus (Cucumber) Fruit Extract, Mentha Piperita (Peppermint) Oil, Glycolic Acid, Laminaria Digitata Extract, Cetyl - Pg Hydroxyethyl Palmitate, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6 II, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Tocopheryl Acetate, Disodium EDTA, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ifra Certified Allergen Free Fragrance, Ci 45430, Ci 15985"
+},
+    102: {
+    name: "Dot & Key Niacinamide + CICA Centella Oil Free Moisturizer for Acne Prone Skin | Lightweight Face Cream for Oily, Sensitive Skin | Fades Dark Spots, Blemishes & Soothes Redness | 50g",
+    category: "moisturizer",
+    price: "Rs. 653",
+    image: "moisturizer2.jpg",
+    rating: 3.0,
+       reviews: 12,
+    desc: "Lightweight oil-free formula for oily and acne-prone skin.",
+     ingredients:"Aqua, Caprylic/​Capric Triglyceride, Glycerine, Glyceryl Stearate, PEG-100 Stearate, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Cyclopentasiloxane, Cyclopentasiloxane, Dimethicone Crosspolymer, Sodium Polyacrylate, Dicaprylyl Carbonate, Polyglyceryl-3 Caprate, Dimethicone, C14-22 Alcohols, C12-20 Alkyl Glucoside, Xylitylglucoside, Anhydroxylitol, Xylitol, Stearic Acid, Olea Europaea (Olive) Fruit Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Laminaria Digitata Extract, [And], Hydrogenated Lecithin, Cetyl-PG Hydroxyethyl Palmitamide, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6, Cholesterol, [And], 1,2-Hexanediol, Sodium Hyaluronate, Glycerin, Aqua, [And], Vaccinium Angustifolium (Blueberry) Fruit Extract, Aqua, [And], Oryza Sativa (Rice) Extract, Saccharomyces Ferment Lysate Filtrate, Citric Acid, [And], Sodium Benzoate, [And], Potassium Sorbate, Polyglutamic Acid, Lactobacillus, [And], Maltodextrin, Tocopheryl Acetate, Xanthan Gum, Disodium EDTA, Sodium Hydroxide, Butylated Hydroxytoluene, Phenoxyethanol, Ethylhexylglycerin"
+  },
+    103: {
+    name: "The Derma Co. 5% Propylene Oil Free Moisturizer with Propylene Glycol & Hyaluronic Acid for Oil-Free Hydration - 100 g",
+    category: "moisturizer",
+    price: "Rs. 566",
+    image: "moisturizer3.jpeg",
+    rating: 4.0,
+    reviews: 12,
+    desc: "Nourishing moisturizer enriched with Vitamin E for glowing skin.",
+    ingredients:"Aqua, Isopropyl Myristate, Urea, C15-C19 Alkane, Dimethicone, Glycerin, Xylitol, Glucose, Anhydroxylitol, Phoenix Dactylifera Seed, Ethanol, Carbomer, Coconut Oil, Stearic Acid, Aloe Vera, Phenoxyethanol, Carbomer, Extract, Triethanolamine, Cetostearyl Alcohol, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Ethoxydiglycol, Disodium EDTA, Vitamin E, Ceramide Complex, Lactic Acid"
+  },
+        11: {
+    name:" L.A. Colors Radiant Foundation (Fair) 28.5ml",
+    category: "foundation",
+    price: "Rs. 1200",
+    image: "foundation1.jpg",
+    shades: ["Fair", "Ivory", "Beige", "Sand", "Caramel", "Mocha"],
+    rating: 4.0,
+       reviews: 12,
+    desc: "Fulface coverage keeps skin soft all day.",
+    ingredients:"Aqua, Caprylyl Methicone, PEG-12 Dimethicone/​PPG-20 Crosspolymer, Cyclopentasiloxane, Dimethicone Crosspolymer, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Glycerine, Silanetriol, Hyaluronic Acid, Propanediol, Citrullus Lanatus (Watermelon) Fruit Extract, Prunus Persica (Peach) Fruit Extract, Urtica Dioica (Nettle) Leaf Extract, Saccharum Officinarum (Sugarcane) Extract, Cucumis Sativus (Cucumber) Fruit Extract, Mentha Piperita (Peppermint) Oil, Glycolic Acid, Laminaria Digitata Extract, Cetyl - Pg Hydroxyethyl Palmitate, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6 II, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Tocopheryl Acetate, Disodium EDTA, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ifra Certified Allergen Free Fragrance, Ci 45430, Ci 15985"
+},
+    22: {
+    name: "Sheglam Complexion Pro Long Lasting Breathable Matte Foundation, 30Ml",
+    category: "foundation",
+    price: "Rs. 3000",
+    image: "foundation2.jpg",
+    shades: ["Fair", "Ivory", "Beige", "Sand", "Caramel", "Mocha"],
+    rating: 3.0,
+       reviews: 12,
+    desc: "Lightweight oil-free formula for oily and acne-prone skin.",
+     ingredients:"Aqua, Caprylic/​Capric Triglyceride, Glycerine, Glyceryl Stearate, PEG-100 Stearate, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Cyclopentasiloxane, Cyclopentasiloxane, Dimethicone Crosspolymer, Sodium Polyacrylate, Dicaprylyl Carbonate, Polyglyceryl-3 Caprate, Dimethicone, C14-22 Alcohols, C12-20 Alkyl Glucoside, Xylitylglucoside, Anhydroxylitol, Xylitol, Stearic Acid, Olea Europaea (Olive) Fruit Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Laminaria Digitata Extract, [And], Hydrogenated Lecithin, Cetyl-PG Hydroxyethyl Palmitamide, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6, Cholesterol, [And], 1,2-Hexanediol, Sodium Hyaluronate, Glycerin, Aqua, [And], Vaccinium Angustifolium (Blueberry) Fruit Extract, Aqua, [And], Oryza Sativa (Rice) Extract, Saccharomyces Ferment Lysate Filtrate, Citric Acid, [And], Sodium Benzoate, [And], Potassium Sorbate, Polyglutamic Acid, Lactobacillus, [And], Maltodextrin, Tocopheryl Acetate, Xanthan Gum, Disodium EDTA, Sodium Hydroxide, Butylated Hydroxytoluene, Phenoxyethanol, Ethylhexylglycerin"
+  },
+    33: {
+    name: "Mars | High Coverage Foundation in a Tube | SPF 50PA++++ UVA/UVB",
+    category: "foundation",
+    price: "Rs. 900",
+    image: "foundation3.jpg",
+    shades: ["Fair", "Ivory", "Beige", "Sand", "Caramel", "Mocha"],
+    rating: 4.0,
+    reviews: 12,
+    desc: "Nourishing moisturizer enriched with Vitamin E for glowing skin.",
+    ingredients:"Aqua, Isopropyl Myristate, Urea, C15-C19 Alkane, Dimethicone, Glycerin, Xylitol, Glucose, Anhydroxylitol, Phoenix Dactylifera Seed, Ethanol, Carbomer, Coconut Oil, Stearic Acid, Aloe Vera, Phenoxyethanol, Carbomer, Extract, Triethanolamine, Cetostearyl Alcohol, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Ethoxydiglycol, Disodium EDTA, Vitamin E, Ceramide Complex, Lactic Acid"
+  },
+        44: {
+    name:" Maybelline Super Stay Matte Ink - 115 - 5ml",
+    category: "lipstick",
+    price: "Rs. 1500",
+    image: "lipstick1.jpg",
+    shades: [ "Cherry", "Rose Pink"],
+    rating: 5.0,
+       reviews: 18,
+    desc: "Fulface coverage keeps skin soft all day.",
+    ingredients:"Aqua, Caprylyl Methicone, PEG-12 Dimethicone/​PPG-20 Crosspolymer, Cyclopentasiloxane, Dimethicone Crosspolymer, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Glycerine, Silanetriol, Hyaluronic Acid, Propanediol, Citrullus Lanatus (Watermelon) Fruit Extract, Prunus Persica (Peach) Fruit Extract, Urtica Dioica (Nettle) Leaf Extract, Saccharum Officinarum (Sugarcane) Extract, Cucumis Sativus (Cucumber) Fruit Extract, Mentha Piperita (Peppermint) Oil, Glycolic Acid, Laminaria Digitata Extract, Cetyl - Pg Hydroxyethyl Palmitate, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6 II, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Tocopheryl Acetate, Disodium EDTA, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ifra Certified Allergen Free Fragrance, Ci 45430, Ci 15985",
+  finish:"matte"},
+    55: {
+    name: "Swiss Beauty Pure Lustre Lipgloss | High Shine Finish| Hydrating | 3.8gm",
+    category: "lipstick",
+    price: "Rs. 2000",
+    image: "lipstick2.jpg",
+   shades: ["Ruby Red", "Cherry", "Rose Pink", "Nude Beige", "Mauve", "Berry"],
+    rating: 4.0,
+       reviews: 1,
+    desc: "Lightweight oil-free formula for oily and acne-prone skin.",
+     ingredients:"Aqua, Caprylic/​Capric Triglyceride, Glycerine, Glyceryl Stearate, PEG-100 Stearate, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Cyclopentasiloxane, Cyclopentasiloxane, Dimethicone Crosspolymer, Sodium Polyacrylate, Dicaprylyl Carbonate, Polyglyceryl-3 Caprate, Dimethicone, C14-22 Alcohols, C12-20 Alkyl Glucoside, Xylitylglucoside, Anhydroxylitol, Xylitol, Stearic Acid, Olea Europaea (Olive) Fruit Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Laminaria Digitata Extract, [And], Hydrogenated Lecithin, Cetyl-PG Hydroxyethyl Palmitamide, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6, Cholesterol, [And], 1,2-Hexanediol, Sodium Hyaluronate, Glycerin, Aqua, [And], Vaccinium Angustifolium (Blueberry) Fruit Extract, Aqua, [And], Oryza Sativa (Rice) Extract, Saccharomyces Ferment Lysate Filtrate, Citric Acid, [And], Sodium Benzoate, [And], Potassium Sorbate, Polyglutamic Acid, Lactobacillus, [And], Maltodextrin, Tocopheryl Acetate, Xanthan Gum, Disodium EDTA, Sodium Hydroxide, Butylated Hydroxytoluene, Phenoxyethanol, Ethylhexylglycerin",
+    finish:"glossy"},
+    66: {
+    name: "LS Mall Swiss Beauty Bold Matt Lip stain Long-lasting Non-drying Shade",
+    category: "lipstick",
+    price: "Rs. 3500",
+    image: "lipstick3.png",
+    shades: ["Ruby Red", "Cherry", "Rose Pink"],
+    rating: 2.0,
+    reviews: 2,
+    desc: "Nourishing moisturizer enriched with Vitamin E for glowing skin.",
+    ingredients:"Aqua, Isopropyl Myristate, Urea, C15-C19 Alkane, Dimethicone, Glycerin, Xylitol, Glucose, Anhydroxylitol, Phoenix Dactylifera Seed, Ethanol, Carbomer, Coconut Oil, Stearic Acid, Aloe Vera, Phenoxyethanol, Carbomer, Extract, Triethanolamine, Cetostearyl Alcohol, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Ethoxydiglycol, Disodium EDTA, Vitamin E, Ceramide Complex, Lactic Acid",
+  finish:"stain"},
+
+  301: {
+  name: "CeraVe Hydrating Cream to Foam Cleanser 87ml | Makeup Remover Face Wash with Hyaluronic Acid & Ceramides | For Normal to Dry Skin",
+  price: "Rs. 600",
+  image: "suncream1.jpg",
+  rating: 4.5,
+  reviews: 128,
+  desc: "A gentle foaming cleanser that removes dirt and oil without drying your skin.",
+  ingredients: "Aqua/Water, Cocamidopropyl Hydroxysultaine, Sodium Lauroyl Sarcosinate, Propanediol, PEG-150 Pentaerythrityl Tetrastearate, PEG-6 Caprylic/Capric Glycerides, Glycerin, Ceramide NP, Ceramide AP, Ceramide EOP, Carbomer, Niacinamide, Sodium Methyl Cocoyl Taurate, Sodium Benzoate, Sodium Chloride, Sodium Lauroyl Lactylate, Sodium Hyaluronate, Cholesterol, Phenoxyethanol, Disodium EDTA, Citric Acid, Phytosphingosine, Xanthan Gum, Ethylhexylglycerin"
+},
+    302: {
+      name: "Dot & Key Watermelon Hyaluronic Sunscreen SPF 50 PA+++, 50gm",
+      price: "Rs. 1300",
+      image: "suncream2.jpeg",
+       rating: 3.2,
+  reviews: 128,
+      desc: "Soft and mild face wash suitable for daily use and sensitive skin.",
+    ingredients:"Aqua, Cocamidopropyl Betaine, Decyl Glucoside, Disodium Cocoyl Glutamate, 1,3 Butylene glycol, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Salicylic Acid, Xanthan Gum, PEG-40 Hydrogenated Castor Oil, Sodium Hydroxide, Zinc Pca, Disodium EDTA, Benzophenone-4, Camphor, Melaleuca Alternifolia (Tea Tree) Leaf Oil, Mentha Piperita (Peppermint) Oil, Panthenol, Glycine Soja (Soybean) Seed Extract, Houttuynia Cordata Extract, Scutellaria Baicalensis Root Extract, Melia Azadirachta Leaf Extract, Rehmannia Chinensis Root Extract, Salix Alba (Willow) Bark Extract, Phellodendron Amurense Bark Extract, Lactobacillus/​Pear Juice Ferment Filtrate, Camellia Sinensis (Green Tea) Leaf Extract, Aloe Barbadensis (Aloe Vera) Leaf Juice, Centella Asiatica (Cica) Leaf Extract, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ci 19140, Ci 42090"
+  },
+    303: {
+      name: "Cetaphil Sun SPF 50+ Light Gel Very High Protection 50ml",
+      price: "Rs. 1700",
+      image: "sunscream3.jpeg",
+       rating: 4.0,
+       reviews: 22,
+      desc: "Helps control excess oil and keeps your skin fresh all day.",
+    ingredients:"Aqua, Sodium Lauryl Ether Sulphate, Cocamidopropyl Betaine, Glycerin, Sorbitol, Propylene Glycol, Niacinamide, Glycolic Acid, Triethanolamine, Carbomer, Xanthan Gum, D-Panthenol, Benzophenone-4, Disodium EDTA, Cellulose Beads, Allantoin, Methylchloroisothiazolinone, Methylisothiazolinone, Fragrance"
+  },
+
+          111: {
+    name:"Maybelline New York Fit Me Blush, Pink 25, 4.5 g",
+    category: "foundation",
+    price: "Rs. 1200",
+    image: "blush1.jpg",
+    shades: ["Coral", "Mauve", "Berry"],
+    rating: 4.0,
+       reviews: 12,
+    desc: "Fulface coverage keeps skin soft all day.",
+    ingredients:"Aqua, Caprylyl Methicone, PEG-12 Dimethicone/​PPG-20 Crosspolymer, Cyclopentasiloxane, Dimethicone Crosspolymer, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Glycerine, Silanetriol, Hyaluronic Acid, Propanediol, Citrullus Lanatus (Watermelon) Fruit Extract, Prunus Persica (Peach) Fruit Extract, Urtica Dioica (Nettle) Leaf Extract, Saccharum Officinarum (Sugarcane) Extract, Cucumis Sativus (Cucumber) Fruit Extract, Mentha Piperita (Peppermint) Oil, Glycolic Acid, Laminaria Digitata Extract, Cetyl - Pg Hydroxyethyl Palmitate, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6 II, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Tocopheryl Acetate, Disodium EDTA, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ifra Certified Allergen Free Fragrance, Ci 45430, Ci 15985"
+},
+    222: {
+    name: "L.A. Girl Soft Matte Cream Blush – Rosebud, Long-Lasting, Matte Finishing, Added Jojoba Seed Oil And Vitamin E, 8 gm, 440 cutie",
+    category: "foundation",
+    price: "Rs. 3000",
+    image: "blush2.jpg",
+    shades: ["Peach", "Pink", "Rose"],
+    rating: 3.0,
+       reviews: 12,
+    desc: "Lightweight oil-free formula for oily and acne-prone skin.",
+     ingredients:"Aqua, Caprylic/​Capric Triglyceride, Glycerine, Glyceryl Stearate, PEG-100 Stearate, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Cyclopentasiloxane, Cyclopentasiloxane, Dimethicone Crosspolymer, Sodium Polyacrylate, Dicaprylyl Carbonate, Polyglyceryl-3 Caprate, Dimethicone, C14-22 Alcohols, C12-20 Alkyl Glucoside, Xylitylglucoside, Anhydroxylitol, Xylitol, Stearic Acid, Olea Europaea (Olive) Fruit Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Laminaria Digitata Extract, [And], Hydrogenated Lecithin, Cetyl-PG Hydroxyethyl Palmitamide, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6, Cholesterol, [And], 1,2-Hexanediol, Sodium Hyaluronate, Glycerin, Aqua, [And], Vaccinium Angustifolium (Blueberry) Fruit Extract, Aqua, [And], Oryza Sativa (Rice) Extract, Saccharomyces Ferment Lysate Filtrate, Citric Acid, [And], Sodium Benzoate, [And], Potassium Sorbate, Polyglutamic Acid, Lactobacillus, [And], Maltodextrin, Tocopheryl Acetate, Xanthan Gum, Disodium EDTA, Sodium Hydroxide, Butylated Hydroxytoluene, Phenoxyethanol, Ethylhexylglycerin"
+  },
+    333: {
+    name: "Sheglam Color Liquid Blush Long-Lasting Makeup for Women Beauty Cosmetic Skin Care 5.2 Ml",
+    category: "foundation",
+    price: "Rs. 900",
+    image: "blush3.jpg",
+    shades: ["Coral", "Rose", "Berry"],
+    rating: 4.0,
+    reviews: 12,
+    desc: "Nourishing moisturizer enriched with Vitamin E for glowing skin.",
+    ingredients:"Aqua, Isopropyl Myristate, Urea, C15-C19 Alkane, Dimethicone, Glycerin, Xylitol, Glucose, Anhydroxylitol, Phoenix Dactylifera Seed, Ethanol, Carbomer, Coconut Oil, Stearic Acid, Aloe Vera, Phenoxyethanol, Carbomer, Extract, Triethanolamine, Cetostearyl Alcohol, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Ethoxydiglycol, Disodium EDTA, Vitamin E, Ceramide Complex, Lactic Acid"
+  },
+
+
+   444: {
+    name:"GUCCI FLORA EAU DE PARFUM FOR WOMEN IMPORTED FROM FRANCE 100ML",
+    category: "perfume",
+    price: "Rs. 22500",
+    image: "perfume1.jpg",
+    shades:["Rose", "Jasmine", "Lavender"],
+    rating: 5.0,
+       reviews: 18,
+    desc: "Fulface coverage keeps skin soft all day.",
+    ingredients:"Aqua, Caprylyl Methicone, PEG-12 Dimethicone/​PPG-20 Crosspolymer, Cyclopentasiloxane, Dimethicone Crosspolymer, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Glycerine, Silanetriol, Hyaluronic Acid, Propanediol, Citrullus Lanatus (Watermelon) Fruit Extract, Prunus Persica (Peach) Fruit Extract, Urtica Dioica (Nettle) Leaf Extract, Saccharum Officinarum (Sugarcane) Extract, Cucumis Sativus (Cucumber) Fruit Extract, Mentha Piperita (Peppermint) Oil, Glycolic Acid, Laminaria Digitata Extract, Cetyl - Pg Hydroxyethyl Palmitate, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6 II, Acrylates/​C10-30 Alkyl Acrylate Crosspolymer, Triethanolamine, Tocopheryl Acetate, Disodium EDTA, Benzyl Alcohol, Ethylhexylglycerin, Tocopherol, Ifra Certified Allergen Free Fragrance, Ci 45430, Ci 15985",
+  finish:"matte"},
+
+    555: {
+    name: "Tube Rose My Way Fresh Perfume :- 50ML",
+    category: "perfume",
+    price: "Rs. 2000",
+    image: "perfume2.jpg",
+   shades: ["Lemon", "Mint", "Aqua"],
+    rating: 4.0,
+       reviews: 1,
+    desc: "Lightweight oil-free formula for oily and acne-prone skin.",
+     ingredients:"Aqua, Caprylic/​Capric Triglyceride, Glycerine, Glyceryl Stearate, PEG-100 Stearate, Cetyl Alcohol, Cetearyl Olivate, Sorbitan Olivate, Cyclopentasiloxane, Cyclopentasiloxane, Dimethicone Crosspolymer, Sodium Polyacrylate, Dicaprylyl Carbonate, Polyglyceryl-3 Caprate, Dimethicone, C14-22 Alcohols, C12-20 Alkyl Glucoside, Xylitylglucoside, Anhydroxylitol, Xylitol, Stearic Acid, Olea Europaea (Olive) Fruit Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Laminaria Digitata Extract, [And], Hydrogenated Lecithin, Cetyl-PG Hydroxyethyl Palmitamide, Ceramide 1, Ceramide 2, Ceramide 3, Ceramide 4, Ceramide 6, Cholesterol, [And], 1,2-Hexanediol, Sodium Hyaluronate, Glycerin, Aqua, [And], Vaccinium Angustifolium (Blueberry) Fruit Extract, Aqua, [And], Oryza Sativa (Rice) Extract, Saccharomyces Ferment Lysate Filtrate, Citric Acid, [And], Sodium Benzoate, [And], Potassium Sorbate, Polyglutamic Acid, Lactobacillus, [And], Maltodextrin, Tocopheryl Acetate, Xanthan Gum, Disodium EDTA, Sodium Hydroxide, Butylated Hydroxytoluene, Phenoxyethanol, Ethylhexylglycerin",
+    finish:"glossy"},
+
+    666: {
+    name: "Skinn By Titan | 24Seven Woody Perfume - 100 Ml | Eau De Parfum FTSM02PC",
+    category: "perfume",
+    price: "Rs. 3000",
+    image: "perfume3.jpg",
+   shades: ["Sandalwood", "Cedarwood", "Oud"],
+    rating: 2.0,
+    reviews: 2,
+    desc: "Nourishing moisturizer enriched with Vitamin E for glowing skin.",
+    ingredients:"Aqua, Isopropyl Myristate, Urea, C15-C19 Alkane, Dimethicone, Glycerin, Xylitol, Glucose, Anhydroxylitol, Phoenix Dactylifera Seed, Ethanol, Carbomer, Coconut Oil, Stearic Acid, Aloe Vera, Phenoxyethanol, Carbomer, Extract, Triethanolamine, Cetostearyl Alcohol, Polyacrylamide, C13-14 Isoparaffin, Laureth-7, Ethoxydiglycol, Disodium EDTA, Vitamin E, Ceramide Complex, Lactic Acid",
+  finish:"stain"},
+
+
+
+
+  };
+
+
+  // get id from URL
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  const product = products[id];
+
+  if(product){
+    document.getElementById("productName").innerText = product.name;
+    document.getElementById("productPrice").innerText = product.price;
+    document.getElementById("productImage").src = product.image;
+    document.getElementById("productDesc").innerText = product.desc;
+    if(product.ingredients){
+  document.getElementById("productIngredients").innerText = product.ingredients;
+  document.getElementById("ingredientsBox").style.display = "block";
+}
+
+    document.getElementById("ratingText").innerText =
+`${product.rating}/5 (${product.reviews} reviews)`;
+
+let stars = "";
+const fullStars = Math.floor(product.rating);
+
+for(let i=0; i<fullStars; i++){
+  stars += "★";
+}
+
+for(let i=fullStars; i<5; i++){
+  stars += "☆";
+}
+
+document.getElementById("stars").innerText = stars;
+  } else {
+    document.querySelector(".container").innerHTML = "<h2>Product not found</h2>";
+  }
+  window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageHeight = document.body.offsetHeight;
+
+  if (scrollPosition >= pageHeight - 50) {
+    footer.classList.add("show");
+  }
+});
+//quantity part
+let quantity = 1;
+
+function changeQty(change) {
+  quantity += change;
+  if (quantity < 1) quantity = 1; // prevent going below 1
+  document.getElementById("qtyDisplay").innerText = quantity;
+}
+
+//shades part
+if(product.shades){
+  document.getElementById("shadesBox").style.display = "block";
+  const container = document.getElementById("shadeOptions");
+
+  product.shades.forEach(shade => {
+    const btn = document.createElement("button");
+    btn.innerText = shade;
+    btn.style.cssText = `
+      padding: 6px 14px;
+      border: 2px solid #ff4d88;
+      background: white;
+      color: #ff4d88;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+    `;
+    btn.addEventListener("click", () => {
+      // remove active from all
+      document.querySelectorAll("#shadeOptions button")
+        .forEach(b => {
+          b.style.background = "white";
+          b.style.color = "#ff4d88";
+        });
+      // highlight selected
+      btn.style.background = "#ff4d88";
+      btn.style.color = "white";
+      document.getElementById("selectedShade").innerText = shade;
+    });
+    container.appendChild(btn);
+  });
+}
+</script>
+
+</body>
+</html>
