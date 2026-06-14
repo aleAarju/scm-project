@@ -577,6 +577,27 @@ header h1{
     text-align:center;
   }
 }
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.search-container input {
+  width: 220px;
+  padding: 8px 38px 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+.search-container .search-icon {
+  position: absolute;
+  right: 12px;
+  color: #bbb;
+  font-size: 14px;
+  cursor: pointer;
+}
+.search-container .search-icon:hover {
+  color: #ff4d88;
+}
 
   </style>
   
@@ -601,9 +622,9 @@ header h1{
       </div>
  
       <div class="account-dropdown">
-        <a href="#">Contact us</a>
+        <a href="aboutus1.html">Contact us</a>
         <a href="doctor.html">Doctors appointment</a>
-        <a href="aboutus1.html">About us</a>
+        <a href="aboutus.html">About us</a>
         <a href="login1.html" id="loginBtn">Login</a>
         <a href="#" id="logoutBtn" style="display:none;">Logout</a>
       </div>
@@ -661,8 +682,9 @@ header h1{
   </div>
 </div>
     <div class="search-container">
-      <input type="text" placeholder="Search the product">
-    </div>
+  <input type="text" id="siteSearch" placeholder="Search products..." autocomplete="off">
+  <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
+</div>
   </nav>
 </div>
 <div class="shop-layout">
@@ -873,6 +895,17 @@ document.getElementById("resetFilter").addEventListener("click", () => {
   document.querySelectorAll(".product-link")
     .forEach(p => p.classList.remove("hidden"));
 });
+
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) {
+    window.location.href = "search.html?q=" + encodeURIComponent(query);
+  }
+}
+document.getElementById("siteSearch").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") goToSearch();
+});
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
 </script>
  
 </body>

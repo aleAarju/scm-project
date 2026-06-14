@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlowCart Shopping Website</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+ 
   <style>
 /* ================= RESET ================= */
 *{
@@ -14,11 +15,11 @@
   box-sizing:border-box;
   font-family: Arial, sans-serif;
 }
-
+ 
 body{
   background:#fff5f7;
 }
-
+ 
 /* ================= HEADER ================= */
 header{
   background:#ff4d88;
@@ -30,22 +31,20 @@ header{
   position:relative;
   flex-wrap:wrap;
 }
-
+ 
 header h1{
   font-size:32px;
   z-index:2;
 }
-/* GlowCart logo link */
 .topbar a{
   text-decoration: none;
   color: white;
 }
-
+ 
 .topbar a:visited{
   color: white;
 }
-
-/* CENTER TEXT */
+ 
 .header-center{
   position:absolute;
   left:50%;
@@ -56,14 +55,13 @@ header h1{
   letter-spacing:1px;
   white-space:nowrap;
 }
-
-/* RIGHT NAV */
+ 
 .right-nav{
   display:flex;
   align-items:center;
   gap:30px;
 }
-
+ 
 /* ================= HERO ================= */
 .hero{
   height:300px;
@@ -75,12 +73,12 @@ header h1{
   color:white;
   text-align:center;
 }
-
+ 
 .hero h2{
   font-size:40px;
   margin-bottom:10px;
 }
-
+ 
 .hero button{
   padding:10px 20px;
   border:none;
@@ -90,7 +88,7 @@ header h1{
   border-radius:5px;
   cursor:pointer;
 }
-
+ 
 /* ================= PRODUCTS ================= */
 .products{
   display:grid;
@@ -98,7 +96,7 @@ header h1{
   gap:20px;
   padding:40px;
 }
-
+ 
 .card{
   background:white;
   border-radius:10px;
@@ -107,28 +105,28 @@ header h1{
   text-align:center;
   transition:0.3s;
 }
-
+ 
 .card:hover{
   transform:scale(1.05);
 }
-
+ 
 .card img{
   width:100%;
   height:200px;
   object-fit:cover;
   border-radius:10px;
 }
-
+ 
 .card h3{
   margin:15px 0 10px;
 }
-
+ 
 .price{
   color:#ff4d88;
   font-size:20px;
   margin-bottom:10px;
 }
-
+ 
 .card button{
   background:#ff4d88;
   color:white;
@@ -137,41 +135,35 @@ header h1{
   border-radius:5px;
   cursor:pointer;
 }
-
+ 
 /* ================= NAVBAR ================= */
 .navbar{
   background:white;
   padding:12px 20px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-.navbar{
-  background:white;
-  padding:12px 20px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-
   position: sticky;
   top: 75px; 
   z-index: 9998;
 }
-
+ 
 .navbar nav{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:25px;
 }
-
+ 
 .navbar nav a{
   text-decoration:none;
   color:#ff4d88;
   font-weight:normal;
 }
-
+ 
 /* ================= DROPDOWN ================= */
 .dropdown{
   position:relative;
 }
-
+ 
 .dropdown-content{
   display:none;
   position:absolute;
@@ -183,43 +175,68 @@ header h1{
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
   z-index:4000;
 }
-
+ 
 .dropdown-content a{
   display:block;
   padding:12px;
   color:#ff4d88;
 }
-
+ 
 .dropdown-content a:hover{
   background:#ffe6ee;
 }
-
+ 
 .dropdown:hover .dropdown-content{
   display:block;
 }
-
+ 
 /* ================= SEARCH ================= */
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+ 
 .search-container input{
   width:220px;
-  padding:8px 15px;
+  padding:8px 38px 8px 15px; /* right padding leaves room for icon */
   border-radius:20px;
   border:1px solid #ccc;
+  outline:none;
+  transition: border-color 0.2s;
 }
-
-/* ================= SLIDER (UNCHANGED) ================= */
+ 
+.search-container input:focus {
+  border-color: #ff4d88;
+}
+ 
+.search-container .search-icon {
+  position:absolute;
+  right:12px;
+  color:#bbb;
+  font-size:14px;
+  cursor:pointer;
+  transition: color 0.2s;
+}
+ 
+.search-container .search-icon:hover {
+  color:#ff4d88;
+}
+ 
+/* ================= SLIDER ================= */
 .slider{
   width:100%;
   height:500px;
   overflow:hidden;
   background:#fff5f7;
 }
-
+ 
 .slides{
   display:flex;
   width:400%;
   animation:swipe 12s infinite ease-in-out;
 }
-
+ 
 .slides img{
   width:100vw;
   height:500px;
@@ -227,7 +244,7 @@ header h1{
   flex-shrink:0;
   background:#fff5f7;
 }
-
+ 
 @keyframes swipe{
   0%{transform:translateX(0);}
   20%{transform:translateX(0);}
@@ -239,7 +256,7 @@ header h1{
   95%{transform:translateX(-300vw);}
   100%{transform:translateX(0);}
 }
-
+ 
 /* ================= ACCOUNT ================= */
 .my-account{
   position:relative;
@@ -248,22 +265,22 @@ header h1{
   gap:10px;
   color:white;
 }
-
+ 
 .my-account .fa-user{
   font-size:28px;
 }
-
+ 
 .account-text{
   display:flex;
   flex-direction:column;
   margin-left:10px;
 }
-
+ 
 .account-text span{
   font-size:12px;
   color:white;
 }
-
+ 
 .account-text a{
   color:white;
   text-decoration:none !important;
@@ -276,8 +293,7 @@ header h1{
 .my-account a{
   text-decoration:none;
 }
-
-/* dropdown */
+ 
 .account-dropdown{
   display:none;
   position:absolute;
@@ -290,7 +306,7 @@ header h1{
   z-index:5000;
   flex-direction:column;
 }
-
+ 
 .account-dropdown a{
   display:block;
   padding:10px 12px;
@@ -298,25 +314,25 @@ header h1{
   text-decoration:none;
   background:white;
 }
-
+ 
 .account-dropdown a:hover{
   background:#ffe6ee;
 }
-
+ 
 .my-account:hover .account-dropdown{
   display:flex;
 }
-
+ 
 /* ================= CART ================= */
 .cart-icon{
   margin-right:23px;
 }
-
+ 
 .cart-icon i{
   font-size:24px;
   color:white;
 }
-
+ 
 /* ================= FOOTER ================= */
 .footer{
   background:#ff4d88;
@@ -327,23 +343,23 @@ header h1{
   transform:translateY(50px);
   transition:all 0.6s ease;
 }
-
+ 
 .footer.show{
   opacity:1;
   transform:translateY(0);
 }
-
+ 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
-
+ 
 .footer-box h3,
 .footer-box h4{
   margin-bottom:10px;
 }
-
+ 
 .footer-box a{
   display:block;
   color:white;
@@ -351,7 +367,7 @@ header h1{
   margin:5px 0;
   font-size:14px;
 }
-
+ 
 .footer-bottom{
   text-align:center;
   margin-top:20px;
@@ -359,7 +375,28 @@ header h1{
   border-top:1px solid rgba(255,255,255,0.3);
   font-size:13px;
 }
-
+ 
+.dropdown a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+ 
+.dropdown-icon{
+  font-size:12px;
+  transition:transform 0.3s ease;
+}
+ 
+.dropdown:hover .dropdown-icon{
+  transform:rotate(180deg);
+}
+ 
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+ 
 /* ================= RESPONSIVE ================= */
 @media (max-width:768px){
   header{
@@ -367,103 +404,62 @@ header h1{
     text-align:center;
     gap:10px;
   }
-
+ 
   .header-center{
     position:static;
     transform:none;
     margin-top:5px;
   }
-
+ 
   .right-nav{
     justify-content:center;
     width:100%;
     gap:20px;
   }
-}
-.dropdown a{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.dropdown-icon{
-  font-size:12px;
-  transition:transform 0.3s ease;
-}
-
-.dropdown:hover .dropdown-icon{
-  transform:rotate(180deg);
-}
-.topbar{
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-}
-@media (max-width:768px){
-
-  header{
-    flex-direction:column;
-    text-align:center;
-    gap:10px;
-  }
-
-  .header-center{
-    position:static;
-    transform:none;
-    margin-top:5px;
-  }
-
-  .right-nav{
-    justify-content:center;
-    width:100%;
-    gap:20px;
-  }
-
-  /* FIX NAVBAR FOR MOBILE */
+ 
   .navbar nav{
-    flex-wrap: wrap; /* allows items to move to next line */
+    flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
   }
-
+ 
   .search-container{
     width:100%;
     display:flex;
     justify-content:center;
     margin-top:10px;
   }
-
+ 
   .search-container input{
-    width:90%; /* prevents overflow */
+    width:90%;
     max-width:300px;
   }
-
+ 
   .dropdown{
     font-size:14px;
   }
 }
-
   </style>
 </head>
-
+ 
 <body>
-
+ 
 <header class="topbar">
- <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
-
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+ 
   <div class="header-center">
     Glow More, Shop More 
   </div>
-
+ 
   <nav class="right-nav">
     <div class="my-account">
       <i class="fa-regular fa-user"></i>
-
+ 
       <div class="account-text">
         <span>Hello User</span>
         <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
       </div>
-
+ 
       <div class="account-dropdown">
         <a href="#">Contact us</a>
         <a href="doctor.html">Doctors appointment</a>
@@ -472,7 +468,7 @@ header h1{
         <a href="#" id="logoutBtn" style="display:none;">Logout</a>
       </div>
     </div>
-
+ 
     <div class="cart-icon">
       <a href="#">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -481,56 +477,61 @@ header h1{
     </div>
   </nav>
 </header>
-
+ 
 <!-- NAVBAR -->
 <div class="navbar">
   <nav>
     <!-- Skincare -->
-<div class="dropdown">
-  <a href="#">
-    Skincare
-    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-  </a>
-
-  <div class="dropdown-content">
-    <a href="cleanser.html">Cleanser</a>
-    <a href="moisturizer.html">Moisturizer</a>
-    <a href="suncream.html">Sunscreen</a>
-  </div>
-</div>
-
-<!-- Makeup -->
-<div class="dropdown">
-  <a href="#">
-    Makeup
-    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-  </a>
-
-  <div class="dropdown-content">
-    <a href="foundation.html">Foundation</a>
-    <a href="Lipstick.html">Lipstick</a>
-    <a href="blush.html">Blush</a>
-  </div>
-</div>
-
-<!-- Fragrance -->
-<div class="dropdown">
-  <a href="#">
-    Fragrance
-    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-  </a>
-
-  <div class="dropdown-content">
-    <a href="perfume.html">Perfume</a>
-  </div>
-</div>
+    <div class="dropdown">
+      <a href="#">
+        Skincare
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
+ 
+    <!-- Makeup -->
+    <div class="dropdown">
+      <a href="#">
+        Makeup
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
+ 
+    <!-- Fragrance -->
+    <div class="dropdown">
+      <a href="#">
+        Fragrance
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
+ 
+    <!-- ✅ SEARCH — now redirects to search.html -->
     <div class="search-container">
-      <input type="text" placeholder="Search the product">
+      <input
+        type="text"
+        id="siteSearch"
+        placeholder="Search products..."
+        autocomplete="off"
+      >
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
     </div>
   </nav>
 </div>
-
-<!-- SLIDER (UNCHANGED) -->
+ 
+<!-- SLIDER -->
 <div class="slider">
   <div class="slides">
     <img src="banner1.jpg">
@@ -541,7 +542,7 @@ header h1{
     <img src="banner3.jpg">
   </div>
 </div>
-
+ 
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
@@ -549,7 +550,7 @@ header h1{
       <h3>GlowCart</h3>
       <p>Glow More, Shop More ✨</p>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Quick Links</h4>
       <a href="#">Home</a>
@@ -557,14 +558,14 @@ header h1{
       <a href="#">Makeup</a>
       <a href="#">Fragrance</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Support</h4>
       <a href="#">Contact Us</a>
       <a href="#">Help</a>
       <a href="#">Privacy Policy</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Follow Us</h4>
       <a href="#">Instagram</a>
@@ -572,56 +573,62 @@ header h1{
       <a href="#">TikTok</a>
     </div>
   </div>
-
+ 
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
 </footer>
-
+ 
 <script>
+// ===== SEARCH =====
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) {
+    window.location.href = "search.html?q=" + encodeURIComponent(query);
+  }
+}
+ 
+// Press Enter to search
+document.getElementById("siteSearch").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") goToSearch();
+});
+ 
+// Click the magnifying glass icon
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
+ 
+// ===== FOOTER REVEAL =====
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");
   const scrollPosition = window.innerHeight + window.scrollY;
   const pageHeight = document.body.offsetHeight;
-
   if (scrollPosition >= pageHeight - 50) {
     footer.classList.add("show");
   }
 });
-
-// check login status
+ 
+// ===== AUTH UI =====
 function updateAuthUI() {
   const isLoggedIn = localStorage.getItem("loggedIn");
-
-  const loginBtn = document.getElementById("loginBtn");
+  const loginBtn  = document.getElementById("loginBtn");
   const logoutBtn = document.getElementById("logoutBtn");
-
   if (isLoggedIn === "true") {
-    loginBtn.style.display = "none";
+    loginBtn.style.display  = "none";
     logoutBtn.style.display = "block";
   } else {
-    loginBtn.style.display = "block";
+    loginBtn.style.display  = "block";
     logoutBtn.style.display = "none";
   }
 }
-
-// simulate login (call this after login page success)
-function loginUser() {
-  localStorage.setItem("loggedIn", "true");
-  updateAuthUI();
-}
-
-// logout function
+ 
 document.getElementById("logoutBtn").addEventListener("click", function (e) {
   e.preventDefault();
   localStorage.removeItem("loggedIn");
   updateAuthUI();
 });
-
-// run on page load
+ 
 updateAuthUI();
-
 </script>
-
+ 
 </body>
 </html>
+ 

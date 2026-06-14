@@ -1,16 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlowCart</title>
-
-<!-- FONT AWESOME ICONS -->
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+<title>Contact Us – GlowCart</title>
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ 
 <style>
-
+ 
 /* ================= RESET ================= */
 *{
   margin:0;
@@ -18,11 +17,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   box-sizing:border-box;
   font-family:Arial, sans-serif;
 }
-
+ 
 body{
   background:#fff5f7;
 }
-
+ 
 /* ================= TOP HEADER ================= */
 .topbar{
   background:#ff4d88;
@@ -36,12 +35,21 @@ body{
   z-index:9999;
   flex-wrap:wrap;
 }
-
+ 
 .topbar h1{
   font-size:32px;
   z-index:2;
 }
-
+ 
+.topbar a{
+  text-decoration:none;
+  color:white;
+}
+ 
+.topbar a:visited{
+  color:white;
+}
+ 
 /* CENTER TEXT */
 .header-center{
   position:absolute;
@@ -52,14 +60,14 @@ body{
   letter-spacing:1px;
   white-space:nowrap;
 }
-
+ 
 /* RIGHT NAV */
 .right-nav{
   display:flex;
   align-items:center;
   gap:30px;
 }
-
+ 
 /* ================= ACCOUNT ================= */
 .my-account{
   position:relative;
@@ -67,22 +75,22 @@ body{
   align-items:center;
   gap:10px;
 }
-
+ 
 .my-account .fa-user{
   font-size:28px;
   color:white;
 }
-
+ 
 .account-text{
   display:flex;
   flex-direction:column;
 }
-
+ 
 .account-text span{
   font-size:12px;
   color:white;
 }
-
+ 
 .account-text a{
   color:white;
   text-decoration:none;
@@ -90,8 +98,7 @@ body{
   align-items:center;
   gap:6px;
 }
-
-/* ACCOUNT DROPDOWN */
+ 
 .account-dropdown{
   display:none;
   position:absolute;
@@ -103,28 +110,32 @@ body{
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
   z-index:5000;
 }
-
+ 
 .account-dropdown a{
   display:block;
   padding:12px;
   color:#ff4d88;
   text-decoration:none;
 }
-
+ 
 .account-dropdown a:hover{
   background:#ffe6ee;
 }
-
+ 
 .my-account:hover .account-dropdown{
   display:block;
 }
-
+ 
 /* ================= CART ================= */
+.cart-icon{
+  margin-right:23px;
+}
+ 
 .cart-icon i{
   font-size:24px;
   color:white;
 }
-
+ 
 /* ================= NAVBAR ================= */
 .navbar{
   background:white;
@@ -134,7 +145,7 @@ body{
   top:75px;
   z-index:9998;
 }
-
+ 
 .navbar nav{
   display:flex;
   justify-content:center;
@@ -142,32 +153,32 @@ body{
   gap:25px;
   flex-wrap:wrap;
 }
-
+ 
 .navbar nav a{
   text-decoration:none;
   color:#ff4d88;
 }
-
+ 
 /* ================= DROPDOWN ================= */
 .dropdown{
   position:relative;
 }
-
+ 
 .dropdown a{
   display:flex;
   align-items:center;
   gap:6px;
 }
-
+ 
 .dropdown-icon{
   font-size:12px;
   transition:0.3s;
 }
-
+ 
 .dropdown:hover .dropdown-icon{
   transform:rotate(180deg);
 }
-
+ 
 .dropdown-content{
   display:none;
   position:absolute;
@@ -179,61 +190,152 @@ body{
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
   z-index:4000;
 }
-
+ 
 .dropdown-content a{
   display:block;
   padding:12px;
   color:#ff4d88;
 }
-
+ 
 .dropdown-content a:hover{
   background:#ffe6ee;
 }
-
+ 
 .dropdown:hover .dropdown-content{
   display:block;
 }
-
+ 
 /* ================= SEARCH ================= */
+.search-container{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+}
+ 
 .search-container input{
   width:220px;
-  padding:8px 15px;
+  padding:8px 38px 8px 15px;
   border-radius:20px;
   border:1px solid #ccc;
   outline:none;
+  transition:border-color 0.2s;
 }
-
-/* ================= PAGE CONTENT ================= */
-.content{
-  min-height:500px;
-  padding:40px;
+ 
+.search-container input:focus{
+  border-color:#ff4d88;
 }
-
+ 
+.search-container .search-icon{
+  position:absolute;
+  right:12px;
+  color:#bbb;
+  font-size:14px;
+  cursor:pointer;
+}
+ 
+.search-container .search-icon:hover{
+  color:#ff4d88;
+}
+ 
+/* ================= CONTACT PAGE ================= */
+.contact-wrapper{
+  width:90%;
+  max-width:1100px;
+  margin:50px auto;
+  display:flex;
+  gap:30px;
+}
+ 
+.contact-info,
+.contact-form{
+  flex:1;
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+ 
+.contact-info h2,
+.contact-form h2{
+  margin-bottom:20px;
+  color:#333;
+}
+ 
+.info-box{
+  margin-bottom:20px;
+}
+ 
+.info-box h4{
+  color:#ff4d88;
+  margin-bottom:5px;
+}
+ 
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:16px;
+  outline:none;
+}
+ 
+.contact-form textarea{
+  height:120px;
+  resize:none;
+}
+ 
+.contact-form button{
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:12px 25px;
+  font-size:16px;
+  border-radius:5px;
+  cursor:pointer;
+  transition:0.3s;
+}
+ 
+.contact-form button:hover{
+  background:#e63e77;
+}
+ 
 /* ================= FOOTER ================= */
 .footer{
   background:#ff4d88;
   color:white;
+  margin-top:40px;
   padding:40px 20px 10px;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 0.6s ease;
 }
-
+ 
+.footer.show{
+  opacity:1;
+  transform:translateY(0);
+}
+ 
 .footer-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
-
+ 
 .footer-box h3,
 .footer-box h4{
   margin-bottom:10px;
 }
-
+ 
 .footer-box a{
   display:block;
   color:white;
   text-decoration:none;
   margin:5px 0;
+  font-size:14px;
 }
-
+ 
 .footer-bottom{
   text-align:center;
   margin-top:20px;
@@ -241,314 +343,251 @@ body{
   border-top:1px solid rgba(255,255,255,0.3);
   font-size:13px;
 }
-
+ 
 /* ================= RESPONSIVE ================= */
 @media(max-width:768px){
-
   .topbar{
     flex-direction:column;
     text-align:center;
     gap:10px;
   }
-
+ 
   .header-center{
     position:static;
     transform:none;
   }
-
+ 
   .right-nav{
     justify-content:center;
   }
-
+ 
   .navbar{
     top:120px;
   }
+ 
+  .navbar nav{
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+  }
+ 
+  .search-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+  }
+ 
+  .search-container input{
+    width:90%;
+    max-width:300px;
+  }
+ 
+  .contact-wrapper{
+    flex-direction:column;
+  }
 }
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body{
-    background: #f5f5f5;
-}
-
-.container{
-    width: 90%;
-    max-width: 1100px;
-    margin: 50px auto;
-    display: flex;
-    gap: 30px;
-}
-
-.contact-info,
-.contact-form{
-    flex: 1;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.contact-info h2,
-.contact-form h2{
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.info-box{
-    margin-bottom: 20px;
-}
-
-.info-box h4{
-    color: #ff4d6d;
-    margin-bottom: 5px;
-}
-
-input,
-textarea{
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-textarea{
-    height: 120px;
-    resize: none;
-}
-
-button{
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover{
-    background: #e63956;
-}
-
-@media(max-width:768px){
-
-.container{
-    flex-direction: column;
-}
-
-}
-
+ 
 </style>
 </head>
-
+ 
 <body>
-
+ 
 <!-- TOP HEADER -->
 <header class="topbar">
-
-  <h1 style="font-family:cursive;">GlowCart</h1>
-
+ 
+  <!-- ✅ FIXED: GlowCart logo now links to homepage -->
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+ 
   <div class="header-center">
     Glow More, Shop More
   </div>
-
+ 
   <nav class="right-nav">
-
-    <!-- ACCOUNT -->
     <div class="my-account">
-
       <i class="fa-regular fa-user"></i>
-
       <div class="account-text">
         <span>Hello User</span>
-        <a href="#">
-          My Account
-          <i class="fa-solid fa-chevron-down"></i>
-        </a>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
       </div>
-
-      <!-- ACCOUNT DROPDOWN -->
       <div class="account-dropdown">
         <a href="contact.html">Contact Us</a>
         <a href="doctor.html">Doctors Appointment</a>
-        <a href="#">About Us</a>
-        <a href="login1.html">Login</a>
+        <a href="aboutus1.html">About Us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
       </div>
-
     </div>
-
-    <!-- CART -->
+ 
     <div class="cart-icon">
       <a href="#">
         <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
       </a>
     </div>
-
   </nav>
-
+ 
 </header>
-
+ 
 <!-- NAVBAR -->
 <div class="navbar">
-
   <nav>
-
-    <!-- SKINCARE -->
+ 
     <div class="dropdown">
-
-      <a href="#">
-        Skincare
-        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-      </a>
-
+      <a href="#">Skincare <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
       <div class="dropdown-content">
         <a href="cleanser.html">Cleanser</a>
         <a href="moisturizer.html">Moisturizer</a>
-        <a href="sunscreen.html">Sunscreen</a>
-        <a href="serum.html">Serum</a>
+        <a href="suncream.html">Sunscreen</a>
       </div>
-
     </div>
-
-    <!-- MAKEUP -->
+ 
     <div class="dropdown">
-
-      <a href="#">
-        Makeup
-        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-      </a>
-
+      <a href="#">Makeup <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
       <div class="dropdown-content">
-        <a href="#">Foundation</a>
-        <a href="#">Lipstick</a>
-        <a href="#">Blush</a>
-        <a href="#">Primer</a>
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
       </div>
-
     </div>
-
-    <!-- FRAGRANCE -->
+ 
     <div class="dropdown">
-
-      <a href="#">
-        Fragrance
-        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-      </a>
-
+      <a href="#">Fragrance <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
       <div class="dropdown-content">
-        <a href="#">Perfume</a>
-        <a href="#">Body Mist</a>
-        <a href="#">Deodorant</a>
+        <a href="perfume.html">Perfume</a>
       </div>
-
     </div>
-
+ 
     <!-- SEARCH -->
     <div class="search-container">
-      <input type="text" placeholder="Search products">
+      <input type="text" id="siteSearch" placeholder="Search products..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
     </div>
-
+ 
   </nav>
-
 </div>
-
-<!-- YOUR PAGE CONTENT GOES HERE -->
-<div class="content">
-  <h2><div class="container">
-
+ 
+<!-- ✅ FIXED: Contact content is now properly outside the navbar -->
+<div class="contact-wrapper">
+ 
   <div class="contact-info">
     <h2>Contact Information</h2>
-
+ 
     <div class="info-box">
       <h4>Address</h4>
       <p>Kathmandu, Nepal</p>
     </div>
-
+ 
     <div class="info-box">
       <h4>Phone</h4>
       <p>+977 9800000000</p>
     </div>
-
+ 
     <div class="info-box">
       <h4>Email</h4>
-      <p>support@example.com</p>
+      <p>support@glowcart.com</p>
     </div>
-
+ 
     <div class="info-box">
       <h4>Working Hours</h4>
-      <p>Sun - Fri : 9AM - 6PM</p>
+      <p>Sun – Fri: 9AM – 6PM</p>
     </div>
   </div>
-
+ 
   <div class="contact-form">
     <h2>Send Message</h2>
-
+ 
     <form id="contactForm">
-
       <input type="text" id="name" placeholder="Your Name" required>
-
       <input type="email" id="email" placeholder="Your Email" required>
-
       <input type="text" id="subject" placeholder="Subject" required>
-
       <textarea id="message" placeholder="Your Message"></textarea>
-
       <button type="submit">Send Message</button>
-
     </form>
   </div>
-
+ 
 </div>
-
-<script src="index.js"></script></h2>
-</div>
-
-<!-- FOOTER -->
+ 
+<!-- ✅ FIXED: Footer is now properly placed after content -->
 <footer class="footer">
-
   <div class="footer-container">
-
+ 
     <div class="footer-box">
       <h3>GlowCart</h3>
       <p>Glow More, Shop More ✨</p>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Quick Links</h4>
-      <a href="#">Home</a>
+      <a href="homepage.html">Home</a>
       <a href="#">Skincare</a>
       <a href="#">Makeup</a>
       <a href="#">Fragrance</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Support</h4>
       <a href="contact.html">Contact Us</a>
       <a href="#">Help</a>
       <a href="#">Privacy Policy</a>
     </div>
-
+ 
     <div class="footer-box">
       <h4>Follow Us</h4>
       <a href="#">Instagram</a>
       <a href="#">Facebook</a>
       <a href="#">TikTok</a>
     </div>
-
+ 
   </div>
-
+ 
   <div class="footer-bottom">
     © 2026 GlowCart. All rights reserved.
   </div>
-
 </footer>
-
+ 
+<script>
+// ===== SEARCH =====
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) {
+    window.location.href = "search.html?q=" + encodeURIComponent(query);
+  }
+}
+document.getElementById("siteSearch").addEventListener("keydown", function(e) {
+  if (e.key === "Enter") goToSearch();
+});
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
+ 
+// ===== FOOTER REVEAL =====
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+    footer.classList.add("show");
+  }
+});
+ 
+// ===== AUTH UI =====
+function updateAuthUI() {
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  document.getElementById("loginBtn").style.display  = isLoggedIn ? "none"  : "block";
+  document.getElementById("logoutBtn").style.display = isLoggedIn ? "block" : "none";
+}
+document.getElementById("logoutBtn").addEventListener("click", function(e) {
+  e.preventDefault();
+  localStorage.removeItem("loggedIn");
+  updateAuthUI();
+});
+updateAuthUI();
+ 
+// ===== CONTACT FORM =====
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  alert("Message sent! We'll get back to you soon.");
+  this.reset();
+});
+</script>
+ 
 </body>
 </html>
+ 

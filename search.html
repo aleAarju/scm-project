@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search – GlowCart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
+    body{ background:#fff5f7; }
+ 
+    /* ===== HEADER ===== */
+    header{
+      background:#ff4d88; color:white;
+      padding:15px 30px;
+      display:flex; justify-content:space-between; align-items:center;
+      position:relative; flex-wrap:wrap;
+    }
+    header h1{ font-size:32px; z-index:2; }
+    .topbar a{ text-decoration:none; color:white; }
+    .topbar a:visited{ color:white; }
+    .header-center{
+      position:absolute; left:50%; transform:translateX(-50%);
+      color:white; font-size:18px; font-weight:bold;
+      letter-spacing:1px; white-space:nowrap;
+    }
+    .right-nav{ display:flex; align-items:center; gap:30px; }
+    .topbar{ position:sticky; top:0; z-index:9999; }
+ 
+    /* ===== ACCOUNT ===== */
+    .my-account{ position:relative; display:flex; align-items:center; gap:10px; color:white; }
+    .my-account .fa-user{ font-size:28px; }
+    .account-text{ display:flex; flex-direction:column; margin-left:10px; }
+    .account-text span{ font-size:12px; color:white; }
+    .account-text a{
+      color:white; text-decoration:none !important; font-weight:normal;
+      font-size:16px; display:flex; align-items:center; gap:6px;
+    }
+    .my-account a{ text-decoration:none; }
+    .account-dropdown{
+      display:none; position:absolute; top:100%; left:0;
+      background:white; min-width:160px; border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:5000; flex-direction:column;
+    }
+    .account-dropdown a{ display:block; padding:10px 12px; color:#ff4d88 !important; text-decoration:none; background:white; }
+    .account-dropdown a:hover{ background:#ffe6ee; }
+    .my-account:hover .account-dropdown{ display:flex; }
+    .cart-icon{ margin-right:23px; }
+    .cart-icon i{ font-size:24px; color:white; }
+ 
+    /* ===== NAVBAR ===== */
+    .navbar{
+      background:white; padding:12px 20px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      position:sticky; top:75px; z-index:9998;
+    }
+    .navbar nav{ display:flex; justify-content:center; align-items:center; gap:25px; }
+    .navbar nav a{ text-decoration:none; color:#ff4d88; }
+    .dropdown{ position:relative; }
+    .dropdown a{ display:flex; align-items:center; gap:6px; }
+    .dropdown-icon{ font-size:12px; transition:transform 0.3s; }
+    .dropdown:hover .dropdown-icon{ transform:rotate(180deg); }
+    .dropdown-content{
+      display:none; position:absolute; top:100%; left:0;
+      background:white; min-width:180px; border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:4000;
+    }
+    .dropdown-content a{ display:block; padding:12px; color:#ff4d88; }
+    .dropdown-content a:hover{ background:#ffe6ee; }
+    .dropdown:hover .dropdown-content{ display:block; }
+    .search-container input{
+      width:220px; padding:8px 15px;
+      border-radius:20px; border:1px solid #ccc;
+    }
+ 
+    /* ===== SEARCH PAGE BODY ===== */
+    .search-page{ padding:30px 40px; }
+ 
+    .search-header{
+      display:flex; align-items:center; gap:12px; margin-bottom:28px; flex-wrap:wrap;
+    }
+    .search-header h2{
+      color:#ff4d88; font-size:22px; white-space:nowrap;
+    }
+    .search-header .query-tag{
+      background:#ffe6ee; color:#ff4d88;
+      padding:4px 14px; border-radius:20px; font-size:14px;
+    }
+    .result-count{ color:#888; font-size:14px; margin-left:auto; }
+ 
+    /* ===== PRODUCTS GRID ===== */
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+      gap:20px;
+    }
+    .product-link{ text-decoration:none; color:inherit; display:block; }
+    .card{
+      background:white; border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+      padding:18px; text-align:center; transition:0.25s;
+    }
+    .card:hover{ transform:scale(1.04); }
+    .card img{
+      width:100%; height:190px;
+      object-fit:contain; border-radius:8px; background:white;
+    }
+    .card h3{
+      margin:12px 0 6px; font-size:14px; line-height:1.4;
+      display:-webkit-box; -webkit-line-clamp:2;
+      -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .price{ color:#ff4d88; font-size:18px; margin-bottom:10px; }
+    .category-tag{
+      display:inline-block;
+      background:#fff5f7; color:#ff4d88;
+      font-size:11px; border-radius:10px;
+      padding:2px 10px; margin-bottom:8px;
+      border:1px solid #ffb3cc;
+    }
+    .card button{
+      background:#ff4d88; color:white;
+      border:none; padding:9px 14px;
+      border-radius:5px; cursor:pointer; width:100%; font-size:13px;
+    }
+ 
+    /* ===== EMPTY STATE ===== */
+    .empty-state{
+      text-align:center; padding:80px 20px; color:#aaa;
+    }
+    .empty-state i{ font-size:48px; margin-bottom:16px; color:#ffb3cc; }
+    .empty-state p{ font-size:16px; }
+    .empty-state a{ color:#ff4d88; text-decoration:none; }
+ 
+    /* ===== FOOTER ===== */
+    .footer{
+      background:#ff4d88; color:white;
+      margin-top:40px; padding:40px 20px 10px;
+      opacity:0; transform:translateY(50px); transition:all 0.6s ease;
+    }
+    .footer.show{ opacity:1; transform:translateY(0); }
+    .footer-container{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px;
+    }
+    .footer-box h3, .footer-box h4{ margin-bottom:10px; }
+    .footer-box a{ display:block; color:white; text-decoration:none; margin:5px 0; font-size:14px; }
+    .footer-bottom{
+      text-align:center; margin-top:20px; padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.3); font-size:13px;
+    }
+ 
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      header{ flex-direction:column; text-align:center; gap:10px; }
+      .header-center{ position:static; transform:none; margin-top:5px; }
+      .right-nav{ justify-content:center; width:100%; gap:20px; }
+      .navbar nav{ flex-wrap:wrap; gap:12px; justify-content:center; }
+      .search-container{ width:100%; display:flex; justify-content:center; margin-top:10px; }
+      .search-container input{ width:90%; max-width:300px; }
+      .search-page{ padding:20px 16px; }
+      .products{ grid-template-columns:repeat(2,1fr); gap:12px; }
+      .card img{ height:140px; }
+    }
+  </style>
+</head>
+<body>
+ 
+<!-- HEADER -->
+<header class="topbar">
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+  <div class="header-center">Glow More, Shop More</div>
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="aboutus1.html">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
+    <div class="cart-icon">
+      <a href="#"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count">0</span></a>
+    </div>
+  </nav>
+</header>
+ 
+<!-- NAVBAR -->
+<div class="navbar">
+  <nav>
+    <div class="dropdown">
+      <a href="#">Skincare <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Makeup <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Fragrance <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search the product">
+    </div>
+  </nav>
+</div>
+ 
+<!-- SEARCH RESULTS -->
+<div class="search-page">
+  <div class="search-header">
+    <h2>Search Results for</h2>
+    <span class="query-tag" id="queryLabel"></span>
+    <span class="result-count" id="resultCount"></span>
+  </div>
+ 
+  <div class="products" id="resultsGrid"></div>
+ 
+  <div class="empty-state" id="emptyState" style="display:none;">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <p>No products found for "<span id="emptyQuery"></span>".</p>
+    <p style="margin-top:10px;">Try a different keyword or <a href="homepage.html">browse all categories</a>.</p>
+  </div>
+</div>
+ 
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+ 
+<script>
+// ============================================================
+// PRODUCT DATABASE — keep this in sync with product.html
+// ============================================================
+const products = {
+  1:   { name:"CeraVe Hydrating Cream to Foam Cleanser 87ml | Makeup Remover Face Wash with Hyaluronic Acid & Ceramides | For Normal to Dry Skin", price:"Rs. 1200", image:"cleanser1.avif",   category:"Cleanser"     },
+  2:   { name:"DOT & KEY Watermelon Super Glow Gel Face Wash With Vitamin C & Cucumber 100ml",                                                      price:"Rs. 900",  image:"cleanser2.jpeg",  category:"Cleanser"     },
+  3:   { name:"Kleida Foaming Face Wash, For Acne Prone Skin, 100G",                                                                                price:"Rs. 1100", image:"cleanser3.webp",  category:"Cleanser"     },
+  4:   { name:"Minimalist 6% Oat Extract Gentle Face Wash for Sensitive, Dry & Dehydrated Skin | Hyaluronic Acid | 120 ml",                        price:"Rs. 500",  image:"cleanser4.webp",  category:"Cleanser"     },
+  101: { name:"Dot & Key Barrier Repair Moisturizer with Ceramide + Hyaluronic 100g",                                                              price:"Rs. 568",  image:"moisturizer1.jpg", category:"Moisturizer"  },
+  102: { name:"Dot & Key Niacinamide + CICA Centella Oil Free Moisturizer for Acne Prone Skin | 50g",                                              price:"Rs. 653",  image:"moisturizer2.jpeg", category:"Moisturizer"  },
+  103: { name:"The Derma Co. 5% Propylene Oil Free Moisturizer with Propylene Glycol & Hyaluronic Acid - 100g",                                    price:"Rs. 566",  image:"moisturizer3.jpeg",category:"Moisturizer"  },
+  11:  { name:"L.A. Colors Radiant Foundation (Fair) 28.5ml",                                                                                      price:"Rs. 1200", image:"foundation1.jpg",  category:"Foundation"   },
+  22:  { name:"Sheglam Complexion Pro Long Lasting Breathable Matte Foundation, 30ml",                                                             price:"Rs. 3000", image:"foundation2.jpg",  category:"Foundation"   },
+  33:  { name:"Mars | High Coverage Foundation in a Tube | SPF 50 PA++++",                                                                         price:"Rs. 900",  image:"foundation3.jpg",  category:"Foundation"   },
+  44:  { name:"Maybelline Super Stay Matte Ink - 115 - 5ml",                                                                                       price:"Rs. 1500", image:"lipstick1.jpg",    category:"Lipstick"     },
+  55:  { name:"Swiss Beauty Pure Lustre Lipgloss | High Shine Finish | Hydrating | 3.8gm",                                                         price:"Rs. 2000", image:"lipstick2.jpg",    category:"Lipstick"     },
+  66:  { name:"LS Mall Swiss Beauty Bold Matt Lip Stain Long-Lasting Non-Drying Shade",                                                            price:"Rs. 3500", image:"lipstick3.png",    category:"Lipstick"     },
+  301: { name:"CeraVe Hydrating Sunscreen Broad Spectrum SPF 30 | Sunscreen Face Lotion",                                                          price:"Rs. 600",  image:"suncream1.jpg",    category:"Sunscreen"    },
+  302: { name:"Dot & Key Watermelon Hyaluronic Sunscreen SPF 50 PA+++, 50gm",                                                                      price:"Rs. 1300", image:"suncream2.jpeg",   category:"Sunscreen"    },
+  303: { name:"Cetaphil Sun SPF 50+ Light Gel Very High Protection 50ml",                                                                          price:"Rs. 1700", image:"sunscream3.jpeg",  category:"Sunscreen"    },
+  111: { name:"Maybelline New York Fit Me Blush, Pink 25, 4.5g",                                                                                   price:"Rs. 1200", image:"blush1.jpg",       category:"Blush"        },
+  222: { name:"L.A. Girl Soft Matte Cream Blush – Rosebud, Long-Lasting, Matte Finishing, 8gm",                                                   price:"Rs. 2000", image:"blush2.jpg",       category:"Blush"        },
+  333: { name:"Sheglam Color Liquid Blush Long-Lasting Makeup for Women Beauty Cosmetic Skin Care 5.2ml",                                          price:"Rs. 5000", image:"blush3.jpg",       category:"Blush"        },
+  444: { name:"GUCCI FLORA EAU DE PARFUM FOR WOMEN IMPORTED FROM FRANCE 100ML",                                                                    price:"Rs. 22500",image:"perfume1.jpg",    category:"Perfume"      },
+  555: { name:"Tube Rose My Way Fresh Perfume 50ml",                                                                                               price:"Rs. 2000", image:"perfume2.jpg",     category:"Perfume"      },
+  666: { name:"Skinn By Titan 24Seven Woody Perfume 100ml | Eau De Parfum",                                                                        price:"Rs. 3000", image:"perfume3.jpg",     category:"Perfume"      },
+};
+ 
+// ============================================================
+// SEARCH LOGIC
+// ============================================================
+function runSearch(query) {
+  query = (query || "").trim().toLowerCase();
+ 
+  document.getElementById("queryLabel").textContent = query || "…";
+  document.getElementById("emptyQuery").textContent = query;
+ 
+  if (!query) {
+    document.getElementById("resultCount").textContent = "";
+    document.getElementById("resultsGrid").innerHTML = "";
+    document.getElementById("emptyState").style.display = "none";
+    return;
+  }
+ 
+  // split query into words for multi-word matching
+  const words = query.split(/\s+/);
+ 
+  const matches = Object.entries(products).filter(([, p]) => {
+    const haystack = (p.name + " " + p.category).toLowerCase();
+    return words.every(w => haystack.includes(w));
+  });
+ 
+  const grid   = document.getElementById("resultsGrid");
+  const empty  = document.getElementById("emptyState");
+ 
+  grid.innerHTML = "";
+ 
+  if (matches.length === 0) {
+    empty.style.display = "block";
+    document.getElementById("resultCount").textContent = "0 results";
+    return;
+  }
+ 
+  empty.style.display = "none";
+  document.getElementById("resultCount").textContent =
+    matches.length + " result" + (matches.length > 1 ? "s" : "");
+ 
+  matches.forEach(([id, p]) => {
+    const a = document.createElement("a");
+    a.href  = `product.html?id=${id}`;
+    a.className = "product-link";
+    a.innerHTML = `
+      <div class="card">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200x190?text=No+Image'">
+        <span class="category-tag">${p.category}</span>
+        <h3>${p.name}</h3>
+        <p class="price">${p.price}</p>
+        <button onclick="event.preventDefault()">View Product</button>
+      </div>`;
+    // clicking the card navigates; button is just a visual cue
+    grid.appendChild(a);
+  });
+}
+ 
+// Read ?q= from URL on page load
+const urlParams = new URLSearchParams(window.location.search);
+const initialQuery = urlParams.get("q") || "";
+document.getElementById("searchInput").value = initialQuery;
+runSearch(initialQuery);
+ 
+// Live search from this page's own input
+document.getElementById("searchInput").addEventListener("input", function () {
+  const newQ = this.value;
+  // update URL so the address bar reflects what's being searched
+  history.replaceState(null, "", "search.html?q=" + encodeURIComponent(newQ));
+  runSearch(newQ);
+});
+ 
+// Press Enter on this page's input
+document.getElementById("searchInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") runSearch(this.value);
+});
+ 
+// Footer reveal
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+    footer.classList.add("show");
+  }
+});
+ 
+// Auth UI
+function updateAuthUI() {
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  document.getElementById("loginBtn").style.display  = loggedIn ? "none"  : "block";
+  document.getElementById("logoutBtn").style.display = loggedIn ? "block" : "none";
+}
+document.getElementById("logoutBtn").addEventListener("click", e => {
+  e.preventDefault();
+  localStorage.removeItem("loggedIn");
+  updateAuthUI();
+});
+updateAuthUI();
+</script>
+ 
+</body>
+</html>
+ 
