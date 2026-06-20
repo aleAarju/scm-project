@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Consultation Form | GlowCart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#fff5f7;
+}
+
+/* ================= HEADER ================= */
+header{
+  background:#ff4d88;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  flex-wrap:wrap;
+}
+
+header h1{
+  font-size:32px;
+  z-index:2;
+}
+.topbar a{
+  text-decoration: none;
+  color: white;
+}
+.topbar a:visited{
+  color: white;
+}
+
+.header-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+.right-nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:white;
+  padding:12px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 75px;
+  z-index: 9998;
+}
+
+.navbar nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:25px;
+}
+
+.navbar nav a{
+  text-decoration:none;
+  color:#ff4d88;
+  font-weight:normal;
+}
+
+/* ================= DROPDOWN ================= */
+.dropdown{ position:relative; }
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:180px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:4000;
+}
+
+.dropdown-content a{
+  display:block;
+  padding:12px;
+  color:#ff4d88;
+}
+
+.dropdown-content a:hover{ background:#ffe6ee; }
+.dropdown:hover .dropdown-content{ display:block; }
+
+/* ================= SEARCH (navbar) ================= */
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.search-container input{
+  width:220px;
+  padding:8px 38px 8px 15px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  outline:none;
+  transition: border-color 0.2s;
+}
+.search-container input:focus { border-color: #ff4d88; }
+.search-container .search-icon {
+  position:absolute;
+  right:12px;
+  color:#bbb;
+  font-size:14px;
+  cursor:pointer;
+  transition: color 0.2s;
+}
+.search-container .search-icon:hover { color:#ff4d88; }
+
+/* ================= ACCOUNT ================= */
+.my-account{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+}
+.my-account .fa-user{ font-size:28px; }
+.account-text{
+  display:flex;
+  flex-direction:column;
+  margin-left:10px;
+}
+.account-text span{ font-size:12px; color:white; }
+.account-text a{
+  color:white;
+  text-decoration:none !important;
+  font-weight:normal;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.my-account a{ text-decoration:none; }
+.account-dropdown{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:160px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:5000;
+  flex-direction:column;
+}
+.account-dropdown a{
+  display:block;
+  padding:10px 12px;
+  color:#ff4d88 !important;
+  text-decoration:none;
+  background:white;
+}
+.account-dropdown a:hover{ background:#ffe6ee; }
+.my-account:hover .account-dropdown{ display:flex; }
+
+/* ================= CART ================= */
+.cart-icon{ margin-right:23px; }
+.cart-icon i{ font-size:24px; color:white; }
+
+.dropdown a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.dropdown-icon{
+  font-size:12px;
+  transition:transform 0.3s ease;
+}
+.dropdown:hover .dropdown-icon{ transform:rotate(180deg); }
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* ================= QUESTIONNAIRE PAGE ================= */
+.q-wrapper{
+  max-width:800px;
+  margin:0 auto;
+  padding:40px 20px;
+}
+
+.q-title{
+  text-align:center;
+  color:#ff4d88;
+  font-size:30px;
+  margin-bottom:25px;
+}
+
+/* Doctor info card at top */
+.doctor-summary{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:20px;
+  margin-bottom:25px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  border-left:5px solid #ff4d88;
+}
+
+.doctor-summary .ds-photo{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ff4d88;
+}
+
+
+.doctor-summary .ds-info h3{
+  color:#333;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.doctor-summary .ds-info p{
+  color:#666;
+  font-size:14px;
+  margin:2px 0;
+}
+
+.doctor-summary .ds-fee{
+  margin-left:auto;
+  background:#ff4d88;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+/* Form */
+.q-form{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:30px;
+}
+
+.form-group{
+  margin-bottom:22px;
+}
+
+.form-group label.field-label{
+  display:block;
+  font-weight:bold;
+  color:#333;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.required{
+  color:#ff4d88;
+}
+
+/* Text inputs */
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group textarea{
+  width:100%;
+  padding:10px 14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:14px;
+  font-family:Arial, sans-serif;
+  outline:none;
+  transition:border-color 0.2s;
+  background:#fff;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus{
+  border-color:#ff4d88;
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:70px;
+}
+
+/* Radio & checkbox groups */
+.option-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.option-group label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fff5f7;
+  padding:8px 14px;
+  border-radius:20px;
+  border:1px solid #ffd0dd;
+  cursor:pointer;
+  font-size:14px;
+  color:#333;
+  transition:0.2s;
+}
+
+.option-group label:hover{
+  background:#ffe6ee;
+}
+
+.option-group input[type="radio"],
+.option-group input[type="checkbox"]{
+  accent-color:#ff4d88;
+  cursor:pointer;
+}
+
+/* Error styling */
+.error-msg{
+  color:#d9214f;
+  font-size:13px;
+  margin-top:6px;
+  display:none;
+}
+
+.form-group.has-error input[type="text"],
+.form-group.has-error input[type="tel"],
+.form-group.has-error input[type="email"]{
+  border-color:#d9214f;
+}
+
+/* Submit button */
+.submit-btn{
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:14px 30px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+  width:100%;
+  margin-top:10px;
+  transition:background 0.2s;
+}
+
+.submit-btn:hover{ background:#e63e77; }
+
+/* Not-found doctor */
+.not-found{
+  background:white;
+  text-align:center;
+  padding:40px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  color:#555;
+}
+.not-found a{
+  color:#ff4d88;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  background:#ff4d88;
+  color:white;
+  margin-top:40px;
+  padding:40px 20px 10px;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 0.6s ease;
+}
+.footer.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+.footer-box h3, .footer-box h4{ margin-bottom:10px; }
+.footer-box a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  margin:5px 0;
+  font-size:14px;
+}
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.3);
+  font-size:13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:768px){
+  header{ flex-direction:column; text-align:center; gap:10px; }
+  .header-center{ position:static; transform:none; margin-top:5px; }
+  .right-nav{ justify-content:center; width:100%; gap:20px; }
+  .navbar nav{ flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .search-container{ width:100%; display:flex; justify-content:center; margin-top:10px; }
+  .search-container input{ width:90%; max-width:300px; }
+  .dropdown{ font-size:14px; }
+
+  .q-title{ font-size:22px; }
+  .doctor-summary{ flex-direction:column; text-align:center; }
+  .doctor-summary .ds-fee{ margin-left:0; }
+  .q-form{ padding:20px; }
+}
+
+/* Pro icon polish */
+.q-title i{ color:#ff4d88; margin-right:8px; }
+.doctor-summary .ds-info p i{ color:#ff4d88; margin-right:6px; }
+.not-found i.fa-triangle-exclamation{
+  font-size:40px; color:#ff4d88; display:block; margin-bottom:10px;
+}
+.submit-btn i{ margin-left:6px; }
+  </style>
+</head>
+
+<body>
+
+<!-- ✅ CLEAN HEADER -->
+<header class="topbar">
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+
+  <div class="header-center">
+    Glow More, Shop More
+  </div>
+
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
+
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="myappointment.html">My Appointments</a>
+        <a href="#">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
+
+    <div class="cart-icon">
+      <a href="cart.html">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ✅ CLEAN NAVBAR -->
+<div class="navbar">
+  <nav>
+    <!-- Skincare -->
+    <div class="dropdown">
+      <a href="#">
+        Skincare
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
+
+    <!-- Makeup -->
+    <div class="dropdown">
+      <a href="#">
+        Makeup
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
+
+    <!-- Fragrance -->
+    <div class="dropdown">
+      <a href="#">
+        Fragrance
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
+
+    <!-- Site search -->
+    <div class="search-container">
+      <input type="text" id="siteSearch" placeholder="Search products..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
+    </div>
+  </nav>
+</div>
+
+<!-- ================= QUESTIONNAIRE PAGE ================= -->
+<div class="q-wrapper">
+
+  <<h2 class="q-title"><i class="fa-solid fa-clipboard-list"></i> Pre-Consultation Form</h2>
+
+  <!-- Doctor info will be injected here -->
+  <div id="doctorSummary"></div>
+
+  <!-- Form will be injected here only if doctor is valid -->
+  <div id="formContainer"></div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================
+   DOCTORS DATA (same list as doctor.html)
+   ===================================================== */
+const doctors = [
+  { id:1, name:"Dr. Priya Sharma", photo:"doctor1.jpg", area:"Naya Baneshwor",
+    address:"123 Hospital Road, Naya Baneshwor, KTM", experience:8, fee:1500, rating:4.8 },
+  { id:2, name:"Dr. kritan Verma", photo:"doctor2.jpg", area:"New Road",
+    address:"45 Mahaboudha Marg, New Road, KTM", experience:10, fee:1800, rating:4.9 },
+  { id:3, name:"Dr. Kritika Joshi", photo:"doctor3.jpg", area:"Lalitpur",
+    address:"Jhamsikhel Marg, Lalitpur", experience:12, fee:2000, rating:4.7 },
+  { id:4, name:"Dr. Ram Mehta", photo:"doctor4.webp", area:"Anamnagar",
+    address:"Putalisadak-adjacent, Anamnagar, KTM", experience:5, fee:1200, rating:4.6 },
+  { id:5, name:"Dr. Sunil Thapa", photo:"doctor5.jpg", area:"Naya Baneshwor",
+    address:"Mid-Baneshwor Chowk, Naya Baneshwor, KTM", experience:7, fee:1300, rating:4.7 },
+  { id:6, name:"Dr. Sneha Gurung", photo:"doctor6.webp", area:"Lalitpur",
+    address:"Pulchowk Road, Lalitpur", experience:6, fee:1400, rating:4.8 }
+];
+
+/* =====================================================
+   READ ?id=X from URL
+   ===================================================== */
+function getDoctorIdFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const idStr  = params.get("id");
+  const id     = parseInt(idStr, 10);
+  return isNaN(id) ? null : id;
+}
+
+/* =====================================================
+   RENDER DOCTOR SUMMARY AT TOP
+   ===================================================== */
+const doctorId      = getDoctorIdFromURL();
+const doctor        = doctors.find(d => d.id === doctorId);
+const summaryDiv    = document.getElementById("doctorSummary");
+const formContainer = document.getElementById("formContainer");
+
+if (!doctor){
+  // Invalid or missing id
+  summaryDiv.innerHTML = `
+    <div class="not-found">
+    <i class="fa-solid fa-triangle-exclamation"></i><br>Doctor not found.<br><br>
+      Please go back and choose a dermatologist from
+      <a href="doctor.html">the listing page</a>.
+    </div>
+  `;
+} else {
+  // Show doctor info
+  summaryDiv.innerHTML = `
+    <div class="doctor-summary">
+     <img src="${doctor.photo}" alt="${doctor.name}" class="ds-photo">
+      <div class="ds-info">
+        <h3>${doctor.name}</h3>
+       <p><i class="fa-solid fa-location-dot"></i> ${doctor.area}</p>
+        <p>General Dermatologist</p>
+      </div>
+      <div class="ds-fee">Rs. ${doctor.fee}</div>
+    </div>
+  `;
+
+  // Inject the form
+  formContainer.innerHTML = `
+    <form class="q-form" id="qForm" novalidate>
+
+      <!-- 1. Name -->
+      <div class="form-group" id="g-name">
+        <label class="field-label">1. Your Name <span class="required">*</span></label>
+        <input type="text" id="name" placeholder="e.g., Sita Shah">
+        <div class="error-msg">Please enter your name.</div>
+      </div>
+
+      <!-- 2. Phone -->
+      <div class="form-group" id="g-phone">
+        <label class="field-label">2. Phone Number <span class="required">*</span></label>
+       <input type="tel" id="phone" placeholder="e.g., 9812345678" maxlength="10" inputmode="numeric">
+        <div class="error-msg">Please enter a valid 10-digit Nepali mobile number (starting with 98 or 97).</div>
+      </div>
+
+      <!-- 3. Email -->
+<div class="form-group" id="g-email">
+  <label class="field-label">3. Email Address <span class="required">*</span></label>
+  <input type="email" id="email" placeholder="e.g., yourname@email.com">
+  <div class="error-msg">Please enter a valid email address.</div>
+</div>
+
+      <!-- 3. Age Group -->
+      <div class="form-group" id="g-age">
+       <label class="field-label">4. Age Group <span class="required">*</span></label>
+        <div class="option-group">
+          <label><input type="radio" name="ageGroup" value="Under 18"> Under 18</label>
+          <label><input type="radio" name="ageGroup" value="18-25"> 18–25</label>
+          <label><input type="radio" name="ageGroup" value="26-35"> 26–35</label>
+          <label><input type="radio" name="ageGroup" value="36-45"> 36–45</label>
+          <label><input type="radio" name="ageGroup" value="46+"> 46+</label>
+        </div>
+        <div class="error-msg">Please select your age group.</div>
+      </div>
+
+      <!-- 4. Skin Type -->
+      <div class="form-group" id="g-skin">
+        <label class="field-label">5. Skin Type <span class="required">*</span></label>
+        <div class="option-group">
+          <label><input type="radio" name="skinType" value="Oily"> Oily</label>
+          <label><input type="radio" name="skinType" value="Dry"> Dry</label>
+          <label><input type="radio" name="skinType" value="Combination"> Combination</label>
+          <label><input type="radio" name="skinType" value="Sensitive"> Sensitive</label>
+          <label><input type="radio" name="skinType" value="Normal"> Normal</label>
+          <label><input type="radio" name="skinType" value="Not sure"> Not sure</label>
+        </div>
+        <div class="error-msg">Please select your skin type.</div>
+      </div>
+
+      <!-- 5. Concerns -->
+      <div class="form-group" id="g-concerns">
+       <label class="field-label">6. Main Skin Concern <span class="required">*</span>
+        <div class="option-group">
+          <label><input type="checkbox" name="concerns" value="Acne / Pimples"> Acne / Pimples</label>
+          <label><input type="checkbox" name="concerns" value="Dark spots / Pigmentation"> Dark spots / Pigmentation</label>
+          <label><input type="checkbox" name="concerns" value="Dryness / Flaky skin"> Dryness / Flaky skin</label>
+          <label><input type="checkbox" name="concerns" value="Wrinkles / Anti-aging"> Wrinkles / Anti-aging</label>
+          <label><input type="checkbox" name="concerns" value="Dullness / Uneven tone"> Dullness / Uneven tone</label>
+          <label><input type="checkbox" name="concerns" value="Redness / Irritation"> Redness / Irritation</label>
+          <label><input type="checkbox" name="concerns" value="Other"> Other</label>
+        </div>
+        <div class="error-msg">Please select at least one concern.</div>
+      </div>
+
+      <!-- 6. Duration -->
+      <div class="form-group" id="g-duration">
+        <label class="field-label">7. Duration of concern <span class="required">*</span></label>
+        <div class="option-group">
+          <label><input type="radio" name="duration" value="< 1 month"> &lt; 1 month</label>
+          <label><input type="radio" name="duration" value="1-6 months"> 1–6 months</label>
+          <label><input type="radio" name="duration" value="6 months-1 year"> 6 months–1 year</label>
+          <label><input type="radio" name="duration" value="> 1 year"> &gt; 1 year</label>
+        </div>
+        <div class="error-msg">Please select the duration.</div>
+      </div>
+
+      <!-- 7. Current products -->
+      <div class="form-group">
+        <label class="field-label">8. Currently using any skincare products? <small style="color:#888;font-weight:normal;">(optional)</small></label>
+        <textarea id="currentProducts" placeholder="e.g., Cetaphil cleanser, niacinamide serum..."></textarea>
+      </div>
+
+      <!-- 8. Allergies -->
+      <div class="form-group">
+        <label class="field-label">9. Known allergies? <small style="color:#888;font-weight:normal;">(optional)</small></label>
+        <textarea id="allergies" placeholder="e.g., fragrance, salicylic acid..."></textarea>
+      </div>
+
+      <!-- 9. Other notes -->
+      <div class="form-group">
+        <label class="field-label">10. Anything else you'd like to share? <small style="color:#888;font-weight:normal;">(optional)</small></label>
+        <textarea id="notes" placeholder="Any other details for the doctor..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Continue to Booking <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+  `;
+
+  // Hook up form submit AFTER it's injected
+  document.getElementById("qForm").addEventListener("submit", handleSubmit);
+}
+
+/* =====================================================
+   VALIDATION + SAVE + REDIRECT
+   ===================================================== */
+   /* Only allow digits in phone field (block letters/symbols) */
+document.addEventListener("input", function(e){
+  if (e.target && e.target.id === "phone"){
+    e.target.value = e.target.value.replace(/\D/g, "");
+  }
+});
+function handleSubmit(e){
+  e.preventDefault();
+
+  // Reset error states
+  document.querySelectorAll(".form-group").forEach(g => g.classList.remove("has-error"));
+
+  let isValid = true;
+
+  // 1. Name
+  const name = document.getElementById("name").value.trim();
+  if (!name){
+    document.getElementById("g-name").classList.add("has-error");
+    isValid = false;
+  }
+
+// 2. Phone — must be exactly 10 digits, starting with 98 or 97 (Nepal)
+const phone = document.getElementById("phone").value.trim();
+if (!phone || !/^(98|97)\d{8}$/.test(phone)){
+  document.getElementById("g-phone").classList.add("has-error");
+  isValid = false;
+}
+
+  // 3. Email — basic check
+const email = document.getElementById("email").value.trim();
+if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+  document.getElementById("g-email").classList.add("has-error");
+  isValid = false;
+}
+
+  // 4. Age Group
+  const ageGroupEl = document.querySelector('input[name="ageGroup"]:checked');
+  if (!ageGroupEl){
+    document.getElementById("g-age").classList.add("has-error");
+    isValid = false;
+  }
+
+  // 5. Skin Type
+  const skinTypeEl = document.querySelector('input[name="skinType"]:checked');
+  if (!skinTypeEl){
+    document.getElementById("g-skin").classList.add("has-error");
+    isValid = false;
+  }
+
+  // 6. Concerns — at least one
+  const concernEls = document.querySelectorAll('input[name="concerns"]:checked');
+  if (concernEls.length === 0){
+    document.getElementById("g-concerns").classList.add("has-error");
+    isValid = false;
+  }
+
+  // 7. Duration
+  const durationEl = document.querySelector('input[name="duration"]:checked');
+  if (!durationEl){
+    document.getElementById("g-duration").classList.add("has-error");
+    isValid = false;
+  }
+
+  if (!isValid){
+    // Scroll to first error
+    const firstError = document.querySelector(".form-group.has-error");
+    if (firstError) firstError.scrollIntoView({ behavior:"smooth", block:"center" });
+    return;
+  }
+
+  // Build object
+  const concerns = Array.from(concernEls).map(cb => cb.value);
+
+  const pendingQuestionnaire = {
+    doctorId:        doctor.id,
+    name:            name,
+    phone:           phone,
+    email:           email,
+    ageGroup:        ageGroupEl.value,
+    skinType:        skinTypeEl.value,
+    concerns:        concerns,
+    duration:        durationEl.value,
+    currentProducts: document.getElementById("currentProducts").value.trim(),
+    allergies:       document.getElementById("allergies").value.trim(),
+    notes:           document.getElementById("notes").value.trim()
+  };
+
+  // Save to localStorage
+  localStorage.setItem("pendingQuestionnaire", JSON.stringify(pendingQuestionnaire));
+
+  // Redirect to booking page
+  window.location.href = "book.html?id=" + doctor.id;
+}
+
+/* =====================================================
+   NAVBAR SEARCH
+   ===================================================== */
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) window.location.href = "search.html?q=" + encodeURIComponent(query);
+}
+document.getElementById("siteSearch").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") goToSearch();
+});
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
+
+/* =====================================================
+   FOOTER REVEAL
+   ===================================================== */
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageHeight = document.body.offsetHeight;
+  if (scrollPosition >= pageHeight - 50) footer.classList.add("show");
+});
+
+/* =====================================================
+   AUTH UI
+   ===================================================== */
+function updateAuthUI() {
+  const isLoggedIn = localStorage.getItem("loggedIn");
+  const loginBtn  = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (isLoggedIn === "true") {
+    loginBtn.style.display  = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    loginBtn.style.display  = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+document.getElementById("logoutBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  localStorage.removeItem("loggedIn");
+  updateAuthUI();
+  window.location.href = "login1.html";
+});
+updateAuthUI();
+</script>
+</body>
+</html>

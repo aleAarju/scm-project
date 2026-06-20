@@ -3,48 +3,925 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Appointment Form</title>
+  <title>Find a Dermatologist | GlowCart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="doctor.css">
+  <style>
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#fff5f7;
+}
+
+/* ================= HEADER ================= */
+header{
+  background:#ff4d88;
+  color:white;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:relative;
+  flex-wrap:wrap;
+}
+
+header h1{
+  font-size:32px;
+  z-index:2;
+}
+.topbar a{
+  text-decoration: none;
+  color: white;
+}
+
+.topbar a:visited{
+  color: white;
+}
+
+.header-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+.right-nav{
+  display:flex;
+  align-items:center;
+  gap:30px;
+}
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:white;
+  padding:12px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 75px;
+  z-index: 9998;
+}
+
+.navbar nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:25px;
+}
+
+.navbar nav a{
+  text-decoration:none;
+  color:#ff4d88;
+  font-weight:normal;
+}
+
+/* ================= DROPDOWN ================= */
+.dropdown{
+  position:relative;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:180px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:4000;
+}
+
+.dropdown-content a{
+  display:block;
+  padding:12px;
+  color:#ff4d88;
+}
+
+.dropdown-content a:hover{
+  background:#ffe6ee;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+
+/* ================= SEARCH (navbar) ================= */
+.search-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-container input{
+  width:220px;
+  padding:8px 38px 8px 15px;
+  border-radius:20px;
+  border:1px solid #ccc;
+  outline:none;
+  transition: border-color 0.2s;
+}
+
+.search-container input:focus {
+  border-color: #ff4d88;
+}
+
+.search-container .search-icon {
+  position:absolute;
+  right:12px;
+  color:#bbb;
+  font-size:14px;
+  cursor:pointer;
+  transition: color 0.2s;
+}
+
+.search-container .search-icon:hover {
+  color:#ff4d88;
+}
+
+/* ================= ACCOUNT ================= */
+.my-account{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+}
+
+.my-account .fa-user{
+  font-size:28px;
+}
+
+.account-text{
+  display:flex;
+  flex-direction:column;
+  margin-left:10px;
+}
+
+.account-text span{
+  font-size:12px;
+  color:white;
+}
+
+.account-text a{
+  color:white;
+  text-decoration:none !important;
+  font-weight:normal;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.my-account a{
+  text-decoration:none;
+}
+
+.account-dropdown{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:white;
+  min-width:160px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:5000;
+  flex-direction:column;
+}
+
+.account-dropdown a{
+  display:block;
+  padding:10px 12px;
+  color:#ff4d88 !important;
+  text-decoration:none;
+  background:white;
+}
+
+.account-dropdown a:hover{
+  background:#ffe6ee;
+}
+
+.my-account:hover .account-dropdown{
+  display:flex;
+}
+
+/* ================= CART ================= */
+.cart-icon{
+  margin-right:23px;
+}
+
+.cart-icon i{
+  font-size:24px;
+  color:white;
+}
+
+.dropdown a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.dropdown-icon{
+  font-size:12px;
+  transition:transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-icon{
+  transform:rotate(180deg);
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* ================= DERMATOLOGIST PAGE ================= */
+.derma-wrapper{
+  max-width:1200px;
+  margin:0 auto;
+  padding:40px 20px;
+}
+
+.derma-title{
+  text-align:center;
+  color:#ff4d88;
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+/* Big search bar */
+.derma-search{
+  display:flex;
+  justify-content:center;
+  margin-bottom:18px;
+}
+
+.derma-search input{
+  width:100%;
+  max-width:600px;
+  padding:14px 20px;
+  font-size:16px;
+  border:2px solid #ff4d88;
+  border-radius:30px;
+  outline:none;
+  background:white;
+  transition:box-shadow 0.2s;
+}
+
+.derma-search input:focus{
+  box-shadow:0 0 8px rgba(255,77,136,0.4);
+}
+
+/* Available area tags */
+.area-tags{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.area-tags .label{
+  display:inline-block;
+  margin-right:10px;
+  color:#555;
+  font-weight:bold;
+}
+
+.tag{
+  display:inline-block;
+  background:white;
+  color:#ff4d88;
+  border:1px solid #ff4d88;
+  padding:6px 14px;
+  margin:4px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.2s;
+}
+
+.tag:hover,
+.tag.active{
+  background:#ff4d88;
+  color:white;
+}
+
+/* Result counter */
+.result-counter{
+  text-align:center;
+  color:#555;
+  margin-bottom:25px;
+  font-size:15px;
+}
+
+/* Doctor grid */
+.doctor-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+.doctor-card{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:25px 20px;
+  text-align:center;
+  transition:0.3s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.doctor-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
+
+.doctor-photo{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+  border:4px solid #ff4d88;
+  box-shadow:0 4px 10px rgba(255,77,136,0.3);
+}
+
+.doctor-name{
+  font-size:18px;
+  color:#333;
+  margin-bottom:4px;
+}
+
+.doctor-spec{
+  color:#888;
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.doctor-rating{
+  color:#f1c40f;
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+.doctor-area{
+  font-weight:bold;
+  color:#333;
+  font-size:14px;
+  margin-bottom:2px;
+}
+
+.doctor-address{
+  color:#777;
+  font-size:12px;
+  margin-bottom:10px;
+  line-height:1.4;
+}
+
+.doctor-info{
+  font-size:14px;
+  color:#555;
+  margin:3px 0;
+}
+
+.book-btn{
+  margin-top:15px;
+  background:#ff4d88;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:bold;
+  width:100%;
+  transition:background 0.2s;
+}
+
+.book-btn:hover{
+  background:#e63e77;
+}
+
+/* No results message */
+.no-results{
+  grid-column:1/-1;
+  text-align:center;
+  background:white;
+  padding:40px 20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  color:#555;
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  background:#ff4d88;
+  color:white;
+  margin-top:40px;
+  padding:40px 20px 10px;
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 0.6s ease;
+}
+
+.footer.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.footer-box h3,
+.footer-box h4{
+  margin-bottom:10px;
+}
+
+.footer-box a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  margin:5px 0;
+  font-size:14px;
+}
+
+.footer-bottom{
+  text-align:center;
+  margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.3);
+  font-size:13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:768px){
+  header{
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+  }
+
+  .header-center{
+    position:static;
+    transform:none;
+    margin-top:5px;
+  }
+
+  .right-nav{
+    justify-content:center;
+    width:100%;
+    gap:20px;
+  }
+
+  .navbar nav{
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .search-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+  }
+
+  .search-container input{
+    width:90%;
+    max-width:300px;
+  }
+
+  .dropdown{
+    font-size:14px;
+  }
+
+  .derma-title{
+    font-size:24px;
+  }
+
+  .derma-search input{
+    font-size:14px;
+    padding:12px 16px;
+  }
+}
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- ================= HEADER (same as homepage) ================= -->
+<header class="topbar">
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
 
-  <div class="form-box">
+  <div class="header-center">
+    Glow More, Shop More
+  </div>
 
-    <h2>Book Appointment</h2>
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
 
-    <form id="appointmentForm">
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
 
-      <input type="text" placeholder="Full Name" required>
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="#">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
 
-      <input type="email" placeholder="Email Address" required>
+    <div class="cart-icon">
+      <a href="cart.html">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+</header>
 
-      <input type="tel" placeholder="Phone Number" required>
+<!-- ================= NAVBAR (same as homepage) ================= -->
+<div class="navbar">
+  <nav>
+    <!-- Skincare -->
+    <div class="dropdown">
+      <a href="#">
+        Skincare
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
 
-      <input type="date" required>
+    <!-- Makeup -->
+    <div class="dropdown">
+      <a href="#">
+        Makeup
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
 
-      <input type="time" required>
+    <!-- Fragrance -->
+    <div class="dropdown">
+      <a href="#">
+        Fragrance
+        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+      </a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
 
-      <select required>
-        <option value="">Select Service</option>
-        <option>Skin Care</option>
-        <option>General Consultation</option>
-      </select>
+    <!-- Site search -->
+    <div class="search-container">
+      <input
+        type="text"
+        id="siteSearch"
+        placeholder="Search products..."
+        autocomplete="off"
+      >
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
+    </div>
+  </nav>
+</div>
 
-      <textarea placeholder="Additional Message"></textarea>
+<!-- ================= DERMATOLOGIST PAGE CONTENT ================= -->
+<div class="derma-wrapper">
 
-      <button type="submit">Book Now</button>
+  <h2 class="derma-title">📍 Find a Dermatologist Near You</h2>
 
-    </form>
+  <!-- BIG search bar -->
+  <div class="derma-search">
+    <input
+      type="text"
+      id="areaSearch"
+      placeholder="Type your area (e.g., Naya Baneshwor)"
+      autocomplete="off"
+    >
+  </div>
 
+  <!-- Available area tags -->
+  <div class="area-tags">
+    <span class="label">Available areas:</span>
+    <span class="tag" data-area="Naya Baneshwor">Naya Baneshwor</span>
+    <span class="tag" data-area="New Road">New Road</span>
+    <span class="tag" data-area="Lalitpur">Lalitpur</span>
+    <span class="tag" data-area="Anamnagar">Anamnagar</span>
+  </div>
+
+  <!-- Result counter -->
+  <div class="result-counter" id="resultCounter">Showing 6 dermatologists</div>
+
+  <!-- Doctor grid -->
+  <div class="doctor-grid" id="doctorGrid">
+    <!-- doctor cards injected by JS -->
   </div>
 
 </div>
 
-<script src="doctor.js"></script>
+<!-- ================= FOOTER (same as homepage) ================= -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* =====================================================
+   DOCTORS DATA
+   ===================================================== */
+const doctors = [
+  {
+    id: 1,
+    name: "Dr. Priya Sharma",
+    gender: "F",
+    photo:"doctor1.jpg",
+    area: "Naya Baneshwor",
+    address: "123 Hospital Road, Naya Baneshwor, KTM",
+    experience: 8,
+    fee: 1500,
+    rating: 4.8
+  },
+  {
+    id: 2,
+    name: "Dr. kritan Verma",
+    gender: "M",
+    photo:"doctor2.jpg",
+    area: "New Road",
+    address: "45 Mahaboudha Marg, New Road, KTM",
+    experience: 10,
+    fee: 1800,
+    rating: 4.9
+  },
+  {
+    id: 3,
+    name: "Dr. Kritika Joshi",
+    gender: "F",
+    photo:"doctor3.jpg",
+    
+    area: "Lalitpur",
+    address: "Jhamsikhel Marg, Lalitpur",
+    experience: 12,
+    fee: 2000,
+    rating: 4.7
+  },
+  {
+    id: 4,
+    name: "Dr. Ram Mehta",
+    gender: "F",
+   photo:"doctor4.webp",
+    area: "Anamnagar",
+    address: "Putalisadak-adjacent, Anamnagar, KTM",
+    experience: 5,
+    fee: 1200,
+    rating: 4.6
+  },
+  {
+    id: 5,
+    name: "Dr. Sunil Thapa",
+    gender: "M",
+    photo: "doctor5.jpg",
+    area: "Naya Baneshwor",
+    address: "Mid-Baneshwor Chowk, Naya Baneshwor, KTM",
+    experience: 7,
+    fee: 1300,
+    rating: 4.7
+  },
+  {
+    id: 6,
+    name: "Dr. Sneha Gurung",
+    gender: "F",
+    photo: "doctor6.webp",
+    area: "Lalitpur",
+    address: "Pulchowk Road, Lalitpur",
+    experience: 6,
+    fee: 1400,
+    rating: 4.8
+  }
+];
+
+/* =====================================================
+   RENDER DOCTOR CARDS
+   ===================================================== */
+const doctorGrid    = document.getElementById("doctorGrid");
+const resultCounter = document.getElementById("resultCounter");
+const areaSearch    = document.getElementById("areaSearch");
+
+// Build star string from numeric rating (e.g. 4.8 -> ★★★★★ 4.8)
+function buildStars(rating){
+  return `⭐ ${rating.toFixed(1)}`;
+}
+
+// Render an array of doctors into the grid
+function renderDoctors(list, typedText){
+  doctorGrid.innerHTML = "";
+
+  // No results case
+  if (list.length === 0){
+    doctorGrid.innerHTML = `
+      <div class="no-results">
+        😔 No dermatologists in '<b>${escapeHtml(typedText)}</b>'.<br>
+        Available areas: Naya Baneshwor, New Road, Lalitpur, Anamnagar
+      </div>
+    `;
+    resultCounter.textContent = "Showing 0 dermatologists";
+    return;
+  }
+
+  // Build card HTML
+  list.forEach(doc => {
+    const card = document.createElement("div");
+    card.className = "doctor-card";
+    card.innerHTML = `
+     <img src="${doc.photo}" alt="${doc.name}" class="doctor-photo">
+      <div class="doctor-name">${doc.name}</div>
+      <div class="doctor-spec">General Dermatologist</div>
+      <div class="doctor-rating">${buildStars(doc.rating)}</div>
+      <div class="doctor-area">📍 ${doc.area}</div>
+      <div class="doctor-address">${doc.address}</div>
+      <div class="doctor-info">💼 ${doc.experience} years experience</div>
+      <div class="doctor-info">💰 Rs. ${doc.fee}</div>
+      <button class="book-btn" onclick="bookDoctor(${doc.id})">
+        Book Appointment
+      </button>
+    `;
+    doctorGrid.appendChild(card);
+  });
+
+  resultCounter.textContent = `Showing ${list.length} dermatologist${list.length !== 1 ? "s" : ""}`;
+}
+
+// Small helper to prevent HTML injection in the "no results" message
+function escapeHtml(str){
+  return str
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+/* =====================================================
+   SMART SEARCH (live filter)
+   ===================================================== */
+function filterDoctors(){
+  const query = areaSearch.value.trim().toLowerCase();
+
+  // Empty input → show all
+  if (query === ""){
+    renderDoctors(doctors, "");
+    clearActiveTag();
+    return;
+  }
+
+  // Partial, case-insensitive match against area OR address
+  const filtered = doctors.filter(doc =>
+    doc.area.toLowerCase().includes(query) ||
+    doc.address.toLowerCase().includes(query)
+  );
+
+  renderDoctors(filtered, areaSearch.value.trim());
+}
+
+// Listen on every keystroke
+areaSearch.addEventListener("input", filterDoctors);
+
+/* =====================================================
+   TAG CLICK → fills search box & filters
+   ===================================================== */
+const tags = document.querySelectorAll(".tag");
+
+tags.forEach(tag => {
+  tag.addEventListener("click", () => {
+    const areaName = tag.getAttribute("data-area");
+    areaSearch.value = areaName;
+    clearActiveTag();
+    tag.classList.add("active");
+    filterDoctors();
+  });
+});
+
+function clearActiveTag(){
+  tags.forEach(t => t.classList.remove("active"));
+}
+
+/* =====================================================
+   BOOK APPOINTMENT → go to questionnaire.html?id=X
+   ===================================================== */
+function bookDoctor(id){
+  window.location.href = "questionnaire.html?id=" + id;
+}
+
+/* =====================================================
+   INITIAL RENDER
+   ===================================================== */
+renderDoctors(doctors, "");
+
+/* =====================================================
+   NAVBAR SEARCH (kept identical to homepage)
+   ===================================================== */
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) {
+    window.location.href = "search.html?q=" + encodeURIComponent(query);
+  }
+}
+document.getElementById("siteSearch").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") goToSearch();
+});
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
+
+/* =====================================================
+   FOOTER REVEAL (kept identical to homepage)
+   ===================================================== */
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageHeight = document.body.offsetHeight;
+  if (scrollPosition >= pageHeight - 50) {
+    footer.classList.add("show");
+  }
+});
+
+/* =====================================================
+   AUTH UI (kept identical to homepage)
+   ===================================================== */
+function updateAuthUI() {
+  const isLoggedIn = localStorage.getItem("loggedIn");
+  const loginBtn  = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (isLoggedIn === "true") {
+    loginBtn.style.display  = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    loginBtn.style.display  = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+
+document.getElementById("logoutBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  localStorage.removeItem("loggedIn");
+  updateAuthUI();
+  window.location.href = "login1.html";
+});
+
+updateAuthUI();
+</script>
 
 </body>
 </html>

@@ -512,7 +512,7 @@ header h1{
     </div>
 
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -627,7 +627,7 @@ header h1{
 </div>
 
 <br>
-<button class="btn" style="margin-top:15px;">Add to Cart</button>
+<button class="btn" id="addBtn" style="margin-top:15px;">Add to Cart</button>
   </div>
 
 </div>
@@ -666,6 +666,7 @@ header h1{
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
 </footer>
+<script src="cart.js"></script>
 
 <script>
   // product database (same IDs as your cleanser page)
@@ -910,9 +911,10 @@ header h1{
 
   // get id from URL
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
 
-  const product = products[id];
+const productId = params.get("id");
+const product = products[productId];
+
 
   if(product){
     document.getElementById("productName").innerText = product.name;
@@ -939,6 +941,12 @@ for(let i=fullStars; i<5; i++){
 }
 
 document.getElementById("stars").innerText = stars;
+
+document.getElementById("addBtn").addEventListener("click", () => {
+  const priceNum = parseInt(product.price.replace(/[^0-9]/g, ''));
+  addToCart(Number(productId), product.name, priceNum, product.image, quantity);
+});
+
   } else {
     document.querySelector(".container").innerHTML = "<h2>Product not found</h2>";
   }
@@ -961,7 +969,7 @@ function changeQty(change) {
 }
 
 //shades part
-if(product.shades){
+if(product && product.shades){
   document.getElementById("shadesBox").style.display = "block";
   const container = document.getElementById("shadeOptions");
 
@@ -978,13 +986,11 @@ if(product.shades){
       font-size: 13px;
     `;
     btn.addEventListener("click", () => {
-      // remove active from all
       document.querySelectorAll("#shadeOptions button")
         .forEach(b => {
           b.style.background = "white";
           b.style.color = "#ff4d88";
         });
-      // highlight selected
       btn.style.background = "#ff4d88";
       btn.style.color = "white";
       document.getElementById("selectedShade").innerText = shade;

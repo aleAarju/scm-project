@@ -107,6 +107,18 @@ header h1{
   padding:20px;
   text-align:center;
   transition:0.3s;
+  display:flex;
+  flex-direction:column;
+  height:100%;          /* fill the grid cell */
+}
+
+.card h3{
+  min-height:42px;      /* reserves 2 lines of space */
+  margin:12px 0 8px;
+}
+
+.card button{
+  margin-top:auto;      /* pushes button to bottom */
 }
  
 .card:hover{
@@ -631,7 +643,7 @@ header h1{
     </div>
  
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -730,7 +742,7 @@ header h1{
       <img src="foundation1.jpg">
       <h3>L.A. Colors Radiant Foundation (Fair) 28.5ml</h3>
       <p class="price">Rs. 1200</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(11, 'L.A. Colors Radiant Foundation', 1200, 'foundation1.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -740,7 +752,7 @@ header h1{
       <img src="foundation2.jpg">
       <h3>Sheglam Complexion Pro Long Lasting Breathable Matte Foundation, 30Ml</h3>
       <p class="price">Rs. 3000</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(22, 'Sheglam Complexion Pro Matte Foundation', 3000, 'foundation2.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -750,7 +762,7 @@ header h1{
       <img src="foundation3.jpg">
       <h3>Mars | High Coverage Foundation in a Tube | SPF 50PA++++ UVA/UVB</h3>
       <p class="price">Rs. 900</p>
-      <button>Add to Cart</button>
+    <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(33, 'Mars High Coverage Foundation', 900, 'foundation3.jpg')">Add to Cart</button>
     </div>
     </a>
 </div>
@@ -792,13 +804,9 @@ header h1{
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
-      </div> <!-- products -->
- 
-  </div> <!-- flex:1 -->
- 
-</div> <!-- shop-layout -->
 </footer>
  
+<script src="cart.js"></script>
  
 <script>
 window.addEventListener("scroll", () => {

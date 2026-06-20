@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Quiz – GlowCart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
+    body { background:#fff5f7; }
+
+    /* ===== HEADER ===== */
+    header {
+      background:#ff4d88; color:white;
+      padding:15px 30px;
+      display:flex; justify-content:space-between; align-items:center;
+      position:relative; flex-wrap:wrap;
+    }
+    header h1 { font-size:32px; z-index:2; }
+    .topbar a { text-decoration:none; color:white; }
+    .topbar a:visited { color:white; }
+    .header-center {
+      position:absolute; left:50%; transform:translateX(-50%);
+      color:white; font-size:18px; font-weight:bold;
+      letter-spacing:1px; white-space:nowrap;
+    }
+    .right-nav { display:flex; align-items:center; gap:30px; }
+    .topbar { position:sticky; top:0; z-index:9999; }
+
+    /* ===== ACCOUNT ===== */
+    .my-account { position:relative; display:flex; align-items:center; gap:10px; color:white; }
+    .my-account .fa-user { font-size:28px; }
+    .account-text { display:flex; flex-direction:column; margin-left:10px; }
+    .account-text span { font-size:12px; color:white; }
+    .account-text a {
+      color:white; text-decoration:none !important;
+      font-size:16px; display:flex; align-items:center; gap:6px;
+    }
+    .my-account a { text-decoration:none; }
+    .account-dropdown {
+      display:none; position:absolute; top:100%; left:0;
+      background:white; min-width:160px; border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:5000; flex-direction:column;
+    }
+    .account-dropdown a { display:block; padding:10px 12px; color:#ff4d88 !important; text-decoration:none; }
+    .account-dropdown a:hover { background:#ffe6ee; }
+    .my-account:hover .account-dropdown { display:flex; }
+    .cart-icon { margin-right:23px; }
+    .cart-icon i { font-size:24px; color:white; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background:white; padding:12px 20px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      position:sticky; top:75px; z-index:9998;
+    }
+    .navbar nav { display:flex; justify-content:center; align-items:center; gap:25px; }
+    .navbar nav a { text-decoration:none; color:#ff4d88; }
+    .dropdown { position:relative; }
+    .dropdown a { display:flex; align-items:center; gap:6px; }
+    .dropdown-icon { font-size:12px; transition:transform 0.3s; }
+    .dropdown:hover .dropdown-icon { transform:rotate(180deg); }
+    .dropdown-content {
+      display:none; position:absolute; top:100%; left:0;
+      background:white; min-width:180px; border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:4000;
+    }
+    .dropdown-content a { display:block; padding:12px; color:#ff4d88; }
+    .dropdown-content a:hover { background:#ffe6ee; }
+    .dropdown:hover .dropdown-content { display:block; }
+    .search-container { position:relative; display:inline-flex; align-items:center; }
+    .search-container input {
+      width:220px; padding:8px 38px 8px 15px;
+      border-radius:20px; border:1px solid #ccc; outline:none;
+    }
+    .search-container input:focus { border-color:#ff4d88; }
+    .search-container .search-icon {
+      position:absolute; right:12px; color:#bbb; font-size:14px; cursor:pointer;
+    }
+    .search-container .search-icon:hover { color:#ff4d88; }
+
+    /* ===== QUIZ WRAPPER ===== */
+    .quiz-page {
+      max-width: 620px;
+      margin: 50px auto;
+      padding: 0 20px 60px;
+    }
+
+    .quiz-heading {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .quiz-heading h2 {
+      font-size: 28px;
+      color: #ff4d88;
+      margin-bottom: 8px;
+    }
+
+    .quiz-heading p {
+      color: #888;
+      font-size: 15px;
+    }
+
+    /* ===== PROGRESS ===== */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: #ffd6e7;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #ff4d88;
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-label {
+      font-size: 13px;
+      color: #ff4d88;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+
+    /* ===== STEP ===== */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .step h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    /* ===== OPTIONS GRID ===== */
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .opt-btn {
+      background: white;
+      border: 2px solid #ffd6e7;
+      border-radius: 12px;
+      padding: 16px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.2s, background 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .opt-btn:hover {
+      border-color: #ff4d88;
+      background: #fff5f7;
+    }
+
+    .opt-btn.selected {
+      border-color: #ff4d88;
+      background: #fff5f7;
+    }
+
+    .opt-btn i {
+      font-size: 22px;
+      color: #ff4d88;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .opt-main { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 3px; }
+    .opt-sub  { font-size: 12px; color: #aaa; }
+
+    /* ===== NAV BUTTONS ===== */
+    .nav-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn-back {
+      background: white;
+      border: 2px solid #ffd6e7;
+      border-radius: 8px;
+      padding: 11px 22px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ff4d88;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover { background: #fff5f7; }
+
+    .btn-next {
+      flex: 1;
+      background: #ff4d88;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .btn-next:hover { background: #e63e77; }
+    .btn-next:disabled { background: #ffd6e7; cursor: not-allowed; color: white; }
+
+    /* ===== RESULT CARDS ===== */
+    .result-heading {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .result-heading h3 {
+      font-size: 22px;
+      color: #ff4d88;
+      margin-bottom: 6px;
+    }
+
+    .result-heading p {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff5f7;
+      color: #ff4d88;
+      font-size: 12px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid #ffb3cc;
+      margin: 3px;
+    }
+
+    .result-tags { text-align: center; margin-bottom: 24px; }
+
+    .result-card {
+      background: white;
+      border: 2px solid #ffd6e7;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .result-card:hover {
+      border-color: #ff4d88;
+      transform: scale(1.02);
+    }
+
+    .result-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .result-icon i { font-size: 22px; color: #ff4d88; }
+
+    .result-info { flex: 1; }
+    .result-title { font-size: 15px; font-weight: bold; color: #333; margin-bottom: 4px; }
+    .result-sub   { font-size: 13px; color: #aaa; }
+
+    .result-arrow { color: #ff4d88; font-size: 18px; }
+
+    .btn-retake {
+      width: 100%;
+      margin-top: 16px;
+      background: white;
+      border: 2px solid #ffd6e7;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      color: #ff4d88;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .btn-retake:hover { background: #fff5f7; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background:#ff4d88; color:white;
+      margin-top:40px; padding:40px 20px 10px;
+      opacity:0; transform:translateY(50px); transition:all 0.6s ease;
+    }
+    .footer.show { opacity:1; transform:translateY(0); }
+    .footer-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; }
+    .footer-box h3, .footer-box h4 { margin-bottom:10px; }
+    .footer-box a { display:block; color:white; text-decoration:none; margin:5px 0; font-size:14px; }
+    .footer-bottom {
+      text-align:center; margin-top:20px; padding-top:10px;
+      border-top:1px solid rgba(255,255,255,0.3); font-size:13px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .options { grid-template-columns: 1fr; }
+      .quiz-heading h2 { font-size: 22px; }
+      header { flex-direction:column; text-align:center; gap:10px; }
+      .header-center { position:static; transform:none; margin-top:5px; }
+      .right-nav { justify-content:center; width:100%; gap:20px; }
+      .navbar nav { flex-wrap:wrap; gap:12px; justify-content:center; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="topbar">
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+  <div class="header-center">Glow More, Shop More</div>
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="aboutus1.html">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
+    <div class="cart-icon">
+      <a href="#"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <nav>
+    <div class="dropdown">
+      <a href="#">Skincare <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Makeup <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Fragrance <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" id="siteSearch" placeholder="Search products..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
+    </div>
+  </nav>
+</div>
+
+
+<!-- QUIZ -->
+<div class="quiz-page">
+
+  <div class="quiz-heading">
+    <h2>✨ Find Your Perfect Products</h2>
+    <p>Answer 3 quick questions and we'll show you exactly what your skin needs.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+    <span class="progress-label" id="progLabel">0 / 3</span>
+  </div>
+
+  <!-- STEP 1: Skin Type -->
+  <div class="step active" id="s1">
+    <h3>What is your skin type?</h3>
+    <div class="options">
+      <button class="opt-btn" data-val="oily" onclick="pick(this,1)">
+        <i class="fa-solid fa-droplet"></i>
+        <div><div class="opt-main">Oily</div><div class="opt-sub">Shiny, enlarged pores</div></div>
+      </button>
+      <button class="opt-btn" data-val="dry" onclick="pick(this,1)">
+        <i class="fa-solid fa-sun"></i>
+        <div><div class="opt-main">Dry</div><div class="opt-sub">Tight, flaky feeling</div></div>
+      </button>
+      <button class="opt-btn" data-val="combination" onclick="pick(this,1)">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+        <div><div class="opt-main">Combination</div><div class="opt-sub">Oily T-zone, dry cheeks</div></div>
+      </button>
+      <button class="opt-btn" data-val="dry" onclick="pick(this,1)">
+        <i class="fa-solid fa-heart"></i>
+        <div><div class="opt-main">Sensitive</div><div class="opt-sub">Reacts easily, redness</div></div>
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-next" id="n1" disabled onclick="goStep(2)">Next →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Concern -->
+  <div class="step" id="s2">
+    <h3>What is your main skin concern?</h3>
+    <div class="options">
+      <button class="opt-btn" data-val="acne" onclick="pick(this,2)">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <div><div class="opt-main">Acne / Breakouts</div><div class="opt-sub">Pimples, blackheads</div></div>
+      </button>
+      <button class="opt-btn" data-val="dryness" onclick="pick(this,2)">
+        <i class="fa-solid fa-droplet-slash"></i>
+        <div><div class="opt-main">Dryness</div><div class="opt-sub">Needs deep hydration</div></div>
+      </button>
+      <button class="opt-btn" data-val="ageing" onclick="pick(this,2)">
+        <i class="fa-solid fa-clock"></i>
+        <div><div class="opt-main">Ageing / Fine lines</div><div class="opt-sub">Wants youthful glow</div></div>
+      </button>
+      <button class="opt-btn" data-val="sun" onclick="pick(this,2)">
+        <i class="fa-solid fa-sun"></i>
+        <div><div class="opt-main">Sun damage</div><div class="opt-sub">Dark spots, UV protection</div></div>
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goStep(1)">← Back</button>
+      <button class="btn-next" id="n2" disabled onclick="goStep(3)">Next →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Category -->
+  <div class="step" id="s3">
+    <h3>Which product are you looking for?</h3>
+    <div class="options">
+      <button class="opt-btn" data-val="all" onclick="pick(this,3)">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <div><div class="opt-main">Full Routine</div><div class="opt-sub">Show me everything</div></div>
+      </button>
+      <button class="opt-btn" data-val="cleanser" onclick="pick(this,3)">
+        <i class="fa-solid fa-soap"></i>
+        <div><div class="opt-main">Cleanser</div><div class="opt-sub">Face wash</div></div>
+      </button>
+      <button class="opt-btn" data-val="moisturizer" onclick="pick(this,3)">
+        <i class="fa-solid fa-bottle-droplet"></i>
+        <div><div class="opt-main">Moisturizer</div><div class="opt-sub">Hydration and repair</div></div>
+      </button>
+      <button class="opt-btn" data-val="sunscreen" onclick="pick(this,3)">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div><div class="opt-main">Sunscreen</div><div class="opt-sub">SPF protection</div></div>
+      </button>
+    </div>
+    <div class="nav-row">
+      <button class="btn-back" onclick="goStep(2)">← Back</button>
+      <button class="btn-next" id="n3" disabled onclick="showResult()">See My Products →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Results -->
+  <div class="step" id="s4">
+    <div class="result-heading">
+      <h3>Your Personalised Picks ✨</h3>
+      <p id="res-subtitle">Based on your skin type and concerns</p>
+    </div>
+    <div class="result-tags" id="res-tags"></div>
+    <div id="res-cards"></div>
+    <button class="btn-retake" onclick="retakeQuiz()">← Retake Quiz</button>
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<script>
+
+  // ===== QUIZ STATE =====
+  const ans = { s1: null, s2: null, s3: null };
+
+  function pick(btn, step) {
+    const parent = btn.closest('.options');
+    parent.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    ans['s' + step] = btn.dataset.val;
+    document.getElementById('n' + step).disabled = false;
+  }
+
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('s' + n).classList.add('active');
+    const pct = ((n - 1) / 3) * 100;
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('progLabel').textContent = (n - 1) + ' / 3';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function retakeQuiz() {
+    ans.s1 = null; ans.s2 = null; ans.s3 = null;
+    document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    ['n1','n2','n3'].forEach(id => document.getElementById(id).disabled = true);
+    goStep(1);
+  }
+
+  // ===== SKIN FILTER MAPPING =====
+  // Maps concern → one of your 3 data-skin values: oily, dry, combination
+  function getSkinFilter(concern) {
+    if (concern === 'acne')    return 'oily';
+    if (concern === 'dryness') return 'dry';
+    if (concern === 'ageing')  return 'dry';
+    if (concern === 'sun')     return 'combination';
+    return null;
+  }
+
+  // ===== RESULT DISPLAY =====
+  const concernLabels = { acne:'Acne / Breakouts', dryness:'Dryness', ageing:'Ageing', sun:'Sun damage' };
+  const skinLabels    = { oily:'Oily', dry:'Dry', combination:'Combination' };
+  const catLabels     = { all:'Full Routine', cleanser:'Cleanser', moisturizer:'Moisturizer', sunscreen:'Sunscreen' };
+
+  function showResult() {
+    const concern = ans.s2;
+    const cat     = ans.s3;
+    const filter  = getSkinFilter(concern);
+
+    // Subtitle
+    document.getElementById('res-subtitle').textContent =
+      'For ' + concernLabels[concern] + ' · ' + catLabels[cat];
+
+    // Tags
+    document.getElementById('res-tags').innerHTML =
+      '<span class="tag">' + (skinLabels[filter] || filter) + ' skin</span>' +
+      '<span class="tag">' + concernLabels[concern] + '</span>' +
+      '<span class="tag">' + catLabels[cat] + '</span>';
+
+    // Build result cards
+    const cardsEl = document.getElementById('res-cards');
+    cardsEl.innerHTML = '';
+
+    // Define which pages to show based on category answer
+    const allRoutes = [
+      {
+        page: 'cleanser.html',
+        filter: filter,
+        label: 'Cleansers for your skin',
+        sub: 'Filtered by your skin type',
+        icon: 'fa-solid fa-soap'
+      },
+      {
+        page: 'moisturizer.html',
+        filter: filter,
+        label: 'Moisturizers for your skin',
+        sub: 'Filtered by your skin type',
+        icon: 'fa-solid fa-bottle-droplet'
+      },
+      {
+        page: 'suncream.html',
+        filter: null,
+        label: 'Sunscreens',
+        sub: 'All sunscreen products',
+        icon: 'fa-solid fa-shield-halved'
+      }
+    ];
+
+    let routes = [];
+    if (cat === 'all') {
+      routes = allRoutes;
+    } else if (cat === 'cleanser') {
+      routes = [allRoutes[0]];
+    } else if (cat === 'moisturizer') {
+      routes = [allRoutes[1]];
+    } else if (cat === 'sunscreen') {
+      routes = [allRoutes[2]];
+    }
+
+    routes.forEach(r => {
+      const url = r.filter ? r.page + '?skin=' + r.filter : r.page;
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.className = 'result-card';
+      a.innerHTML =
+        '<div class="result-icon"><i class="' + r.icon + '"></i></div>' +
+        '<div class="result-info">' +
+          '<div class="result-title">' + r.label + '</div>' +
+          '<div class="result-sub">' + r.sub + '</div>' +
+        '</div>' +
+        '<i class="fa-solid fa-chevron-right result-arrow"></i>';
+
+      cardsEl.appendChild(a);
+    });
+
+    // Show result step
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('s4').classList.add('active');
+    document.getElementById('prog').style.width = '100%';
+    document.getElementById('progLabel').textContent = '3 / 3';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ===== SEARCH =====
+  function goToSearch() {
+    const query = document.getElementById("siteSearch").value.trim();
+    if (query) window.location.href = "search.html?q=" + encodeURIComponent(query);
+  }
+  document.getElementById("siteSearch").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") goToSearch();
+  });
+  document.getElementById("searchIcon").addEventListener("click", goToSearch);
+
+  // ===== FOOTER REVEAL =====
+  window.addEventListener("scroll", () => {
+    const footer = document.querySelector(".footer");
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+      footer.classList.add("show");
+    }
+  });
+
+  // ===== AUTH UI =====
+  function updateAuthUI() {
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+    document.getElementById("loginBtn").style.display  = loggedIn ? "none"  : "block";
+    document.getElementById("logoutBtn").style.display = loggedIn ? "block" : "none";
+  }
+  document.getElementById("logoutBtn").addEventListener("click", e => {
+    e.preventDefault();
+    localStorage.removeItem("loggedIn");
+    updateAuthUI();
+  });
+  updateAuthUI();
+
+</script>
+
+</body>
+</html>

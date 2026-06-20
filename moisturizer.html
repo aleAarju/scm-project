@@ -637,7 +637,7 @@ header h1{
     </div>
  
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -736,7 +736,7 @@ header h1{
       <img src="moisturizer1.jpg">
       <h3> Dot & Key Barrier Repair Moisturizer with Ceramide + Hyaluronic 100g</h3>
       <p class="price">Rs.568</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(101, 'Dot & Key Barrier Repair Moisturizer', 568, 'moisturizer1.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -746,7 +746,7 @@ header h1{
       <img src="moisturizer2.jpeg">
       <h3>Dot & Key Niacinamide + CICA Centella Oil Free Moisturizer for Acne Prone Skin| 50g</h3>
       <p class="price">Rs. 653</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(102, 'Dot & Key Niacinamide + CICA Moisturizer', 653, 'moisturizer2.jpeg')">Add to Cart</button>
     </div>
   </a>
  
@@ -756,7 +756,7 @@ header h1{
       <img src="moisturizer3.jpeg">
       <h3>The Derma Co. 5% Propylene Oil Free Moisturizer with Propylene Glycol - 100g</h3>
       <p class="price">Rs. 566</p>
-      <button>Add to Cart</button>
+  <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(103, 'The Derma Co. 5% Propylene Oil Free Moisturizer', 566, 'moisturizer3.jpeg')">Add to Cart</button>
     </div>
   </a>
  
@@ -797,14 +797,9 @@ header h1{
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
-      </div> <!-- products -->
- 
-  </div> <!-- flex:1 -->
- 
-</div> <!-- shop-layout -->
 </footer>
  
- 
+ <script src="cart.js"></script>
 <script>
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");

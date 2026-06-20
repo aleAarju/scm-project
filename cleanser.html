@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -631,7 +632,7 @@ header h1{
     </div>
  
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -730,7 +731,7 @@ header h1{
       <img src="cleanser1.avif">
       <h3>CeraVe Hydrating Cream to Foam Cleanser 87ml</h3>
       <p class="price">Rs. 1200</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(1, 'CeraVe Hydrating Cream to Foam Cleanser 87ml', 1200, 'cleanser1.avif')">Add to Cart</button>
     </div>
   </a>
  
@@ -740,7 +741,7 @@ header h1{
       <img src="cleanser2.jpeg">
       <h3>DOT & KEY Watermelon Super Glow Gel Face Wash With Vitamin C & Cucumber 100ml</h3>
       <p class="price">Rs. 900</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(2, 'DOT & KEY Watermelon Super Glow Gel Face Wash', 900, 'cleanser2.jpeg')">Add to Cart</button>
     </div>
   </a>
  
@@ -750,7 +751,7 @@ header h1{
       <img src="cleanser3.webp">
       <h3>Kleida Foaming Face Wash, For Acne Prone Skin, 100G</h3>
       <p class="price">Rs. 1100</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(3, 'Kleida Foaming Face Wash, For Acne Prone Skin, 100G', 1100, 'cleanser3.webp')">Add to Cart</button>
     </div>
   </a>
     <a href="product.html?id=4" class="product-link" data-price="500" data-skin="combination">
@@ -758,7 +759,7 @@ header h1{
       <img src="cleanser4.webp">
       <h3>Minimalist 6% Oat Extract Gentle Face Wash for Sensitive, Dry & Dehydrated Skin</h3>
       <p class="price">Rs. 500</p>
-      <button>Add to Cart</button>
+    <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(4, 'Minimalist 6% Oat Extract Gentle Face Wash', 500, 'cleanser4.webp')">Add to Cart</button>
     </div>
   </a>
  
@@ -806,7 +807,7 @@ header h1{
 </div> <!-- shop-layout -->
 </footer>
  
- 
+ <script src="cart.js"></script>
 <script>
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");

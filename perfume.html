@@ -631,7 +631,7 @@ header h1{
     </div>
  
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -731,7 +731,7 @@ header h1{
       <img src="perfume1.jpg">
       <h3>GUCCI FLORA EAU DE PARFUM FOR WOMEN IMPORTED FROM FRANCE 100ML</h3>
       <p class="price">Rs. 22500</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(444, 'Gucci Flora Eau De Parfum', 22500, 'perfume1.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -741,7 +741,7 @@ header h1{
       <img src="perfume2.jpg">
       <h3>Tube Rose My Way Fresh Perfume :- 50ML</h3>
       <p class="price">Rs. 2000</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(555, 'Tube Rose My Way Fresh Perfume', 2000, 'perfume2.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -752,7 +752,7 @@ header h1{
       <h3>Skinn By Titan | 24Seven Woody Perfume - 100 Ml | Eau De Parfum FTSM02PC
 </h3>
       <p class="price">Rs. 3000</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(666, 'Skinn By Titan 24Seven Woody Perfume', 3000, 'perfume3.jpg')">Add to Cart</button>
     </div>
     </a>
 </div>
@@ -794,14 +794,9 @@ header h1{
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
-      </div> <!-- products -->
- 
-  </div> <!-- flex:1 -->
- 
-</div> <!-- shop-layout -->
 </footer>
  
- 
+ <script src="cart.js"></script>
 <script>
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");

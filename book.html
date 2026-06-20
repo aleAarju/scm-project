@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | GlowCart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+/* ================= RESET ================= */
+*{ margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body{ background:#fff5f7; }
+
+/* ================= HEADER ================= */
+header{
+  background:#ff4d88; color:white; padding:15px 30px;
+  display:flex; justify-content:space-between; align-items:center;
+  position:relative; flex-wrap:wrap;
+}
+header h1{ font-size:32px; z-index:2; }
+.topbar a{ text-decoration: none; color: white; }
+.topbar a:visited{ color: white; }
+.header-center{
+  position:absolute; left:50%; transform:translateX(-50%);
+  color:white; font-size:18px; font-weight:bold;
+  letter-spacing:1px; white-space:nowrap;
+}
+.right-nav{ display:flex; align-items:center; gap:30px; }
+
+/* ================= NAVBAR ================= */
+.navbar{
+  background:white; padding:12px 20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  position: sticky; top: 75px; z-index: 9998;
+}
+.navbar nav{ display:flex; justify-content:center; align-items:center; gap:25px; }
+.navbar nav a{ text-decoration:none; color:#ff4d88; font-weight:normal; }
+
+/* ================= DROPDOWN ================= */
+.dropdown{ position:relative; }
+.dropdown-content{
+  display:none; position:absolute; top:100%; left:0;
+  background:white; min-width:180px; border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:4000;
+}
+.dropdown-content a{ display:block; padding:12px; color:#ff4d88; }
+.dropdown-content a:hover{ background:#ffe6ee; }
+.dropdown:hover .dropdown-content{ display:block; }
+
+/* ================= SEARCH ================= */
+.search-container { position: relative; display: inline-flex; align-items: center; }
+.search-container input{
+  width:220px; padding:8px 38px 8px 15px;
+  border-radius:20px; border:1px solid #ccc;
+  outline:none; transition: border-color 0.2s;
+}
+.search-container input:focus { border-color: #ff4d88; }
+.search-container .search-icon {
+  position:absolute; right:12px; color:#bbb;
+  font-size:14px; cursor:pointer;
+}
+.search-container .search-icon:hover { color:#ff4d88; }
+
+/* ================= ACCOUNT ================= */
+.my-account{ position:relative; display:flex; align-items:center; gap:10px; color:white; }
+.my-account .fa-user{ font-size:28px; }
+.account-text{ display:flex; flex-direction:column; margin-left:10px; }
+.account-text span{ font-size:12px; color:white; }
+.account-text a{
+  color:white; text-decoration:none !important;
+  font-weight:normal; font-size:16px;
+  display:flex; align-items:center; gap:6px;
+}
+.my-account a{ text-decoration:none; }
+.account-dropdown{
+  display:none; position:absolute; top:100%; left:0;
+  background:white; min-width:160px; border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  z-index:5000; flex-direction:column;
+}
+.account-dropdown a{
+  display:block; padding:10px 12px;
+  color:#ff4d88 !important; text-decoration:none; background:white;
+}
+.account-dropdown a:hover{ background:#ffe6ee; }
+.my-account:hover .account-dropdown{ display:flex; }
+
+/* ================= CART ================= */
+.cart-icon{ margin-right:23px; }
+.cart-icon i{ font-size:24px; color:white; }
+
+.dropdown a{ display:flex; align-items:center; gap:6px; }
+.dropdown-icon{ font-size:12px; transition:transform 0.3s ease; }
+.dropdown:hover .dropdown-icon{ transform:rotate(180deg); }
+
+.topbar{ position: sticky; top: 0; z-index: 9999; }
+
+/* ================= BOOK PAGE ================= */
+.book-wrapper{ max-width:800px; margin:0 auto; padding:40px 20px; }
+.book-title{ text-align:center; color:#ff4d88; font-size:30px; margin-bottom:25px; }
+
+.doctor-summary{
+  background:white; border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:20px; margin-bottom:20px;
+  display:flex; align-items:center; gap:20px;
+  border-left:5px solid #ff4d88;
+}
+.doctor-summary .ds-photo{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #ff4d88;
+  box-shadow:0 4px 10px rgba(255,77,136,0.3);
+  flex-shrink:0;
+}
+.doctor-summary .ds-info h3{ color:#333; font-size:20px; margin-bottom:5px; }
+.doctor-summary .ds-info p{ color:#666; font-size:14px; margin:2px 0; }
+.doctor-summary .ds-fee{
+  margin-left:auto; background:#ff4d88; color:white;
+  padding:10px 16px; border-radius:8px;
+  font-weight:bold; font-size:16px;
+}
+
+.q-summary{
+  background:white; border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom:20px; overflow:hidden;
+}
+.q-summary-header{
+  padding:15px 20px; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  background:#fff5f7; font-weight:bold; color:#ff4d88; user-select:none;
+}
+.q-summary-header i{ transition:transform 0.3s; }
+.q-summary.open .q-summary-header i{ transform:rotate(180deg); }
+.q-summary-body{
+  display:none; padding:15px 20px;
+  border-top:1px solid #ffe0ea;
+  font-size:14px; color:#444; line-height:1.7;
+}
+.q-summary.open .q-summary-body{ display:block; }
+.q-summary-body b{ color:#333; }
+
+.book-form{
+  background:white; border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:30px;
+}
+.form-group{ margin-bottom:22px; }
+.form-group label.field-label{
+  display:block; font-weight:bold; color:#333;
+  margin-bottom:10px; font-size:15px;
+}
+.required{ color:#ff4d88; }
+
+.form-group input[type="date"],
+.form-group select{
+  width:100%; padding:10px 14px;
+  border:1px solid #ccc; border-radius:8px;
+  font-size:14px; font-family:Arial, sans-serif;
+  outline:none; background:#fff; transition:border-color 0.2s;
+}
+.form-group input[type="date"]:focus,
+.form-group select:focus{ border-color:#ff4d88; }
+
+.type-group{ display:flex; flex-direction:column; gap:10px; }
+.type-option{
+  background:#fff5f7; border:1px solid #ffd0dd;
+  border-radius:8px; padding:12px 14px; cursor:pointer;
+  display:flex; align-items:center; gap:10px;
+  transition:0.2s; font-size:14px; color:#333;
+}
+.type-option:hover{ background:#ffe6ee; }
+.type-option input[type="radio"]{ accent-color:#ff4d88; cursor:pointer; }
+.type-option.selected{ background:#ffe6ee; border-color:#ff4d88; }
+
+/* Clinic info box (replaces consultation type options) */
+.clinic-info-box{
+  background:#fff5f7;
+  border:1px solid #ffd0dd;
+  border-left:4px solid #ff4d88;
+  border-radius:8px;
+  padding:14px 16px;
+}
+.clinic-type{
+  font-size:15px;
+  font-weight:bold;
+  color:#1e8a3a;
+  margin-bottom:6px;
+}
+.clinic-type i{ margin-right:6px; }
+.clinic-addr-line{
+  font-size:14px;
+  color:#555;
+}
+.clinic-addr-line i{ color:#ff4d88; margin-right:4px; }
+
+/* Icon colors for pro look */
+.book-title i,
+.field-label i,
+.doctor-summary .ds-info p i,
+.q-summary-header span i{
+  color:#ff4d88;
+  margin-right:6px;
+}
+.submit-btn i{ margin-right:6px; }
+.not-found i.fa-triangle-exclamation{
+  font-size:40px; color:#ff4d88; display:block; margin-bottom:10px;
+}
+
+/* Success popup contact note */
+.popup-box .check-icon i{ font-size:70px; color:#2ecc71; }
+.popup-box .contact-note{
+  background:#fff5f7;
+  border:1px solid #ffd0dd;
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:13px;
+  color:#444;
+  text-align:left;
+  margin:15px 0;
+  line-height:1.6;
+}
+.popup-box .contact-note i{
+  color:#ff4d88;
+  margin-right:6px;
+}
+
+.clinic-address{
+  display:none; margin-left:30px; margin-top:-4px;
+  font-size:13px; color:#666; background:#fff;
+  padding:8px 12px; border-radius:6px;
+  border:1px dashed #ffb3cc;
+}
+.clinic-address.show{ display:block; }
+
+.error-msg{ color:#d9214f; font-size:13px; margin-top:6px; display:none; }
+.form-group.has-error .error-msg{ display:block; }
+.form-group.has-error input[type="date"],
+.form-group.has-error select{ border-color:#d9214f; }
+
+.submit-btn{
+  background:#ff4d88; color:white; border:none;
+  padding:14px 30px; border-radius:8px; cursor:pointer;
+  font-size:16px; font-weight:bold; width:100%;
+  margin-top:10px; transition:background 0.2s;
+}
+.submit-btn:hover{ background:#e63e77; }
+
+.not-found{
+  background:white; text-align:center; padding:40px;
+  border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); color:#555;
+}
+.not-found a{ color:#ff4d88; font-weight:bold; text-decoration:none; }
+
+/* ================= SUCCESS POPUP ================= */
+.popup-overlay{
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.5);
+  justify-content:center; align-items:center;
+  z-index:99999; animation:fadeIn 0.3s ease;
+}
+.popup-overlay.show{ display:flex; }
+.popup-box{
+  background:white; border-radius:15px;
+  padding:35px 30px; text-align:center;
+  max-width:400px; width:90%;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  animation:popIn 0.4s ease;
+}
+.popup-box .check-icon{ font-size:60px; color:#2ecc71; margin-bottom:15px; }
+.popup-box h3{ color:#ff4d88; font-size:24px; margin-bottom:10px; }
+.popup-box p{ color:#555; font-size:14px; margin-bottom:8px; }
+.popup-box .booking-id{
+  background:#fff5f7; padding:10px; border-radius:8px;
+  font-weight:bold; color:#ff4d88; font-size:18px;
+  letter-spacing:1px; margin:15px 0;
+}
+.popup-box button{
+  background:#ff4d88; color:white; border:none;
+  padding:10px 25px; border-radius:6px; cursor:pointer;
+  font-size:15px; font-weight:bold; margin-top:10px;
+}
+.popup-box button:hover{ background:#e63e77; }
+
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+@keyframes popIn{
+  from{ transform:scale(0.7); opacity:0; }
+  to  { transform:scale(1);   opacity:1; }
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  background:#ff4d88; color:white;
+  margin-top:40px; padding:40px 20px 10px;
+  opacity:0; transform:translateY(50px);
+  transition:all 0.6s ease;
+}
+.footer.show{ opacity:1; transform:translateY(0); }
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+.footer-box h3, .footer-box h4{ margin-bottom:10px; }
+.footer-box a{
+  display:block; color:white; text-decoration:none;
+  margin:5px 0; font-size:14px;
+}
+.footer-bottom{
+  text-align:center; margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.3);
+  font-size:13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:768px){
+  header{ flex-direction:column; text-align:center; gap:10px; }
+  .header-center{ position:static; transform:none; margin-top:5px; }
+  .right-nav{ justify-content:center; width:100%; gap:20px; }
+  .navbar nav{ flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .search-container{ width:100%; display:flex; justify-content:center; margin-top:10px; }
+  .search-container input{ width:90%; max-width:300px; }
+  .dropdown{ font-size:14px; }
+  .book-title{ font-size:22px; }
+  .doctor-summary{ flex-direction:column; text-align:center; }
+  .doctor-summary .ds-fee{ margin-left:0; }
+  .book-form{ padding:20px; }
+}
+  </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="topbar">
+  <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
+  <div class="header-center">Glow More, Shop More</div>
+  <nav class="right-nav">
+    <div class="my-account">
+      <i class="fa-regular fa-user"></i>
+      <div class="account-text">
+        <span>Hello User</span>
+        <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
+      </div>
+      <div class="account-dropdown">
+        <a href="#">Contact us</a>
+        <a href="doctor.html">Doctors appointment</a>
+        <a href="myappointment.html">My Appointments</a>
+        <a href="#">About us</a>
+        <a href="login1.html" id="loginBtn">Login</a>
+        <a href="#" id="logoutBtn" style="display:none;">Logout</a>
+      </div>
+    </div>
+    <div class="cart-icon">
+      <a href="cart.html">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+  <nav>
+    <div class="dropdown">
+      <a href="#">Skincare <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="cleanser.html">Cleanser</a>
+        <a href="moisturizer.html">Moisturizer</a>
+        <a href="suncream.html">Sunscreen</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Makeup <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="foundation.html">Foundation</a>
+        <a href="Lipstick.html">Lipstick</a>
+        <a href="blush.html">Blush</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#">Fragrance <i class="fa-solid fa-chevron-down dropdown-icon"></i></a>
+      <div class="dropdown-content">
+        <a href="perfume.html">Perfume</a>
+      </div>
+    </div>
+    <div class="search-container">
+      <input type="text" id="siteSearch" placeholder="Search products..." autocomplete="off">
+      <i class="fa-solid fa-magnifying-glass search-icon" id="searchIcon"></i>
+    </div>
+  </nav>
+</div>
+
+<!-- ================= BOOK PAGE CONTENT ================= -->
+<div class="book-wrapper">
+  <h2 class="book-title"><i class="fa-solid fa-calendar-check"></i> Book Your Appointment</h2>
+  <div id="doctorSummary"></div>
+  <div id="qSummaryContainer"></div>
+  <div id="formContainer"></div>
+</div>
+
+<!-- ================= SUCCESS POPUP ================= -->
+<div class="popup-overlay" id="successPopup">
+  <div class="popup-box">
+    <div class="check-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <h3>Booking Confirmed!</h3>
+    <p>Your appointment has been successfully booked.</p>
+    <div class="booking-id" id="popupBookingId">GC-2026-XXXX</div>
+
+    <div class="contact-note">
+      <i class="fa-solid fa-phone-volume"></i>
+      Our team will contact you shortly on your phone &amp; email to confirm your visit. Please keep your booking ID safe.
+    </div>
+
+    <p style="font-size:13px; color:#888;">Redirecting to My Appointments...</p>
+    <button onclick="goToAppointments()">Go Now</button>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>GlowCart</h3>
+      <p>Glow More, Shop More ✨</p>
+    </div>
+    <div class="footer-box">
+      <h4>Quick Links</h4>
+      <a href="homepage.html">Home</a>
+      <a href="#">Skincare</a>
+      <a href="#">Makeup</a>
+      <a href="#">Fragrance</a>
+    </div>
+    <div class="footer-box">
+      <h4>Support</h4>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-box">
+      <h4>Follow Us</h4>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 GlowCart. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ============ DOCTORS DATA ============ */
+const doctors = [
+  { id:1, name:"Dr. Priya Sharma", photo:"doctor1.jpg", area:"Naya Baneshwor",
+    address:"123 Hospital Road, Naya Baneshwor, KTM", experience:8, fee:1500, rating:4.8 },
+  { id:2, name:"Dr. kritan Verma", photo:"doctor2.jpg", area:"New Road",
+    address:"45 Mahaboudha Marg, New Road, KTM", experience:10, fee:1800, rating:4.9 },
+  { id:3, name:"Dr. Kritika Joshi", photo:"doctor3.jpg", area:"Lalitpur",
+    address:"Jhamsikhel Marg, Lalitpur", experience:12, fee:2000, rating:4.7 },
+  { id:4, name:"Dr. Ram Mehta", photo:"doctor4.webp", area:"Anamnagar",
+    address:"Putalisadak-adjacent, Anamnagar, KTM", experience:5, fee:1200, rating:4.6 },
+  { id:5, name:"Dr. Sunil Thapa", photo:"doctor5.jpg", area:"Naya Baneshwor",
+    address:"Mid-Baneshwor Chowk, Naya Baneshwor, KTM", experience:7, fee:1300, rating:4.7 },
+  { id:6, name:"Dr. Sneha Gurung", photo:"doctor6.webp", area:"Lalitpur",
+    address:"Pulchowk Road, Lalitpur", experience:6, fee:1400, rating:4.8 }
+];
+
+const TIME_SLOTS = [
+  "10:00 AM","11:00 AM","12:00 PM",
+  "02:00 PM","03:00 PM","04:00 PM","05:00 PM"
+];
+
+function getDoctorIdFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"), 10);
+  return isNaN(id) ? null : id;
+}
+
+const doctorId      = getDoctorIdFromURL();
+const doctor        = doctors.find(d => d.id === doctorId);
+const summaryDiv    = document.getElementById("doctorSummary");
+const qSummaryDiv   = document.getElementById("qSummaryContainer");
+const formContainer = document.getElementById("formContainer");
+
+const pendingRaw = localStorage.getItem("pendingQuestionnaire");
+const pendingQ   = pendingRaw ? JSON.parse(pendingRaw) : null;
+
+if (!doctor){
+  summaryDiv.innerHTML = `
+    <div class="not-found">
+    <i class="fa-solid fa-triangle-exclamation"></i><br><br>
+Doctor not found.<br><br>
+      Please go back to <a href="doctor.html">the listing page</a>.
+    </div>
+  `;
+} else if (!pendingQ || pendingQ.doctorId !== doctor.id){
+  summaryDiv.innerHTML = `
+    <div class="not-found">
+      <i class="fa-solid fa-triangle-exclamation"></i><br><br>
+Please fill out the pre-consultation form first.<br><br>
+      <a href="questionnaire.html?id=${doctor.id}">Go to questionnaire →</a>
+    </div>
+  `;
+} else {
+summaryDiv.innerHTML = `
+  <div class="doctor-summary">
+    <img src="${doctor.photo}" alt="${escapeHtml(doctor.name)}" class="ds-photo">
+    <div class="ds-info">
+      <h3>${doctor.name}</h3>
+     <p><i class="fa-solid fa-location-dot"></i> ${doctor.area}</p>
+      <p>General Dermatologist</p>
+    </div>
+    <div class="ds-fee">Rs. ${doctor.fee}</div>
+  </div>
+`;
+
+  qSummaryDiv.innerHTML = `
+    <div class="q-summary" id="qSummary">
+      <div class="q-summary-header" onclick="toggleQSummary()">
+      <span><i class="fa-solid fa-file-medical"></i> Pre-Consultation Details (tap to expand)</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="q-summary-body">
+        <p><b>Name:</b> ${escapeHtml(pendingQ.name)}</p>
+        <p><b>Phone:</b> ${escapeHtml(pendingQ.phone)}</p>
+        <p><b>Age Group:</b> ${escapeHtml(pendingQ.ageGroup)}</p>
+        <p><b>Skin Type:</b> ${escapeHtml(pendingQ.skinType)}</p>
+        <p><b>Concerns:</b> ${pendingQ.concerns.map(escapeHtml).join(", ")}</p>
+        <p><b>Duration:</b> ${escapeHtml(pendingQ.duration)}</p>
+        <p><b>Current Products:</b> ${escapeHtml(pendingQ.currentProducts) || "—"}</p>
+        <p><b>Allergies:</b> ${escapeHtml(pendingQ.allergies) || "—"}</p>
+        <p><b>Notes:</b> ${escapeHtml(pendingQ.notes) || "—"}</p>
+      </div>
+    </div>
+  `;
+
+  const { minDate, maxDate } = getDateRange();
+
+  formContainer.innerHTML = `
+    <form class="book-form" id="bookForm" novalidate>
+      <div class="form-group" id="g-date">
+        <label class="field-label"><i class="fa-solid fa-calendar"></i> Select Date <span class="required">*</span></label>
+        <input type="date" id="date" min="${minDate}" max="${maxDate}">
+        <div class="error-msg">Please choose a valid date (within next 30 days).</div>
+      </div>
+
+      <div class="form-group" id="g-time">
+        <label class="field-label"><i class="fa-solid fa-clock"></i> Select Time Slot <span class="required">*</span></label>
+        <select id="time">
+          <option value="">-- Choose a time --</option>
+          ${TIME_SLOTS.map(t => `<option value="${t}">${t}</option>`).join("")}
+        </select>
+        <div class="error-msg">Please choose a time slot.</div>
+      </div>
+
+   <div class="form-group">
+  <label class="field-label"><i class="fa-solid fa-hospital"></i> Consultation Type</label>
+  <div class="clinic-info-box">
+    <div class="clinic-type">
+      <i class="fa-solid fa-circle-check"></i> In-Person Consultation at Clinic
+    </div>
+    <div class="clinic-addr-line">
+      <i class="fa-solid fa-location-dot"></i> <b>Address:</b> ${escapeHtml(doctor.address)}
+    </div>
+  </div>
+</div>
+
+      <button type="submit" class="submit-btn"><i class="fa-solid fa-circle-check"></i> Confirm Booking</button>
+    </form>
+  `;
+
+  document.getElementById("bookForm").addEventListener("submit", handleBooking);
+
+}
+
+function getDateRange(){
+  const today    = new Date();
+  const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+  const max      = new Date(today); max.setDate(today.getDate() + 30);
+  return { minDate: fmtDate(tomorrow), maxDate: fmtDate(max) };
+}
+function fmtDate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+function escapeHtml(str){
+  if (str === undefined || str === null) return "";
+  return String(str)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+function toggleQSummary(){
+  document.getElementById("qSummary").classList.toggle("open");
+}
+
+function handleBooking(e){
+  e.preventDefault();
+  document.querySelectorAll(".form-group").forEach(g => g.classList.remove("has-error"));
+  let valid = true;
+
+  const dateVal = document.getElementById("date").value;
+  const { minDate, maxDate } = getDateRange();
+  if (!dateVal || dateVal < minDate || dateVal > maxDate){
+    document.getElementById("g-date").classList.add("has-error");
+    valid = false;
+  }
+
+  const timeVal = document.getElementById("time").value;
+  if (!timeVal){
+    document.getElementById("g-time").classList.add("has-error");
+    valid = false;
+  }
+
+  if (!valid){
+    const firstErr = document.querySelector(".form-group.has-error");
+    if (firstErr) firstErr.scrollIntoView({ behavior:"smooth", block:"center" });
+    return;
+  }
+
+  const randomNum = Math.floor(1000 + Math.random() * 9000);
+  const bookingId = `GC-2026-${randomNum}`;
+
+ const appointment = {
+  bookingId, doctorId: doctor.id, doctorName: doctor.name,
+  photo: doctor.photo, area: doctor.area, address: doctor.address,
+  fee: doctor.fee, date: dateVal, time: timeVal,
+  type: "In-Person", status: "Confirmed",
+  questionnaire: { ...pendingQ }
+};
+
+  const existing = JSON.parse(localStorage.getItem("appointments") || "[]");
+  existing.push(appointment);
+  localStorage.setItem("appointments", JSON.stringify(existing));
+  localStorage.removeItem("pendingQuestionnaire");
+
+  document.getElementById("popupBookingId").textContent = bookingId;
+  document.getElementById("successPopup").classList.add("show");
+  setTimeout(goToAppointments, 3000);
+}
+
+function goToAppointments(){
+  window.location.href = "myappointment.html";
+}
+
+/* ============ NAVBAR SEARCH ============ */
+function goToSearch() {
+  const query = document.getElementById("siteSearch").value.trim();
+  if (query) window.location.href = "search.html?q=" + encodeURIComponent(query);
+}
+document.getElementById("siteSearch").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") goToSearch();
+});
+document.getElementById("searchIcon").addEventListener("click", goToSearch);
+
+/* ============ FOOTER REVEAL ============ */
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector(".footer");
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const pageHeight = document.body.offsetHeight;
+  if (scrollPosition >= pageHeight - 50) footer.classList.add("show");
+});
+
+/* ============ AUTH UI ============ */
+function updateAuthUI() {
+  const isLoggedIn = localStorage.getItem("loggedIn");
+  const loginBtn  = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (isLoggedIn === "true") {
+    loginBtn.style.display  = "none";
+    logoutBtn.style.display = "block";
+  } else {
+    loginBtn.style.display  = "block";
+    logoutBtn.style.display = "none";
+  }
+}
+document.getElementById("logoutBtn").addEventListener("click", function (e) {
+  e.preventDefault();
+  localStorage.removeItem("loggedIn");
+  updateAuthUI();
+  window.location.href = "login1.html";
+});
+updateAuthUI();
+</script>
+
+</body>
+</html>

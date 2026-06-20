@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GlowCart Shopping Website</title>
+  <title>Your Cart – GlowCart</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
- 
+
   <style>
 /* ================= RESET ================= */
 *{
@@ -15,11 +14,11 @@
   box-sizing:border-box;
   font-family: Arial, sans-serif;
 }
- 
+
 body{
   background:#fff5f7;
 }
- 
+
 /* ================= HEADER ================= */
 header{
   background:#ff4d88;
@@ -31,7 +30,7 @@ header{
   position:relative;
   flex-wrap:wrap;
 }
- 
+
 header h1{
   font-size:32px;
   z-index:2;
@@ -40,11 +39,11 @@ header h1{
   text-decoration: none;
   color: white;
 }
- 
+
 .topbar a:visited{
   color: white;
 }
- 
+
 .header-center{
   position:absolute;
   left:50%;
@@ -55,115 +54,41 @@ header h1{
   letter-spacing:1px;
   white-space:nowrap;
 }
- 
+
 .right-nav{
   display:flex;
   align-items:center;
   gap:30px;
 }
- 
-/* ================= HERO ================= */
-.hero{
-  height:300px;
-  background:linear-gradient(to right,#ff9a9e,#fad0c4);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:white;
-  text-align:center;
-}
- 
-.hero h2{
-  font-size:40px;
-  margin-bottom:10px;
-}
- 
-.hero button{
-  padding:10px 20px;
-  border:none;
-  background:white;
-  color:#ff4d88;
-  font-size:18px;
-  border-radius:5px;
-  cursor:pointer;
-}
- 
-/* ================= PRODUCTS ================= */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  padding:40px;
-}
- 
-.card{
-  background:white;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  padding:20px;
-  text-align:center;
-  transition:0.3s;
-}
- 
-.card:hover{
-  transform:scale(1.05);
-}
- 
-.card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:10px;
-}
- 
-.card h3{
-  margin:15px 0 10px;
-}
- 
-.price{
-  color:#ff4d88;
-  font-size:20px;
-  margin-bottom:10px;
-}
- 
-.card button{
-  background:#ff4d88;
-  color:white;
-  border:none;
-  padding:10px 15px;
-  border-radius:5px;
-  cursor:pointer;
-}
- 
+
 /* ================= NAVBAR ================= */
 .navbar{
   background:white;
   padding:12px 20px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
   position: sticky;
-  top: 75px; 
+  top: 75px;
   z-index: 9998;
 }
- 
+
 .navbar nav{
   display:flex;
   justify-content:center;
   align-items:center;
   gap:25px;
 }
- 
+
 .navbar nav a{
   text-decoration:none;
   color:#ff4d88;
   font-weight:normal;
 }
- 
+
 /* ================= DROPDOWN ================= */
 .dropdown{
   position:relative;
 }
- 
+
 .dropdown-content{
   display:none;
   position:absolute;
@@ -175,41 +100,56 @@ header h1{
   box-shadow:0 4px 10px rgba(0,0,0,0.2);
   z-index:4000;
 }
- 
+
 .dropdown-content a{
   display:block;
   padding:12px;
   color:#ff4d88;
 }
- 
+
 .dropdown-content a:hover{
   background:#ffe6ee;
 }
- 
+
 .dropdown:hover .dropdown-content{
   display:block;
 }
- 
+
+.dropdown a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.dropdown-icon{
+  font-size:12px;
+  transition:transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-icon{
+  transform:rotate(180deg);
+}
+
 /* ================= SEARCH ================= */
 .search-container {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
- 
+
 .search-container input{
   width:220px;
-  padding:8px 38px 8px 15px; /* right padding leaves room for icon */
+  padding:8px 38px 8px 15px;
   border-radius:20px;
   border:1px solid #ccc;
   outline:none;
   transition: border-color 0.2s;
 }
- 
+
 .search-container input:focus {
   border-color: #ff4d88;
 }
- 
+
 .search-container .search-icon {
   position:absolute;
   right:12px;
@@ -218,45 +158,11 @@ header h1{
   cursor:pointer;
   transition: color 0.2s;
 }
- 
+
 .search-container .search-icon:hover {
   color:#ff4d88;
 }
- 
-/* ================= SLIDER ================= */
-.slider{
-  width:100%;
-  height:500px;
-  overflow:hidden;
-  background:#fff5f7;
-}
- 
-.slides{
-  display:flex;
-  width:400%;
-  animation:swipe 12s infinite ease-in-out;
-}
- 
-.slides img{
-  width:100vw;
-  height:500px;
-  object-fit:contain;
-  flex-shrink:0;
-  background:#fff5f7;
-}
- 
-@keyframes swipe{
-  0%{transform:translateX(0);}
-  20%{transform:translateX(0);}
-  25%{transform:translateX(-100vw);}
-  45%{transform:translateX(-100vw);}
-  50%{transform:translateX(-200vw);}
-  70%{transform:translateX(-200vw);}
-  75%{transform:translateX(-300vw);}
-  95%{transform:translateX(-300vw);}
-  100%{transform:translateX(0);}
-}
- 
+
 /* ================= ACCOUNT ================= */
 .my-account{
   position:relative;
@@ -265,22 +171,22 @@ header h1{
   gap:10px;
   color:white;
 }
- 
+
 .my-account .fa-user{
   font-size:28px;
 }
- 
+
 .account-text{
   display:flex;
   flex-direction:column;
   margin-left:10px;
 }
- 
+
 .account-text span{
   font-size:12px;
   color:white;
 }
- 
+
 .account-text a{
   color:white;
   text-decoration:none !important;
@@ -293,7 +199,7 @@ header h1{
 .my-account a{
   text-decoration:none;
 }
- 
+
 .account-dropdown{
   display:none;
   position:absolute;
@@ -306,7 +212,7 @@ header h1{
   z-index:5000;
   flex-direction:column;
 }
- 
+
 .account-dropdown a{
   display:block;
   padding:10px 12px;
@@ -314,25 +220,167 @@ header h1{
   text-decoration:none;
   background:white;
 }
- 
+
 .account-dropdown a:hover{
   background:#ffe6ee;
 }
- 
+
 .my-account:hover .account-dropdown{
   display:flex;
 }
- 
+
 /* ================= CART ================= */
 .cart-icon{
   margin-right:23px;
+  position:relative;
 }
- 
+
 .cart-icon i{
   font-size:24px;
   color:white;
 }
- 
+
+.cart-count{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  background:white;
+  color:#ff4d88;
+  font-size:11px;
+  font-weight:bold;
+  border-radius:50%;
+  width:18px;
+  height:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* ================= CART PAGE BODY ================= */
+.cart-page{
+  max-width:1000px;
+  margin:0 auto;
+  padding:40px 20px 20px;
+}
+.cart-page h2{ color:#ff4d88; margin-bottom:25px; }
+
+.cart-layout{
+  display:flex;
+  gap:30px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+
+.cart-items{ flex:2; min-width:300px; display:flex; flex-direction:column; gap:15px; }
+
+.cart-item{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.cart-item img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#fff5f7;
+  flex-shrink:0;
+}
+.cart-item-info{ flex:1; min-width:0; }
+.cart-item-info h4{
+  font-size:15px;
+  margin-bottom:6px;
+  color:#333;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.cart-item-info .unit-price{ font-size:13px; color:#999; }
+
+.qty-control{
+  display:inline-flex;
+  align-items:center;
+  border:2px solid #ff4d88;
+  border-radius:8px;
+  overflow:hidden;
+}
+.qty-control button{
+  width:30px; height:30px;
+  border:none; background:white;
+  color:#ff4d88; font-size:16px; cursor:pointer;
+}
+.qty-control span{
+  width:34px; height:30px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:bold;
+  border-left:2px solid #ff4d88;
+  border-right:2px solid #ff4d88;
+}
+
+.cart-item-total{
+  min-width:90px;
+  text-align:right;
+  font-weight:bold;
+  color:#ff4d88;
+  font-size:15px;
+}
+
+.remove-btn{
+  background:none;
+  border:none;
+  color:#bbb;
+  font-size:18px;
+  cursor:pointer;
+  margin-left:6px;
+}
+.remove-btn:hover{ color:#ff4d88; }
+
+.cart-summary{
+  flex:1; min-width:260px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  padding:25px;
+  position:sticky;
+  top:160px;
+}
+.cart-summary h3{ color:#ff4d88; margin-bottom:18px; }
+.summary-row{
+  display:flex; justify-content:space-between;
+  font-size:14px; color:#555; margin-bottom:10px;
+}
+.summary-row.total{
+  font-size:17px; font-weight:bold; color:#333;
+  border-top:1px solid #eee; padding-top:14px; margin-top:10px;
+}
+.checkout-btn{
+  width:100%; padding:13px; margin-top:18px;
+  background:#ff4d88; color:white; border:none;
+  border-radius:5px; font-size:15px; cursor:pointer;
+}
+.checkout-btn:hover{ background:#e63e77; }
+
+.empty-cart{ text-align:center; padding:80px 20px; color:#aaa; }
+.empty-cart i{ font-size:48px; margin-bottom:16px; color:#ffb3cc; }
+.empty-cart p{ font-size:16px; margin-bottom:14px; }
+.empty-cart a{
+  display:inline-block;
+  background:#ff4d88; color:white;
+  text-decoration:none;
+  padding:10px 22px; border-radius:5px; font-size:14px;
+}
+
 /* ================= FOOTER ================= */
 .footer{
   background:#ff4d88;
@@ -343,23 +391,23 @@ header h1{
   transform:translateY(50px);
   transition:all 0.6s ease;
 }
- 
+
 .footer.show{
   opacity:1;
   transform:translateY(0);
 }
- 
+
 .footer-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
- 
+
 .footer-box h3,
 .footer-box h4{
   margin-bottom:10px;
 }
- 
+
 .footer-box a{
   display:block;
   color:white;
@@ -367,7 +415,7 @@ header h1{
   margin:5px 0;
   font-size:14px;
 }
- 
+
 .footer-bottom{
   text-align:center;
   margin-top:20px;
@@ -375,28 +423,7 @@ header h1{
   border-top:1px solid rgba(255,255,255,0.3);
   font-size:13px;
 }
- 
-.dropdown a{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
- 
-.dropdown-icon{
-  font-size:12px;
-  transition:transform 0.3s ease;
-}
- 
-.dropdown:hover .dropdown-icon{
-  transform:rotate(180deg);
-}
- 
-.topbar{
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-}
- 
+
 /* ================= RESPONSIVE ================= */
 @media (max-width:768px){
   header{
@@ -404,71 +431,76 @@ header h1{
     text-align:center;
     gap:10px;
   }
- 
+
   .header-center{
     position:static;
     transform:none;
     margin-top:5px;
   }
- 
+
   .right-nav{
     justify-content:center;
     width:100%;
     gap:20px;
   }
- 
+
   .navbar nav{
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
   }
- 
+
   .search-container{
     width:100%;
     display:flex;
     justify-content:center;
     margin-top:10px;
   }
- 
+
   .search-container input{
     width:90%;
     max-width:300px;
   }
- 
+
   .dropdown{
     font-size:14px;
   }
+
+  .cart-layout{ flex-direction:column; }
+  .cart-summary{ position:static; width:100%; }
+  .cart-item{ flex-wrap:wrap; }
+  .cart-item-total{ text-align:left; margin-top:8px; }
 }
   </style>
 </head>
- 
+
 <body>
- 
+
 <header class="topbar">
   <a href="homepage.html"><h1 style="font-family:cursive;">GlowCart</h1></a>
- 
+
   <div class="header-center">
-    Glow More, Shop More 
+    Glow More, Shop More
   </div>
- 
+
   <nav class="right-nav">
     <div class="my-account">
       <i class="fa-regular fa-user"></i>
- 
+
       <div class="account-text">
         <span>Hello User</span>
         <a href="#">My Account <i class="fa-solid fa-chevron-down"></i></a>
       </div>
- 
+
       <div class="account-dropdown">
         <a href="#">Contact us</a>
         <a href="doctor.html">Doctors appointment</a>
-        <a href="#">About us</a>
+        <a href="aboutus1.html">About us</a>
         <a href="login1.html" id="loginBtn">Login</a>
         <a href="#" id="logoutBtn" style="display:none;">Logout</a>
       </div>
     </div>
- 
+
     <div class="cart-icon">
       <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
@@ -477,7 +509,7 @@ header h1{
     </div>
   </nav>
 </header>
- 
+
 <!-- NAVBAR -->
 <div class="navbar">
   <nav>
@@ -493,7 +525,7 @@ header h1{
         <a href="suncream.html">Sunscreen</a>
       </div>
     </div>
- 
+
     <!-- Makeup -->
     <div class="dropdown">
       <a href="#">
@@ -506,7 +538,7 @@ header h1{
         <a href="blush.html">Blush</a>
       </div>
     </div>
- 
+
     <!-- Fragrance -->
     <div class="dropdown">
       <a href="#">
@@ -517,8 +549,8 @@ header h1{
         <a href="perfume.html">Perfume</a>
       </div>
     </div>
- 
-    <!-- ✅ SEARCH — now redirects to search.html -->
+
+    <!-- SEARCH -->
     <div class="search-container">
       <input
         type="text"
@@ -530,19 +562,15 @@ header h1{
     </div>
   </nav>
 </div>
- 
-<!-- SLIDER -->
-<div class="slider">
-  <div class="slides">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
-    <img src="banner1.jpg">
-    <img src="banner2.jpg">
-    <img src="banner3.jpg">
+
+<!-- CART PAGE -->
+<div class="cart-page">
+  <h2>Your Cart</h2>
+  <div class="cart-layout" id="cartLayout">
+    <!-- filled in by JS -->
   </div>
 </div>
- 
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
@@ -550,22 +578,22 @@ header h1{
       <h3>GlowCart</h3>
       <p>Glow More, Shop More ✨</p>
     </div>
- 
+
     <div class="footer-box">
       <h4>Quick Links</h4>
-      <a href="#">Home</a>
+      <a href="homepage.html">Home</a>
       <a href="#">Skincare</a>
       <a href="#">Makeup</a>
       <a href="#">Fragrance</a>
     </div>
- 
+
     <div class="footer-box">
       <h4>Support</h4>
       <a href="#">Contact Us</a>
       <a href="#">Help</a>
       <a href="#">Privacy Policy</a>
     </div>
- 
+
     <div class="footer-box">
       <h4>Follow Us</h4>
       <a href="#">Instagram</a>
@@ -573,64 +601,109 @@ header h1{
       <a href="#">TikTok</a>
     </div>
   </div>
- 
+
   <div class="footer-bottom">
     <p>© 2026 GlowCart. All rights reserved.</p>
   </div>
 </footer>
- 
+
+<!-- SHARED CART LOGIC -->
+<script src="cart.js"></script>
+
 <script>
+// ===== RENDER CART PAGE =====
+function renderCart() {
+  const cart = getCart();
+  const layout = document.getElementById("cartLayout");
+
+  if (cart.length === 0) {
+    layout.innerHTML = `
+      <div class="empty-cart" style="width:100%;">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <p>Your cart is empty.</p>
+        <a href="homepage.html">Continue Shopping</a>
+      </div>`;
+    return;
+  }
+
+  let itemsHTML = `<div class="cart-items">`;
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    const lineTotal = item.price * item.qty;
+    subtotal += lineTotal;
+
+    itemsHTML += `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80x80?text=No+Image'">
+        <div class="cart-item-info">
+          <h4>${item.name}</h4>
+          <span class="unit-price">Rs. ${item.price} each</span>
+        </div>
+        <div class="qty-control">
+          <button onclick="changeCartQty(${item.id}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeCartQty(${item.id}, 1)">+</button>
+        </div>
+        <div class="cart-item-total">Rs. ${lineTotal}</div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})" title="Remove">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </div>`;
+  });
+
+  itemsHTML += `</div>`;
+
+  const shipping = subtotal > 0 ? 99 : 0;
+  const total = subtotal + shipping;
+
+  const summaryHTML = `
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span>Subtotal</span><span>Rs. ${subtotal}</span></div>
+      <div class="summary-row"><span>Shipping</span><span>Rs. ${shipping}</span></div>
+      <div class="summary-row total"><span>Total</span><span>Rs. ${total}</span></div>
+      <button class="checkout-btn" onclick="alert('Checkout coming soon!')">Proceed to Checkout</button>
+    </div>`;
+
+  layout.innerHTML = itemsHTML + summaryHTML;
+}
+
 // ===== SEARCH =====
 function goToSearch() {
   const query = document.getElementById("siteSearch").value.trim();
-  if (query) {
-    window.location.href = "search.html?q=" + encodeURIComponent(query);
-  }
+  if (query) window.location.href = "search.html?q=" + encodeURIComponent(query);
 }
- 
-// Press Enter to search
 document.getElementById("siteSearch").addEventListener("keydown", function (e) {
   if (e.key === "Enter") goToSearch();
 });
- 
-// Click the magnifying glass icon
 document.getElementById("searchIcon").addEventListener("click", goToSearch);
- 
+
 // ===== FOOTER REVEAL =====
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");
-  const scrollPosition = window.innerHeight + window.scrollY;
-  const pageHeight = document.body.offsetHeight;
-  if (scrollPosition >= pageHeight - 50) {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
     footer.classList.add("show");
   }
 });
- 
+
 // ===== AUTH UI =====
 function updateAuthUI() {
-  const isLoggedIn = localStorage.getItem("loggedIn");
-  const loginBtn  = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (isLoggedIn === "true") {
-    loginBtn.style.display  = "none";
-    logoutBtn.style.display = "block";
-  } else {
-    loginBtn.style.display  = "block";
-    logoutBtn.style.display = "none";
-  }
+  const loggedIn = localStorage.getItem("loggedIn") === "true";
+  document.getElementById("loginBtn").style.display  = loggedIn ? "none"  : "block";
+  document.getElementById("logoutBtn").style.display = loggedIn ? "block" : "none";
 }
- 
 document.getElementById("logoutBtn").addEventListener("click", function (e) {
   e.preventDefault();
   localStorage.removeItem("loggedIn");
   updateAuthUI();
-   window.location.href = "login1.html"//adding this everwhere for login logoiut
+  window.location.href = "login1.html";
 });
- 
-updateAuthUI();
 
+// ===== INIT =====
+updateAuthUI();
+renderCart();
 </script>
- 
+
 </body>
 </html>
- 

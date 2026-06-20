@@ -631,7 +631,7 @@ header h1{
     </div>
  
     <div class="cart-icon">
-      <a href="#">
+      <a href="cart.html">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count">0</span>
       </a>
@@ -730,7 +730,7 @@ header h1{
       <img src="lipstick1.jpg">
       <h3>Maybelline Super Stay Matte Ink - 115 - 5ml</h3>
       <p class="price">Rs. 1500</p>
-      <button>Add to Cart</button>
+     <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(44, 'Maybelline Super Stay Matte Ink', 1500, 'lipstick1.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -740,7 +740,7 @@ header h1{
       <img src="lipstick2.jpg">
       <h3>Swiss Beauty Pure Lustre Lipgloss | High Shine Finish| Hydrating | 3.8gm</h3>
       <p class="price">Rs. 2000</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(55, 'Swiss Beauty Pure Lustre Lipgloss', 2000, 'lipstick2.jpg')">Add to Cart</button>
     </div>
   </a>
  
@@ -750,7 +750,7 @@ header h1{
       <img src="lipstick3.png">
       <h3>LS Mall Swiss Beauty Bold Matt Lip stain Long-lasting Non-drying Shade</h3>
       <p class="price">Rs. 3500</p>
-      <button>Add to Cart</button>
+      <button onclick="event.preventDefault(); event.stopPropagation(); addToCart(66, 'LS Mall Swiss Beauty Bold Matt Lip Stain', 3500, 'lipstick3.png')">Add to Cart</button>
     </div>
     </a>
 </div>
@@ -795,7 +795,7 @@ header h1{
 
 </footer>
  
- 
+ <script src="cart.js"></script>
 <script>
 window.addEventListener("scroll", () => {
   const footer = document.querySelector(".footer");
