@@ -1,0 +1,76 @@
+body{
+font-family:Arial,sans-serif;
+background:#fff5f7;
+padding:20px;
+}
+
+.review-container{
+max-width:800px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+text-align:center;
+color:#ff4d88;
+}
+
+.rating-summary{
+text-align:center;
+margin-bottom:20px;
+}
+
+.stars{
+margin:15px 0;
+font-size:35px;
+cursor:pointer;
+}
+
+.star{
+color:lightgray;
+}
+
+.star.active{
+color:gold;
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#ff4d88;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.review{
+background:#f9f9f9;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+position:relative;
+}
+
+.delete-btn{
+position:absolute;
+right:10px;
+top:10px;
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+cursor:pointer;
+width:auto;
+}
